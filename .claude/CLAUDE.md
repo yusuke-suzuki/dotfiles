@@ -236,3 +236,23 @@ When including queries in documentation:
 3. **Add context comments**: Explain what the query measures
 4. **Note data period**: Clearly state the time period analyzed
 5. **Document optimization**: Mention any performance optimizations applied
+
+## Design Documents
+
+Confidential design documents are stored in `~/dotfiles/docs.local/`. This directory is git-ignored and remains local-only.
+
+### Referencing Design Documents
+
+When working on implementation tasks, check for relevant design documents:
+
+```bash
+ls ~/dotfiles/docs.local/
+```
+
+Read design documents to understand architecture decisions, API specifications, data models, and integration patterns before implementing features.
+
+### File Naming Convention
+
+- `<project>-<feature>.md` for feature designs
+- `<project>-architecture.md` for architecture overviews
+- `<topic>-guide.md` for cross-project guidelines

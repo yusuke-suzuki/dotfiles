@@ -1,2 +1,5 @@
 # Claude Code local settings
 .claude/settings.local.json
+
+# Local-only documents (confidential, not tracked)
+docs.local/
