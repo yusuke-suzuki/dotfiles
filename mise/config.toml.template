@@ -1,0 +1,11 @@
+[tools]
+
+[env]
+
+[settings]
+# Recognize idiomatic version files like .ruby-version
+idiomatic_version_file = true
+idiomatic_version_file_enable_tools = ["ruby", "node"]
+
+# Automatically load .env files in project root
+env_file = ".env"
