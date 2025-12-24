@@ -60,19 +60,6 @@ Then run the install script:
     └── sync.md            # /sync command
 ```
 
-### Local-Only Documents
-
-The `docs.local/` directory is for confidential design documents that should not be committed to the repository. This directory is git-ignored.
-
-When using Dev Containers with the dotfiles feature enabled, `~/dotfiles/docs.local/` becomes accessible from within containers, allowing Claude Code to reference design documents as context.
-
-```text
-~/dotfiles/
-└── docs.local/            # Git-ignored, local only
-    ├── project-feature.md
-    └── project-architecture.md
-```
-
 ### Requirements
 
 - Git
