@@ -47,11 +47,26 @@ gh pr view
 
 ## PR Guidelines
 
+### Template
+
+**MUST check for project PR template first:**
+
+```bash
+cat .github/PULL_REQUEST_TEMPLATE.md 2>/dev/null || cat .github/pull_request_template.md 2>/dev/null || cat PULL_REQUEST_TEMPLATE.md 2>/dev/null || cat pull_request_template.md 2>/dev/null || cat docs/PULL_REQUEST_TEMPLATE.md 2>/dev/null || cat docs/pull_request_template.md 2>/dev/null
+```
+
+If a template exists, use it as the structure for the PR description. Only use the default structure below if no template exists.
+
 ### Title
 
-- MUST match the commit message subject line exactly
+- MUST match a commit message subject line exactly
+- If multiple commits exist, ask the user which commit message to use as the PR title
 
-### Description Structure
+### Draft or Ready
+
+- Ask the user whether to create the PR as a draft or ready for review
+
+### Description Structure (Default - only if no template exists)
 
 ```markdown
 ## Summary
@@ -74,6 +89,18 @@ Why are these changes needed?
 - [ ] Documentation updated
 - [ ] Breaking changes documented
 ```
+
+### Writing Style
+
+Determine the language based on the template used:
+
+1. **If a project PR template exists**: Match the language of the template
+2. **If using the default template above**: Write in English
+
+When writing in Japanese:
+
+- Use polite Japanese (敬語)
+- MUST invoke the `text-formatting-ja` skill
 
 ### Signature
 
