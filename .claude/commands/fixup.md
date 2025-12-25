@@ -1,58 +1,55 @@
-You are assisting with a commit fixup and squash workflow using interactive rebase. Follow these steps:
+---
+description: Create a fixup commit and autosquash rebase
+allowed-tools: Bash(git status:*), Bash(git fetch:*), Bash(git log:*), Bash(git diff:*), Read, Glob
+---
+
+# Fixup
+
+You are assisting with fixing up an existing commit using interactive rebase. Follow these steps:
 
 ## 1. Initial Assessment
 
-Check the current state:
 - Run `git status` to see if there are uncommitted changes
 - Run `git fetch origin` to get latest remote updates
-- Display existing commits with `git log origin/master..HEAD --oneline` or `git log origin/main..HEAD --oneline`
-- Check if a PR is open with `gh pr view`
+- Display existing commits with `git log origin/main..HEAD --oneline`
 
-## 2. Workflow Based on Changes
+## 2. Create Fixup Commit
 
-### With Uncommitted Changes:
+If there are uncommitted changes:
 
-1. **Identify Target Commit:**
-   - Show the commit history
-   - Ask user which commit hash to fixup (or identify it based on context)
+1. Show the commit history
+2. Ask user which commit hash to fixup (or identify it based on context)
+3. Stage changes with `git add .` or ask which files to stage
+4. Create a fixup commit:
 
-2. **Create Fixup Commit:**
-   - Stage changes with `git add .` or ask which files to stage
-   - Create a fixup commit: `git commit --fixup=<commit-hash>`
+   ```bash
+   git commit --fixup=<commit-hash>
+   ```
 
-3. **Interactive Rebase:**
-   - Run `git rebase -i --autosquash origin/master` or `git rebase -i --autosquash origin/main`
-   - The autosquash option will automatically arrange fixup commits
+## 3. Autosquash Rebase
 
-4. **Force Push:**
-   - Push with `git push --force-with-lease` (safer than --force)
+Run interactive rebase with autosquash:
 
-### Without Changes (Consolidating Existing Fixups):
+```bash
+git rebase -i --autosquash origin/main
+```
 
-1. **Interactive Rebase:**
-   - Run `git rebase -i --autosquash origin/master` or `git rebase -i --autosquash origin/main`
-   - This will consolidate any existing fixup commits
+The autosquash option will automatically arrange and mark fixup commits for squashing.
 
-2. **Force Push:**
-   - Push with `git push --force-with-lease`
+## 4. Post-Rebase Actions
 
-## 3. Post-Rebase Actions
+After rebase completes:
 
-After rebasing, **ALWAYS** execute these steps:
+1. Display the final commit history:
 
-1. **Display the final commit history:**
-   - Run `git log origin/master..HEAD --oneline` or `git log origin/main..HEAD --oneline`
+   ```bash
+   git log origin/main..HEAD --oneline
+   ```
 
-2. **Update PR description (MANDATORY):**
-   - Run `gh pr view` to check if PR exists
-   - If PR exists, **ALWAYS** run `gh pr edit` to update the description
-   - The PR description must reflect the consolidated commit history after fixup
-   - Never skip this step - PR descriptions must stay in sync with commits
+2. Inform the user to run `/publish` to push changes and update the PR
 
 ## Key Principles
 
 - Use `--fixup=<hash>` to create fixup commits targeting specific commits
 - `--autosquash` automatically merges fixup commits during rebase
-- Always use `--force-with-lease` instead of `--force` for safety
-- Commit messages follow the project's conventions per CLAUDE.md
-- Update PR descriptions to reflect the consolidated commit history
+- Commit messages follow the project's Conventional Commits conventions
