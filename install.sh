@@ -10,6 +10,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SOURCE_DIR="$SCRIPT_DIR/.claude"
 COMMANDS_DIR="$HOME/.claude/commands"
+SKILLS_DIR="$HOME/.claude/skills"
 CLAUDE_DIR="$HOME/.claude"
 MISE_CONFIG_DIR="$HOME/.config/mise"
 
@@ -42,8 +43,21 @@ cp "$SOURCE_DIR/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
 for cmd_path in "$SOURCE_DIR"/commands/*.md; do
     if [ -f "$cmd_path" ]; then
         cmd_file=$(basename "$cmd_path")
-        echo "📄 Installing $cmd_file..."
+        echo "📄 Installing command: $cmd_file"
         cp "$cmd_path" "$COMMANDS_DIR/$cmd_file"
+    fi
+done
+
+# Install skills
+echo ""
+echo "📚 Installing skills..."
+for skill_dir in "$SOURCE_DIR"/skills/*/; do
+    if [ -d "$skill_dir" ]; then
+        skill_name=$(basename "$skill_dir")
+        dest_dir="$SKILLS_DIR/$skill_name"
+        echo "   Installing skill: $skill_name"
+        mkdir -p "$dest_dir"
+        cp -r "$skill_dir." "$dest_dir/"
     fi
 done
 
@@ -86,12 +100,24 @@ for cmd_file in "$COMMANDS_DIR"/*.md; do
         echo "  - $cmd_file"
     fi
 done
+for skill_dir in "$SKILLS_DIR"/*/; do
+    if [ -d "$skill_dir" ]; then
+        echo "  - $skill_dir"
+    fi
+done
 echo "  - $MISE_CONFIG_DIR/config.toml"
 echo ""
 echo "Claude Code commands:"
-echo "  /commit - Systematic commit and PR management workflow"
-echo "  /fixup  - Commit fixup and squash workflow"
-echo "  /sync   - Sync feature branch with master/main"
+echo "  /commit  - Create a git commit with Conventional Commits format"
+echo "  /fixup   - Create a fixup commit and autosquash rebase"
+echo "  /publish - Push commits and create/update pull request"
+echo "  /sync    - Sync feature branch with main via rebase"
+echo ""
+echo "Claude Code skills:"
+echo "  technical-writing  - Technical document creation"
+echo "  data-querying      - SQL query development with BigQuery"
+echo "  analytics-design   - Analytics infrastructure design"
+echo "  text-formatting-ja - Japanese text formatting"
 echo ""
 echo "mise setup:"
 echo "  Add the following to your shell config (e.g., ~/.bashrc, ~/.zshrc):"
