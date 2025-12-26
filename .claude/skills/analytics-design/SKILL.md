@@ -1,53 +1,41 @@
 ---
 name: analytics-design
-description: Design analytics infrastructure including KPI definitions and dashboards. Use when creating Looker Studio reports, defining KPIs, or designing monitoring dashboards.
+description: Design Looker Studio reports and dashboards. Use when creating Looker Studio reports, designing data sources, or writing visualization specifications. Trigger on "Looker Studio", "レポート設計", "ダッシュボード".
 ---
 
 # Analytics Design
 
-## Design Process
+## Workflow
 
-1. **Define KPIs** - What metrics matter and what are the targets
-2. **Design data sources** - Which tables, how to join, what calculations
-3. **Design report structure** - Page layout, filter scopes, time granularity
-4. **Design visualizations** - Chart types, field mappings, drill-down paths
+1. **Purpose**: Define what to visualize (link to design doc with KPIs)
+2. **Data Sources**: Design SQL queries and field definitions
+3. **Report Structure**: Define pages and their purposes
+4. **Visualization**: Specify charts with dimensions, metrics, filters
 
-## KPI Definition
+## Templates
 
-When defining KPIs:
+See [references/looker-studio-template.md](references/looker-studio-template.md) for report design template.
 
-- State the metric name clearly
-- Define the calculation method precisely
-- Set baseline (current state) and target values
-- Identify the data source and measurement query
-- Consider leading vs lagging indicators
-
-## Report Structure
-
-### Page Organization
-
-- Separate pages by time granularity (daily vs monthly) to avoid filter confusion
-- Group related metrics on the same page
-- Use consistent filter scopes within each page
+## Looker Studio Best Practices
 
 ### Data Source Design
 
 - One data source per analytical purpose
-- Pre-aggregate where possible for performance
+- Pre-aggregate in SQL for performance
+- Include bucket fields for distribution analysis
 - Include sort-order fields for proper chart ordering
-- Add bucket fields for distribution analysis
+- Descriptive data source names
 
-## Looker Studio Best Practices
+### Report Structure
 
-### Data Sources
+- Separate pages by time granularity (daily/monthly)
+- Group related metrics per page
+- Consistent filter scopes within pages
 
-- Name data sources descriptively (e.g., `fix_payment_request_base`)
-- Document each field with type and description
-- Include calculated fields in the query rather than Looker Studio when possible
+### Visualization
 
-### Visualizations
-
-- Use time series for trend analysis
-- Use scorecards for current KPI values
-- Use tables for detailed breakdowns
-- Add comparison periods (previous month, previous year) where relevant
+- Scorecards for KPI current values
+- Time series for trends
+- Stacked area/bar for category breakdown over time
+- Tables for detailed data
+- Add comparison periods where relevant

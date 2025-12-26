@@ -27,43 +27,8 @@ You are assisting with creating a git commit. Follow these steps:
 ## 3. Commit Creation
 
 - Stage changes with `git add .` or ask user which files to stage
-- Craft a commit message following the conventions below
+- Craft a commit message following the `commit-message` rule
 - Execute `git commit`
-
-## Commit Message Conventions
-
-### Format
-
-- Use [Conventional Commits](https://www.conventionalcommits.org/) format
-- Write in English using imperative mood and present tense
-- Example: `feat: add user authentication` not `feat: added user authentication`
-
-### Subject Line
-
-- Maximum 50 characters including prefix and scope
-- Verify character count before committing:
-
-  ```bash
-  echo -n "your subject line" | wc -c
-  ```
-
-- If over 50 characters, shorten before committing
-
-### Body
-
-- Separate subject from body with a blank line
-- Wrap body text at 72 characters
-- Add blank lines between paragraphs for readability
-- Explain **what** and **why**, not **how**
-
-### Example
-
-```text
-feat: add user authentication
-
-Implement JWT-based authentication to secure API endpoints.
-This addresses the security requirements outlined in issue #123.
-```
 
 ## Key Constraints
 
