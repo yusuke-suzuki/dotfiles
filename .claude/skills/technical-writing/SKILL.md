@@ -1,42 +1,41 @@
 ---
 name: technical-writing
-description: Write high-quality technical documents such as design docs, specifications, and proposals. Use when creating or editing technical documentation, design documents, RFCs, or similar structured content.
+description: Write technical design documents (design docs, specs, proposals). Use when creating design documents, technical specifications, project proposals, or similar structured technical content. Trigger on "design doc", "デザインドック", "設計書", "仕様書", "proposal".
 ---
 
 # Technical Writing
 
-## Writing Style
+## Workflow
 
-Write naturally, as a human engineer would:
+1. **Context Gathering**: Understand the problem, stakeholders, constraints
+2. **Structure Selection**: Choose appropriate template based on document type
+3. **Data Collection**: Gather metrics, run queries, collect evidence
+4. **Drafting**: Write section by section, starting with unknowns
+5. **Verification**: Validate all data and queries are accurate
 
-- Avoid overly formal or stilted phrasing
-- Do not use bullet-point lists to explain something that flows better as prose
-- Avoid redundant emphasis phrases like "This is important because...", "It's worth noting that..."
-- Do not repeat information unnecessarily
-- Keep explanations concise and direct
+## Document Templates
 
-## Document Consistency
+See [references/templates.md](references/templates.md) for:
 
-When modifying any document, ensure comprehensive consistency:
+- Design Doc (問題解決型)
+- Report Design (レポート設計型)
 
-1. Identify modification point - clearly understand what is being changed
-2. Analyze impact scope - consider what other sections might be affected
-3. Check related sections - review the entire document for related content
-4. Verify consistency - ensure numbers, terms, and expressions are consistent throughout
-5. Batch update - update all related areas simultaneously, not piecemeal
+## Key Principles
 
-This principle applies especially to:
+### Data-Driven
 
-- Design documents with metrics and data
-- Technical specifications with cross-references
-- Documentation with repeated concepts or values
+- Include real data, not hypotheticals
+- Show SQL queries with actual results
+- Define measurable KPIs with baselines and targets
 
-## Document Structure
+### Scope Clarity
 
-For design documents and technical specs:
+- Explicit "スコープ外" section
+- Document what you're NOT doing and why
+- Prevents scope creep and sets expectations
 
-- Start with a clear problem statement or motivation
-- Provide context before diving into solutions
-- Use headings to create scannable structure
-- Include concrete examples where helpful
-- End with clear next steps or action items when applicable
+### Problem First
+
+- Start with the problem, not the solution
+- Quantify the impact (件数, コスト, 時間)
+- Make the "why" compelling before the "how"

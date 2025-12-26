@@ -52,4 +52,4 @@ After rebase completes:
 
 - Use `--fixup=<hash>` to create fixup commits targeting specific commits
 - `--autosquash` automatically merges fixup commits during rebase
-- Commit messages follow the project's Conventional Commits conventions
+- Commit messages follow the `commit-message` rule
