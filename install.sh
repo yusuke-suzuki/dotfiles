@@ -9,9 +9,10 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SOURCE_DIR="$SCRIPT_DIR/.claude"
-COMMANDS_DIR="$HOME/.claude/commands"
-SKILLS_DIR="$HOME/.claude/skills"
 CLAUDE_DIR="$HOME/.claude"
+COMMANDS_DIR="$CLAUDE_DIR/commands"
+SKILLS_DIR="$CLAUDE_DIR/skills"
+RULES_DIR="$CLAUDE_DIR/rules"
 MISE_CONFIG_DIR="$HOME/.config/mise"
 
 echo "Installing dotfiles..."
@@ -61,6 +62,20 @@ for skill_dir in "$SOURCE_DIR"/skills/*/; do
     fi
 done
 
+# Install rules
+echo ""
+echo "📏 Installing rules..."
+if [ -d "$SOURCE_DIR/rules" ]; then
+    mkdir -p "$RULES_DIR"
+    for rule_path in "$SOURCE_DIR"/rules/*.md; do
+        if [ -f "$rule_path" ]; then
+            rule_file=$(basename "$rule_path")
+            echo "   Installing rule: $rule_file"
+            cp "$rule_path" "$RULES_DIR/$rule_file"
+        fi
+    done
+fi
+
 echo ""
 
 # ============================================
@@ -103,6 +118,11 @@ done
 for skill_dir in "$SKILLS_DIR"/*/; do
     if [ -d "$skill_dir" ]; then
         echo "  - $skill_dir"
+    fi
+done
+for rule_file in "$RULES_DIR"/*.md; do
+    if [ -f "$rule_file" ]; then
+        echo "  - $rule_file"
     fi
 done
 echo "  - $MISE_CONFIG_DIR/config.toml"
