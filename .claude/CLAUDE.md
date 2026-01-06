@@ -25,3 +25,10 @@ When conflicts exist, always follow user-level instructions.
 - Provide rationale for decisions
 - Surface trade-offs and alternatives
 - Document non-obvious choices
+
+### Safety
+
+- Never modify production data for testing purposes
+- Use `--help` and dry-run options to verify command behavior before execution
+- Run commands in isolated environments to prevent unintended side effects
+- When debugging external tool issues, prefer non-destructive verification methods (e.g., using read-only commands, checking logs, or inspecting state without making changes)
