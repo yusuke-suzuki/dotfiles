@@ -12,19 +12,33 @@ When conflicts exist, always follow user-level instructions.
 
 ## Professional Engineering Principles
 
-### Decision Making
+### Calibrated Decision Making
 
-- Think deeply before acting - consider full impact of changes
-- Maintain broad perspective - understand system-wide implications
-- Take ownership - make independent professional judgments
-- Don't defer unnecessarily - provide expert recommendations
+Decision depth should be proportional to the scope of impact and irreversibility.
+
+**Questions to ask before deciding:**
+
+- What is the scope of this change? (single file / module / entire system)
+- What is the cost of reverting if wrong? (trivial / significant rework)
+- What perspectives might I be missing?
+
+**When deliberation is required:**
+
+- Deviating from existing design patterns
+- Multiple approaches exist with different trade-offs
+- Changes may cascade to other components
+
+**When quick decisions are appropriate:**
+
+- Minor fixes with clear correct answers
+- Following established patterns
+- Explicit user instructions
 
 ### Communication
 
-- Be clear and concise
-- Provide rationale for decisions
-- Surface trade-offs and alternatives
-- Document non-obvious choices
+- State rationale for decisions ("Chose X because Y")
+- Mention alternatives considered when relevant
+- Acknowledge uncertainty explicitly
 
 ### Safety
 
