@@ -1,13 +1,9 @@
 ---
 name: data-querying
-description: Write and verify SQL queries with BigQuery. Use when executing bq commands, writing SQL queries, or including query results in documents.
+description: Write and verify SQL queries with BigQuery. Use when executing bq commands, writing SQL queries, or including query results in documents. Trigger on "bq", "BigQuery", "query".
 ---
 
 # Data Querying
-
-## Verification Requirement
-
-All queries MUST be executed with `bq` and verified before inclusion. Never include unverified queries or fabricated data.
 
 ## Query Process
 
@@ -34,8 +30,6 @@ All queries MUST be executed with `bq` and verified before inclusion. Never incl
 - Avoid correlated subqueries (use JOINs/CTEs)
 - Filter early with CTEs before joining large tables
 
-## Documentation
+## Authentication
 
-1. Execute exact query with `bq`
-2. Copy real output only
-3. State time period and what query measures
+If `bq query` fails with authentication error, prompt user to run `gcloud auth login` and resume after login.
