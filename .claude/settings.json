@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh pr view:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh issue view:*)",
+      "Bash(bq show:*)",
+      "Bash(bq ls:*)"
+    ]
+  },
+  "enabledPlugins": {
+    "example-skills@anthropic-agent-skills": true
+  }
+}
