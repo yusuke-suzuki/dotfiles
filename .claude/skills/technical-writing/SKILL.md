@@ -1,6 +1,6 @@
 ---
 name: technical-writing
-description: Write technical design documents (design docs, specs, proposals). Use when creating design documents, technical specifications, project proposals, or similar structured technical content. Trigger on "design doc", "デザインドック", "設計書", "仕様書", "proposal".
+description: Write technical design documents (design docs, specs, proposals). Use when creating design documents, technical specifications, project proposals, or similar structured technical content.
 ---
 
 # Technical Writing
