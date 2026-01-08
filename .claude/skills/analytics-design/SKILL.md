@@ -1,6 +1,6 @@
 ---
 name: analytics-design
-description: Design Looker Studio reports and dashboards. Use when creating Looker Studio reports, designing data sources, or writing visualization specifications. Trigger on "Looker Studio", "レポート設計", "ダッシュボード".
+description: Design Looker Studio reports and dashboards. Use when creating Looker Studio reports, designing data sources, or writing visualization specifications.
 ---
 
 # Analytics Design

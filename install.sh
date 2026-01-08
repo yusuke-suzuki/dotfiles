@@ -128,16 +128,25 @@ done
 echo "  - $MISE_CONFIG_DIR/config.toml"
 echo ""
 echo "Claude Code commands:"
-echo "  /commit  - Create a git commit with Conventional Commits format"
-echo "  /fixup   - Create a fixup commit and autosquash rebase"
-echo "  /publish - Push commits and create/update pull request"
-echo "  /sync    - Sync feature branch with main via rebase"
+for cmd_file in "$COMMANDS_DIR"/*.md; do
+    if [ -f "$cmd_file" ]; then
+        cmd_name=$(basename "$cmd_file" .md)
+        description=$(grep -m1 "^description:" "$cmd_file" | sed 's/^description:[[:space:]]*//')
+        printf "  /%-16s - %s\n" "$cmd_name" "$description"
+    fi
+done
 echo ""
 echo "Claude Code skills:"
-echo "  technical-writing  - Technical document creation"
-echo "  data-querying      - SQL query development with BigQuery"
-echo "  analytics-design   - Analytics infrastructure design"
-echo "  text-formatting-ja - Japanese text formatting"
+for skill_dir in "$SKILLS_DIR"/*/; do
+    if [ -d "$skill_dir" ]; then
+        skill_name=$(basename "$skill_dir")
+        skill_file="$skill_dir/SKILL.md"
+        if [ -f "$skill_file" ]; then
+            description=$(grep -m1 "^description:" "$skill_file" | sed 's/^description:[[:space:]]*//')
+            printf "  %-18s - %s\n" "$skill_name" "$description"
+        fi
+    fi
+done
 echo ""
 echo "mise setup:"
 echo "  Add the following to your shell config (e.g., ~/.bashrc, ~/.zshrc):"
