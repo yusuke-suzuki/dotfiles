@@ -31,6 +31,12 @@ All code and queries in documents must be verified before inclusion.
 
 Use Mermaid notation for diagrams. Do not use ASCII art.
 
+## Progressive Disclosure
+
+- Explain concepts before details
+- Explain "why" before "how"
+- State the next step explicitly
+
 ## Writing Style
 
 Write naturally. Avoid:
