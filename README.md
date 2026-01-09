@@ -40,6 +40,7 @@ cd ~/dotfiles
 
 - Git
 - GitHub CLI (`gh`)
+- Google Cloud SDK (`bq`)
 - mise
 
 ### Updating
