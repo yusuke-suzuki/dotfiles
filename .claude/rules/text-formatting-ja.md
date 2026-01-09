@@ -16,6 +16,13 @@ Use half-width `()`:
 - OK: `ユーザー (User) が追加されました`
 - NG: `ユーザー（User）が追加されました`
 
+## Sentence Completion
+
+Complete sentences properly. Don't end with colons:
+
+- OK: `テーブル間の関係をまとめると以下のようになります。`
+- NG: `テーブル間の関係をまとめると:`
+
 ## Scope
 
 Do NOT modify: backticks, database values, API responses.
