@@ -52,6 +52,8 @@ Present your analysis and recommendation to the user for each comment. The user 
 **If fix required:**
 
 - Make the necessary code changes
+- Reply to acknowledge the fix (e.g., "Done")
+- Resolve the thread
 - Inform user to use `/fixup` or `/commit` after all fixes are complete
 
 **If no action needed:**
