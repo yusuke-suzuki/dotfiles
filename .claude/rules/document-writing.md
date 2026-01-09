@@ -4,14 +4,13 @@ Apply when writing or editing documents.
 
 ## Structural Integrity
 
-A document is not a collection of independent sections but a logically coherent narrative. Each section should build on previous sections, and all content should serve the document's central argument or purpose.
+A document is a logically coherent narrative, not a collection of independent sections. Each section's story determines what belongs and what doesn't: add content that advances the story, remove content that contradicts or distracts from it.
 
-### Principles for Modifications
+When modifying a document:
 
-1. **Read the entire document before editing** - Understand the overall structure and argument before making partial changes
-2. **Consider impact on the narrative** - Evaluate how modifications affect the logical flow of the entire document
-3. **Update all related occurrences** - Search the entire document for terms/expressions being modified and update all instances
-4. **Remove obsolete sections** - Actively delete sections that become redundant or unnecessary after modifications
+1. **Read first** - Understand the overall structure before making partial changes
+2. **Update all affected sections** - When the story changes, maintain consistency throughout
+3. **Remove obsolete content** - Delete content that becomes redundant after modifications
 
 ## Content Verification
 
