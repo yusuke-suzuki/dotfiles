@@ -25,11 +25,10 @@ if [ ! -d "$SOURCE_DIR" ]; then
     exit 1
 fi
 
-# Create directories if they don't exist
-if [ ! -d "$COMMANDS_DIR" ]; then
-    echo "📁 Creating directory: $COMMANDS_DIR"
-    mkdir -p "$COMMANDS_DIR"
-fi
+# Clean and recreate directories
+echo "🧹 Cleaning existing configurations..."
+rm -rf "$COMMANDS_DIR" "$SKILLS_DIR" "$RULES_DIR"
+mkdir -p "$COMMANDS_DIR" "$SKILLS_DIR" "$RULES_DIR"
 
 # Install CLAUDE.md (backup existing if present)
 echo "📝 Installing CLAUDE.md..."
@@ -57,24 +56,20 @@ for skill_dir in "$SOURCE_DIR"/skills/*/; do
         skill_name=$(basename "$skill_dir")
         dest_dir="$SKILLS_DIR/$skill_name"
         echo "   Installing skill: $skill_name"
-        mkdir -p "$dest_dir"
-        cp -r "$skill_dir." "$dest_dir/"
+        cp -r "$skill_dir" "$dest_dir"
     fi
 done
 
 # Install rules
 echo ""
 echo "📏 Installing rules..."
-if [ -d "$SOURCE_DIR/rules" ]; then
-    mkdir -p "$RULES_DIR"
-    for rule_path in "$SOURCE_DIR"/rules/*.md; do
-        if [ -f "$rule_path" ]; then
-            rule_file=$(basename "$rule_path")
-            echo "   Installing rule: $rule_file"
-            cp "$rule_path" "$RULES_DIR/$rule_file"
-        fi
-    done
-fi
+for rule_path in "$SOURCE_DIR"/rules/*.md; do
+    if [ -f "$rule_path" ]; then
+        rule_file=$(basename "$rule_path")
+        echo "   Installing rule: $rule_file"
+        cp "$rule_path" "$RULES_DIR/$rule_file"
+    fi
+done
 
 echo ""
 

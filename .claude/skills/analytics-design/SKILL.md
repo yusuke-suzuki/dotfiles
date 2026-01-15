@@ -1,20 +1,72 @@
 ---
 name: analytics-design
-description: Design Looker Studio reports and dashboards. Use when creating Looker Studio reports, designing data sources, or writing visualization specifications.
+description: Design data analysis from purpose clarification to visualization. Use when analyzing data, exploring BigQuery schemas, building queries, or creating Looker Studio reports.
 ---
 
 # Analytics Design
 
 ## Workflow
 
-1. **Purpose**: Define what to visualize (link to design doc with KPIs)
-2. **Data Sources**: Design SQL queries and field definitions
-3. **Report Structure**: Define pages and their purposes
-4. **Visualization**: Specify charts with dimensions, metrics, filters
+Use [references/analytics-design-template.md](references/analytics-design-template.md) to document every analysis.
 
-## Templates
+1. **Clarify Purpose**: What do you want to know? Why is this analysis needed? Who will use it? One-time or ongoing monitoring?
 
-See [references/looker-studio-template.md](references/looker-studio-template.md) for report design template.
+2. **Discover Data**: Explore available datasets and understand schema.
+   - Ask user for project/dataset context and business background
+   - `bq ls`, `bq show --schema` for BigQuery tables
+   - `db/schema.rb` for Rails projects
+   - API docs or sample data for external services
+   - Understand table relationships (ER diagrams help)
+
+3. **Build Query**: Write SQL based on discovered schema.
+   - Use CTEs for readability
+   - Execute using BigQuery CLI (see [BigQuery Query Execution](#bigquery-query-execution) below)
+   - Interpret results and document findings
+
+4. **Create Dashboard** (if ongoing monitoring needed):
+   - Use [references/looker-studio-template.md](references/looker-studio-template.md) to design
+   - Define decisions: What actions will users take based on this dashboard?
+   - Check existing resources: Similar dashboards or queries already exist?
+   - Align time granularity with usage frequency (daily/weekly/monthly)
+   - Design data sources, pages, and charts
+
+## BigQuery Query Execution
+
+### Prerequisites
+
+Check gcloud configuration before running queries:
+
+```bash
+gcloud config get-value project
+```
+
+- If authentication error: prompt user to run `gcloud auth login`, then resume
+- If project unset: prompt user to run `gcloud config set project <PROJECT_ID>`
+
+### Execution Process
+
+1. **Dry run**: Validate syntax and estimate cost
+
+   ```bash
+   bq query --use_legacy_sql=false --dry_run "SELECT * FROM \`project.dataset.table\`"
+   ```
+
+   Cost: ~$5/TB. <1GB is light, 2GB+ needs optimization.
+
+2. **Execute**: Run and confirm results
+
+   ```bash
+   bq query --use_legacy_sql=false --format=csv "SELECT * FROM \`project.dataset.table\`"
+   ```
+
+Always use fully-qualified table names: `project.dataset.table`
+
+### Query Design Tips
+
+- Specify exact date ranges
+- Filter partitioned tables by partition key
+- Avoid correlated subqueries (use JOINs/CTEs)
+- Filter early with CTEs before joining large tables
 
 ## Looker Studio Best Practices
 
@@ -32,10 +84,14 @@ See [references/looker-studio-template.md](references/looker-studio-template.md)
 - Group related metrics per page
 - Consistent filter scopes within pages
 
-### Visualization
+### Chart Type Selection
 
-- Scorecards for KPI current values
-- Time series for trends
-- Stacked area/bar for category breakdown over time
-- Tables for detailed data
-- Add comparison periods where relevant
+| Purpose | Chart Type |
+|---------|------------|
+| KPI current value | Scorecard |
+| Time series trend | Time series chart |
+| Category breakdown over time | Stacked area / Stacked bar |
+| Category comparison | Bar chart |
+| Composition | Pie chart |
+| Detailed data | Table |
+| Distribution (percentile) | Time series (multiple metrics) |
