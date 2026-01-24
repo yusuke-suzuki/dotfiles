@@ -12,5 +12,18 @@
   },
   "enabledPlugins": {
     "example-skills@anthropic-agent-skills": true
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR\"/install.sh"
+          }
+        ]
+      }
+    ]
   }
 }

@@ -12,6 +12,6 @@
       ]
     }
   },
-  "postCreateCommand": "curl -fsSL https://claude.ai/install.sh | bash && bash install.sh",
+  "postCreateCommand": "bash .devcontainer/setup.sh",
   "remoteUser": "vscode"
 }
