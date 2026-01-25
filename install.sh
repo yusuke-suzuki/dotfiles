@@ -80,25 +80,26 @@ echo "Installing mise configuration..."
 
 # Check mise is installed
 if ! command -v mise &> /dev/null; then
-    echo "  [ERROR] mise is not installed." >&2
-    echo "  Please install it by following the instructions at https://mise.jdx.dev/getting-started.html" >&2
-    exit 1
-fi
+    echo "  ⚠️  mise is not installed. Skipping mise configuration."
+    MISE_INSTALLED=false
+else
+    MISE_INSTALLED=true
 
-# Create mise config directory
-if [ ! -d "$MISE_CONFIG_DIR" ]; then
-    echo "  Creating directory: $MISE_CONFIG_DIR"
-    mkdir -p "$MISE_CONFIG_DIR"
-fi
+    # Create mise config directory
+    if [ ! -d "$MISE_CONFIG_DIR" ]; then
+        echo "  Creating directory: $MISE_CONFIG_DIR"
+        mkdir -p "$MISE_CONFIG_DIR"
+    fi
 
-# Install mise config (backup existing if present)
-if [ -f "$MISE_CONFIG_DIR/config.toml" ]; then
-    backup="$MISE_CONFIG_DIR/config.toml.backup.$(date +%Y%m%d_%H%M%S)"
-    echo "  Backing up existing config.toml to: $backup"
-    mv "$MISE_CONFIG_DIR/config.toml" "$backup"
+    # Install mise config (backup existing if present)
+    if [ -f "$MISE_CONFIG_DIR/config.toml" ]; then
+        backup="$MISE_CONFIG_DIR/config.toml.backup.$(date +%Y%m%d_%H%M%S)"
+        echo "  Backing up existing config.toml to: $backup"
+        mv "$MISE_CONFIG_DIR/config.toml" "$backup"
+    fi
+    cp "$SCRIPT_DIR/mise/config.toml.template" "$MISE_CONFIG_DIR/config.toml"
+    echo "  Installed: $MISE_CONFIG_DIR/config.toml"
 fi
-cp "$SCRIPT_DIR/mise/config.toml.template" "$MISE_CONFIG_DIR/config.toml"
-echo "  Installed: $MISE_CONFIG_DIR/config.toml"
 
 echo ""
 echo "Installation complete!"
@@ -120,7 +121,9 @@ for rule_file in "$RULES_DIR"/*.md; do
         echo "  - $rule_file"
     fi
 done
-echo "  - $MISE_CONFIG_DIR/config.toml"
+if [ "$MISE_INSTALLED" = true ]; then
+    echo "  - $MISE_CONFIG_DIR/config.toml"
+fi
 echo ""
 echo "Claude Code commands:"
 for cmd_file in "$COMMANDS_DIR"/*.md; do
@@ -142,7 +145,9 @@ for skill_dir in "$SKILLS_DIR"/*/; do
         fi
     fi
 done
-echo ""
-echo "mise setup:"
-echo "  Add the following to your shell config (e.g., ~/.bashrc, ~/.zshrc):"
-echo '    eval "$(mise activate)"'
+if [ "$MISE_INSTALLED" = true ]; then
+    echo ""
+    echo "mise setup:"
+    echo "  Add the following to your shell config (e.g., ~/.bashrc, ~/.zshrc):"
+    echo '    eval "$(mise activate)"'
+fi
