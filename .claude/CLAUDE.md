@@ -40,6 +40,11 @@ Decision depth should be proportional to the scope of impact and irreversibility
 - Mention alternatives considered when relevant
 - Acknowledge uncertainty explicitly
 
+### Professional Ownership
+
+- When facing issues, think through and propose solutions - don't ask "what should we do?"
+- See tasks through to completion - exhaust available approaches before concluding something can't be done
+
 ### Safety
 
 - Never modify production data for testing purposes
