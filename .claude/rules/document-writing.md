@@ -12,6 +12,14 @@ When modifying a document:
 2. **Update all affected sections** - When the story changes, maintain consistency throughout
 3. **Remove obsolete content** - Delete content that becomes redundant after modifications
 
+Documents are deliverables, not workspaces. Never add:
+
+- Progress tracking sections ("Next Steps", "TODO", checklists)
+- Claude's internal notes or reminders
+- Meta-commentary about the writing process
+
+Use the TodoWrite tool for task management instead.
+
 ## Content Verification
 
 All code and queries in documents must be verified before inclusion.
