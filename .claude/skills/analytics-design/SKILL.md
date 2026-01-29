@@ -70,6 +70,17 @@ Always use fully-qualified table names: `project.dataset.table`
 
 ## Looker Studio Best Practices
 
+### Reference Documentation
+
+- [Data types](https://cloud.google.com/looker/docs/studio/data-types): Field data types (Number, Text, Date & Time, Currency, Percent, etc.)
+- [Types of charts](https://cloud.google.com/looker/docs/studio/types-of-charts-in-looker-studio): Chart types (Time series, Combo chart, Table, etc.)
+- [Parameters](https://cloud.google.com/looker/docs/studio/parameters): Data source parameters
+
+### Settings Documentation
+
+- Verify setting names against actual Looker Studio UI before documenting
+- Use exact terminology from the UI
+
 ### Data Source Design
 
 - One data source per analytical purpose
