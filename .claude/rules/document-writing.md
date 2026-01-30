@@ -1,3 +1,7 @@
+---
+paths: ["*.md"]
+---
+
 # Document Writing
 
 Apply when writing or editing documents.

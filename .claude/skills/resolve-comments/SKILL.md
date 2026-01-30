@@ -1,6 +1,8 @@
 ---
+name: resolve-comments
 description: Resolve PR review comments
 allowed-tools: Bash(gh pr view:*), Bash(gh api:*), Read, Glob, Edit, Write
+disable-model-invocation: true
 ---
 
 # Resolve Comments

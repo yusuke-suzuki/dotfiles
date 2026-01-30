@@ -1,6 +1,8 @@
 ---
+name: publish
 description: Push commits and create/update pull request
-allowed-tools: Bash(git status:*), Bash(git fetch:*), Bash(git log:*), Bash(git diff:*), Bash(gh pr view:*), Read, Glob
+allowed-tools: Bash(git status:*), Bash(git fetch:*), Bash(git log:*), Bash(git diff:*), Bash(gh pr view:*), Bash(gh pr create:*), Bash(gh pr edit:*), Read, Glob
+disable-model-invocation: true
 ---
 
 # Publish
@@ -43,15 +45,39 @@ gh pr view
 
 **If no PR exists:**
 
-- Create a new PR: `gh pr create`
-
-## PR Guidelines
-
-Follow the `pr-description` rule.
-
-Additionally:
-
+- Create a new PR following the conventions below
 - Ask user whether to create as draft or ready for review
+
+## PR Description Conventions
+
+### Template Priority
+
+Check for project template first:
+
+```bash
+find . -maxdepth 2 -iname "pull_request_template.md" -print -quit | xargs -r cat
+```
+
+If exists, use it. Otherwise use the default template in [references/pr-template.md](references/pr-template.md).
+
+### Title
+
+- MUST match a commit message subject line exactly
+- If multiple commits, ask user which to use
+
+### Language
+
+- Match template language if project template exists
+- Default: English
+- Japanese: Use polite form (敬語)
+
+### Signature
+
+Always end with:
+
+```text
+🤖 Generated with [Claude Code](https://claude.ai/code)
+```
 
 ## 4. Final Output
 

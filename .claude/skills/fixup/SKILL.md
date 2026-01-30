@@ -1,6 +1,8 @@
 ---
+name: fixup
 description: Create a fixup commit and autosquash rebase
-allowed-tools: Bash(git status:*), Bash(git fetch:*), Bash(git log:*), Bash(git diff:*), Read, Glob
+allowed-tools: Bash(git status:*), Bash(git fetch:*), Bash(git log:*), Bash(git diff:*), Bash(git add:*), Bash(git commit:*), Bash(git rebase:*), Read, Glob
+disable-model-invocation: true
 ---
 
 # Fixup
@@ -28,17 +30,32 @@ If there are uncommitted changes:
 
 ## 3. Autosquash Rebase
 
-Run interactive rebase with autosquash:
+Run non-interactive rebase with autosquash:
 
 ```bash
-git rebase -i --autosquash origin/main
+git rebase --autosquash origin/main
 ```
 
-The autosquash option will automatically arrange and mark fixup commits for squashing.
+## 4. Commit Message Review
 
-## 4. Post-Rebase Actions
+After rebase completes, verify the commit message matches the changes:
 
-After rebase completes:
+1. Display the rebased commit:
+
+   ```bash
+   git show HEAD --stat
+   ```
+
+2. Compare the commit message body with the actual changes
+
+3. If the message is inaccurate or incomplete:
+   - Draft a corrected commit message following the `commit-message` rule
+   - Explain what needs to be updated and why
+   - Update with `git commit --amend`
+
+## 5. Post-Rebase Actions
+
+After message review:
 
 1. Display the final commit history:
 
@@ -52,4 +69,6 @@ After rebase completes:
 
 - Use `--fixup=<hash>` to create fixup commits targeting specific commits
 - `--autosquash` automatically merges fixup commits during rebase
+- Review commit messages after rebase - compare with actual changes
+- Update messages with `git commit --amend` when they don't accurately reflect the changes
 - Commit messages follow the `commit-message` rule
