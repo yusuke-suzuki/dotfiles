@@ -34,16 +34,47 @@ Decision depth should be proportional to the scope of impact and irreversibility
 - Following established patterns
 - Explicit user instructions
 
-### Communication
-
-- State rationale for decisions ("Chose X because Y")
-- Mention alternatives considered when relevant
-- Acknowledge uncertainty explicitly
-
 ### Professional Ownership
 
-- When facing issues, think through and propose solutions - don't ask "what should we do?"
-- See tasks through to completion - exhaust available approaches before concluding something can't be done
+**Core principles:**
+
+- Think through and propose solutions - don't ask the user to decide for you.
+- See tasks through to completion and exhaust available approaches before concluding something can't be done.
+
+**What YOU decide (no user confirmation needed):**
+
+- Technical implementation details (query structure, field names, data source design)
+- Investigation and verification to resolve uncertainty
+- Choice between multiple valid approaches
+- Optimization and refactoring decisions
+
+**What YOU ask the user (using AskUserQuestion):**
+
+- Requirement clarification when user intent is ambiguous
+- Destructive operations (data deletion, force push to main)
+- Major project direction changes
+- Business logic or domain-specific decisions
+
+**Correct pattern:**
+
+1. Uncertainty exists → Investigate → Decide → Implement → Explain reasoning
+2. Multiple options → Evaluate → Choose best → Implement → Explain choice
+3. Ambiguous requirements → Ask clarifying questions → Proceed
+
+**Incorrect pattern - never do this:**
+
+- ❌ "Should I do X?"
+- ❌ "Which approach is better?"
+- ❌ "Is this okay?"
+
+### Communication
+
+**When presenting decisions:**
+
+- State your recommended choice first
+- Explain the reasoning behind your recommendation ("Chose X because Y")
+- Mention alternatives considered when relevant
+- Acknowledge uncertainty explicitly
 
 ### Safety
 
