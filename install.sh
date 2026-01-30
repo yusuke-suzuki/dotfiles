@@ -3,14 +3,13 @@ set -e
 
 # Dotfiles Installer
 # This script installs:
-#   - Claude Code custom slash commands and CLAUDE.md
+#   - Claude Code skills and CLAUDE.md
 #   - mise configuration
 # Run this script from the cloned repository directory
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SOURCE_DIR="$SCRIPT_DIR/.claude"
 CLAUDE_DIR="$HOME/.claude"
-COMMANDS_DIR="$CLAUDE_DIR/commands"
 SKILLS_DIR="$CLAUDE_DIR/skills"
 RULES_DIR="$CLAUDE_DIR/rules"
 MISE_CONFIG_DIR="$HOME/.config/mise"
@@ -27,8 +26,8 @@ fi
 
 # Clean and recreate directories
 echo "🧹 Cleaning existing configurations..."
-rm -rf "$COMMANDS_DIR" "$SKILLS_DIR" "$RULES_DIR"
-mkdir -p "$COMMANDS_DIR" "$SKILLS_DIR" "$RULES_DIR"
+rm -rf "$SKILLS_DIR" "$RULES_DIR"
+mkdir -p "$SKILLS_DIR" "$RULES_DIR"
 
 # Install CLAUDE.md (backup existing if present)
 echo "📝 Installing CLAUDE.md..."
@@ -38,15 +37,6 @@ if [ -f "$CLAUDE_DIR/CLAUDE.md" ]; then
     mv "$CLAUDE_DIR/CLAUDE.md" "$backup"
 fi
 cp "$SOURCE_DIR/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
-
-# Install each command file
-for cmd_path in "$SOURCE_DIR"/commands/*.md; do
-    if [ -f "$cmd_path" ]; then
-        cmd_file=$(basename "$cmd_path")
-        echo "📄 Installing command: $cmd_file"
-        cp "$cmd_path" "$COMMANDS_DIR/$cmd_file"
-    fi
-done
 
 # Install skills
 echo ""
@@ -106,11 +96,6 @@ echo "Installation complete!"
 echo ""
 echo "Installed files:"
 echo "  - $CLAUDE_DIR/CLAUDE.md"
-for cmd_file in "$COMMANDS_DIR"/*.md; do
-    if [ -f "$cmd_file" ]; then
-        echo "  - $cmd_file"
-    fi
-done
 for skill_dir in "$SKILLS_DIR"/*/; do
     if [ -d "$skill_dir" ]; then
         echo "  - $skill_dir"
@@ -124,15 +109,6 @@ done
 if [ "$MISE_INSTALLED" = true ]; then
     echo "  - $MISE_CONFIG_DIR/config.toml"
 fi
-echo ""
-echo "Claude Code commands:"
-for cmd_file in "$COMMANDS_DIR"/*.md; do
-    if [ -f "$cmd_file" ]; then
-        cmd_name=$(basename "$cmd_file" .md)
-        description=$(grep -m1 "^description:" "$cmd_file" | sed 's/^description:[[:space:]]*//')
-        printf "  /%-16s - %s\n" "$cmd_name" "$description"
-    fi
-done
 echo ""
 echo "Claude Code skills:"
 for skill_dir in "$SKILLS_DIR"/*/; do

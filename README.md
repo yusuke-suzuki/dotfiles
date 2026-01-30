@@ -7,7 +7,6 @@ Personal dotfiles for managing development environment configurations.
 ### Claude Code Configuration
 
 - **CLAUDE.md** - Professional engineering principles
-- **commands/** - Slash commands for common workflows
 - **rules/** - Standards automatically applied based on context
 - **skills/** - Specialized capabilities for specific tasks
 
@@ -28,7 +27,6 @@ cd ~/dotfiles
 ```text
 ~/.claude/
 ├── CLAUDE.md
-├── commands/
 ├── rules/
 └── skills/
 
