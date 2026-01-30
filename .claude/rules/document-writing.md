@@ -55,3 +55,13 @@ Write naturally. Avoid:
   - "This is important because...", "It's worth noting...", "Crucially..."
 - Repeating information
 - Vague expressions (overuse of "etc.", "such as", "and so on")
+
+### Style Consistency
+
+When editing existing documents, match the established writing style:
+
+- **Japanese documents**: Match the formality level (敬語 vs 常体)
+  - If the document uses です/ます (polite form), continue with polite form
+  - If the document uses である/だ (plain form), continue with plain form
+- **English documents**: Match the tone and voice (formal, casual, technical)
+- Never mix styles within the same document, except in clearly demarcated sections (e.g., quoted text, appendices, or code examples)
