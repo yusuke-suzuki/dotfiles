@@ -1,7 +1,3 @@
----
-paths: ["*.md"]
----
-
 # Japanese Text Formatting
 
 Apply to all Japanese prose text (documents, comments, descriptions).
