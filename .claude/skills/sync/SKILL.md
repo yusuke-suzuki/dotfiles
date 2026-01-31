@@ -2,7 +2,6 @@
 name: sync
 description: Sync feature branch with main via rebase
 allowed-tools: Bash(git status:*), Bash(git fetch:*), Bash(git log:*), Bash(git diff:*), Bash(git rebase:*)
-disable-model-invocation: true
 ---
 
 # Sync

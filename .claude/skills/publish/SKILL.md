@@ -2,7 +2,6 @@
 name: publish
 description: Push commits and create/update pull request
 allowed-tools: Bash(git status:*), Bash(git fetch:*), Bash(git log:*), Bash(git diff:*), Bash(gh pr view:*), Bash(gh pr create:*), Bash(gh pr edit:*), Read, Glob
-disable-model-invocation: true
 ---
 
 # Publish
