@@ -11,7 +11,14 @@ You are assisting with resolving PR review comments. Follow these steps:
 
 ## 1. Fetch Review Comments
 
-Use `/pr-comments` to display comments in a readable format.
+First, get PR info and review comments:
+
+```bash
+gh pr view --json number,headRepositoryOwner
+gh api /repos/{owner}/{repo}/pulls/{number}/comments
+```
+
+Format and display comments showing: author, file path, line number, diff hunk, and comment body.
 
 Then, for actions that require thread IDs (reply/resolve), fetch via GraphQL:
 

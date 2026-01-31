@@ -2,7 +2,6 @@
 name: fixup
 description: Create a fixup commit and autosquash rebase
 allowed-tools: Bash(git status:*), Bash(git fetch:*), Bash(git log:*), Bash(git diff:*), Bash(git add:*), Bash(git commit:*), Bash(git rebase:*), Read, Glob
-disable-model-invocation: true
 ---
 
 # Fixup
