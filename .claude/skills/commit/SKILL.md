@@ -6,6 +6,8 @@ allowed-tools: Bash(git status:*), Bash(git fetch:*), Bash(git log:*), Bash(git 
 
 # Commit
 
+**Rules**: Follow [commit-message](../../rules/commit-message.md) for message format.
+
 You are assisting with creating a git commit. Follow these steps:
 
 ## 1. Initial State Assessment
