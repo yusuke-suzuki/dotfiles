@@ -22,7 +22,7 @@ gcloud config get-value project
 
 1. **Clarify requirements**: Understand what data is needed and why. If requirements are already in context, proceed to next step.
 
-2. **Understand schema**: If schema is not in context, explore:
+2. **Understand schema**: Explore available datasets. If schema is already in context, proceed to next step.
 
    ```bash
    bq ls project:dataset                           # List tables
@@ -44,9 +44,9 @@ gcloud config get-value project
    bq query --use_legacy_sql=false --dry_run "SELECT ..."
    ```
 
-   Cost: ~$5/TB. <1GB is light, 2GB+ needs optimization.
+   Cost: ~$5/TB. If >2GB, ask user before executing.
 
-5. **Execute**: Run and retrieve results
+5. **Execute**: Run after successful dry run, once any required user confirmation has been given
 
    ```bash
    bq query --use_legacy_sql=false --format=csv "SELECT ..."
