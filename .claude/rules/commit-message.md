@@ -17,7 +17,8 @@ Apply when creating git commits.
 
 - Blank line after subject
 - Wrap at 72 characters
-- Explain **what** and **why**, not **how**
+- Add blank lines between paragraphs for readability
+- Explain the rationale for the change (the "why"), not just what was modified or how it was implemented
 
 ## Example
 

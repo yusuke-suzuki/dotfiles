@@ -5,6 +5,8 @@ description: Design data analysis from purpose clarification to visualization. U
 
 # Analytics Design
 
+**Rules**: Follow [document-writing](../../rules/document-writing.md) and [text-formatting-ja](../../rules/text-formatting-ja.md) for Japanese documents.
+
 ## Workflow
 
 Use [references/analytics-design-template.md](references/analytics-design-template.md) to document every analysis.
@@ -13,14 +15,13 @@ Use [references/analytics-design-template.md](references/analytics-design-templa
 
 2. **Discover Data**: Explore available datasets and understand schema.
    - Ask user for project/dataset context and business background
-   - `bq ls`, `bq show --schema` for BigQuery tables
+   - Use `/bq-query` skill for BigQuery schema exploration
    - `db/schema.rb` for Rails projects
    - API docs or sample data for external services
-   - Understand table relationships (ER diagrams help)
+   - Document schema and table relationships in the report
 
-3. **Build Query**: Write SQL based on discovered schema.
-   - Use CTEs for readability
-   - Execute using BigQuery CLI (see [BigQuery Query Execution](#bigquery-query-execution) below)
+3. **Build Query**: Use `/bq-query` skill to design and execute queries.
+   - Requirements and schema from Steps 1-2 provide context
    - Interpret results and document findings
 
 4. **Create Dashboard** (if ongoing monitoring needed):
@@ -29,44 +30,6 @@ Use [references/analytics-design-template.md](references/analytics-design-templa
    - Check existing resources: Similar dashboards or queries already exist?
    - Align time granularity with usage frequency (daily/weekly/monthly)
    - Design data sources, pages, and charts
-
-## BigQuery Query Execution
-
-### Prerequisites
-
-Check gcloud configuration before running queries:
-
-```bash
-gcloud config get-value project
-```
-
-- If authentication error: prompt user to run `gcloud auth login`, then resume
-- If project unset: prompt user to run `gcloud config set project <PROJECT_ID>`
-
-### Execution Process
-
-1. **Dry run**: Validate syntax and estimate cost
-
-   ```bash
-   bq query --use_legacy_sql=false --dry_run "SELECT * FROM \`project.dataset.table\`"
-   ```
-
-   Cost: ~$5/TB. <1GB is light, 2GB+ needs optimization.
-
-2. **Execute**: Run and confirm results
-
-   ```bash
-   bq query --use_legacy_sql=false --format=csv "SELECT * FROM \`project.dataset.table\`"
-   ```
-
-Always use fully-qualified table names: `project.dataset.table`
-
-### Query Design Tips
-
-- Specify exact date ranges
-- Filter partitioned tables by partition key
-- Avoid correlated subqueries (use JOINs/CTEs)
-- Filter early with CTEs before joining large tables
 
 ## Looker Studio Best Practices
 
