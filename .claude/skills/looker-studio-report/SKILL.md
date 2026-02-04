@@ -1,43 +1,34 @@
 ---
-name: analytics-design
-description: Design data analysis from purpose clarification to visualization. Use when analyzing data, exploring BigQuery schemas, building queries, or creating Looker Studio reports.
+name: looker-studio-report
+description: Design Looker Studio reports for ongoing monitoring. Use when creating reports to visualize operations, costs, or metrics.
 ---
 
-# Analytics Design
+# Looker Studio Report Design
 
 **Rules**: Follow [document-writing](../../rules/document-writing.md) and [text-formatting-ja](../../rules/text-formatting-ja.md) for Japanese documents.
 
 ## Workflow
 
-Use [references/analytics-design-template.md](references/analytics-design-template.md) to document every analysis.
+Use [references/looker-studio-template.md](references/looker-studio-template.md) to document the report design.
 
-1. **Clarify Purpose**: What do you want to know? Why is this analysis needed? Who will use it? One-time or ongoing monitoring?
+1. **Define Purpose**: What needs to be monitored? What decisions will users make based on this report?
 
 2. **Discover Data**: Explore available datasets and understand schema.
    - Ask user for project/dataset context and business background
    - Use `/bq-query` skill for BigQuery schema exploration
-   - `db/schema.rb` for Rails projects
-   - API docs or sample data for external services
-   - Document schema and table relationships in the report
+   - If prior analysis exists, reference it and skip detailed exploration
 
-3. **Build Query**: Use `/bq-query` skill to design and execute queries.
-   - Requirements and schema from Steps 1-2 provide context
-   - Interpret results and document findings
-
-4. **Create Dashboard** (if ongoing monitoring needed):
-   - Use [references/looker-studio-template.md](references/looker-studio-template.md) to design
-   - Define decisions: What actions will users take based on this dashboard?
-   - Check existing resources: Similar dashboards or queries already exist?
+3. **Design Report**:
+   - Check existing resources: Similar reports or queries already exist?
    - Align time granularity with usage frequency (daily/weekly/monthly)
    - Design data sources, pages, and charts
 
-## Looker Studio Best Practices
+## Best Practices
 
 ### Reference Documentation
 
 - [Data types](https://cloud.google.com/looker/docs/studio/data-types): Field data types (Number, Text, Date & Time, Currency, Percent, etc.)
 - [Types of charts](https://cloud.google.com/looker/docs/studio/types-of-charts-in-looker-studio): Chart types (Time series, Combo chart, Table, etc.)
-- [Parameters](https://cloud.google.com/looker/docs/studio/parameters): Data source parameters
 
 ### Settings Documentation
 
