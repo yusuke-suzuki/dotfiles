@@ -29,13 +29,8 @@ echo "🧹 Cleaning existing configurations..."
 rm -rf "$SKILLS_DIR" "$RULES_DIR"
 mkdir -p "$SKILLS_DIR" "$RULES_DIR"
 
-# Install CLAUDE.md (backup existing if present)
+# Install CLAUDE.md
 echo "📝 Installing CLAUDE.md..."
-if [ -f "$CLAUDE_DIR/CLAUDE.md" ]; then
-    backup="$CLAUDE_DIR/CLAUDE.md.backup.$(date +%Y%m%d_%H%M%S)"
-    echo "   Backing up existing CLAUDE.md to: $backup"
-    mv "$CLAUDE_DIR/CLAUDE.md" "$backup"
-fi
 cp "$SOURCE_DIR/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
 
 # Install skills
@@ -81,12 +76,7 @@ else
         mkdir -p "$MISE_CONFIG_DIR"
     fi
 
-    # Install mise config (backup existing if present)
-    if [ -f "$MISE_CONFIG_DIR/config.toml" ]; then
-        backup="$MISE_CONFIG_DIR/config.toml.backup.$(date +%Y%m%d_%H%M%S)"
-        echo "  Backing up existing config.toml to: $backup"
-        mv "$MISE_CONFIG_DIR/config.toml" "$backup"
-    fi
+    # Install mise config
     cp "$SCRIPT_DIR/mise/config.toml.template" "$MISE_CONFIG_DIR/config.toml"
     echo "  Installed: $MISE_CONFIG_DIR/config.toml"
 fi
