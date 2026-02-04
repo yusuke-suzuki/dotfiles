@@ -49,15 +49,18 @@ gh pr view
 
 ## PR Description Conventions
 
-### Template Priority
+### Template Selection
 
-Check for project template first:
+1. Check for project template:
+   ```bash
+   find . -maxdepth 2 -iname "pull_request_template.md" -print -quit
+   ```
 
-```bash
-find . -maxdepth 2 -iname "pull_request_template.md" -print -quit | xargs -r cat
-```
+2. Select template based on result:
+   - **Project template exists**: Read and use the project template
+   - **No project template**: Read [references/pr-template.md](references/pr-template.md) and use it
 
-If exists, use it. Otherwise use the default template in [references/pr-template.md](references/pr-template.md).
+**IMPORTANT**: Always read the selected template file before creating the PR description. Never create a PR description without first reading a template.
 
 ### Title
 
