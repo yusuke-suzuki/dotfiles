@@ -1,7 +1,7 @@
 ---
 name: lint-doc
 description: Check documents against style rules and fix violations. Use after writing or editing documents to ensure compliance with document-writing and text-formatting-ja rules.
-allowed-tools: Read, Edit, Glob
+allowed-tools: Read, Glob
 ---
 
 # Document Linting
