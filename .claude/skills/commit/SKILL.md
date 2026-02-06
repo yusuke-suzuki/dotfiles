@@ -5,8 +5,6 @@ description: Create a git commit with Conventional Commits format
 
 # Commit
 
-**Rules**: Follow [commit-message](../../rules/commit-message.md) for message format.
-
 You are assisting with creating a git commit. Follow these steps:
 
 ## 1. Initial State Assessment
@@ -29,8 +27,32 @@ You are assisting with creating a git commit. Follow these steps:
 ## 3. Commit Creation
 
 - Stage changes with `git add .` or ask user which files to stage
-- Craft a commit message following the `commit-message` rule
+- Craft a commit message using Conventional Commits format (see below)
 - Execute `git commit`
+
+### Commit Message Format
+
+**Structure:**
+```
+<type>: <description>
+
+[optional body]
+```
+
+**Requirements:**
+- Type: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, etc.
+- Description: imperative mood, present tense (e.g., "add" not "added")
+- Subject line: maximum 50 characters (including type and scope)
+- Body: wrap at 72 characters, explain the "why" not the "what"
+- Blank line between subject and body
+
+**Example:**
+```
+feat: add user authentication
+
+Implement JWT-based authentication to secure API endpoints.
+This addresses the security requirements in issue #123.
+```
 
 ## Key Constraints
 

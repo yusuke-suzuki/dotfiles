@@ -57,7 +57,7 @@ gh pr view
 
 2. Select template based on result:
    - **Project template exists**: Read and use the project template
-   - **No project template**: Read [references/pr-template.md](references/pr-template.md) and use it
+   - **No project template**: Read [templates/pr-template.md](templates/pr-template.md) and use it
 
 **IMPORTANT**: Always read the selected template file before creating the PR description. Never create a PR description without first reading a template.
 

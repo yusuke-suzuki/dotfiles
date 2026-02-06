@@ -7,7 +7,6 @@ Personal dotfiles for managing development environment configurations.
 ### Claude Code Configuration
 
 - **CLAUDE.md** - Professional engineering principles
-- **rules/** - Standards automatically applied based on context
 - **skills/** - Specialized capabilities for specific tasks
 
 ### mise Configuration
@@ -27,7 +26,6 @@ cd ~/dotfiles
 ```text
 ~/.claude/
 ├── CLAUDE.md
-├── rules/
 └── skills/
 
 ~/.config/mise/
@@ -50,3 +48,47 @@ git pull
 ```
 
 Existing files are automatically backed up before installation.
+
+## Installing Skills via npx skills
+
+You can also install individual skills or groups of skills using the Agent Skills ecosystem.
+
+### All Skills
+
+```bash
+npx skills add yusuke-suzuki/dotfiles --all -g
+```
+
+### By Workflow
+
+**Analysis Workflow**
+```bash
+npx skills add yusuke-suzuki/dotfiles -g -s "bq-query analysis-report"
+```
+
+**Looker Studio Workflow**
+```bash
+npx skills add yusuke-suzuki/dotfiles -g -s "bq-query looker-studio-report"
+```
+
+**Technical Writing Workflow**
+```bash
+npx skills add yusuke-suzuki/dotfiles -g -s "technical-writing"
+```
+
+**Git Workflow**
+```bash
+npx skills add yusuke-suzuki/dotfiles -g -s "commit fixup publish sync resolve-comments"
+```
+
+### Individual Skills
+
+```bash
+# List available skills
+npx skills add yusuke-suzuki/dotfiles -l
+
+# Install specific skill
+npx skills add yusuke-suzuki/dotfiles -g -s "skill-name"
+```
+
+**Note:** Some skills have dependencies on other skills. The workflow commands above include all required dependencies.

@@ -5,11 +5,9 @@ description: Create analysis reports to answer specific questions. Use when anal
 
 # Analysis Report
 
-**Rules**: Follow [document-writing](../../rules/document-writing.md) and [text-formatting-ja](../../rules/text-formatting-ja.md) for Japanese documents.
-
 ## Workflow
 
-Use [references/analysis-report-template.md](references/analysis-report-template.md) to document every analysis.
+Use [templates/analysis-report-template.md](templates/analysis-report-template.md) to document every analysis.
 
 1. **Clarify Purpose** (Section 1): What do you want to know? Why is this analysis needed? Who will use it?
 
@@ -27,5 +25,3 @@ Use [references/analysis-report-template.md](references/analysis-report-template
 4. **Interpret Results** (Section 4): Analyze query results and draw insights.
    - Interpret results and explain findings
    - Visualize insights with tables and Mermaid diagrams where helpful
-
-5. **Verify Style Compliance**: Use `/lint-doc <filename>` to check and fix style violations
