@@ -27,4 +27,4 @@ Complete sentences properly. Don't end with colons:
 
 ## Scope
 
-Do NOT modify: backticks, database values, API responses.
+Do NOT modify: database values, API responses.
