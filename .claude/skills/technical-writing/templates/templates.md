@@ -54,6 +54,9 @@
 
 # 9. 障害対応
 [エラー時の挙動、リトライ戦略、ロールバック手順]
+
+---
+Generated with [Claude Code](https://claude.ai/code)
 ```
 
 **注**: セクション 5-9 は必要な場合のみ記載。
