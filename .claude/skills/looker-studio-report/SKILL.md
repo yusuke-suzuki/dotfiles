@@ -23,6 +23,8 @@ Use [references/looker-studio-template.md](references/looker-studio-template.md)
    - Align time granularity with usage frequency (daily/weekly/monthly)
    - Design data sources, pages, and charts
 
+4. **Verify Style Compliance**: Use `/lint-doc <filename>` to check and fix style violations
+
 ## Best Practices
 
 ### Reference Documentation
