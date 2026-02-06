@@ -10,6 +10,7 @@ description: Write technical design documents (design docs, specs, proposals). U
 1. **Understand context**: Problem, stakeholders, constraints
 2. **Choose template**: Based on document type
 3. **Write**: Section by section
+4. **Verify style compliance**: Use `/lint-doc <filename>` to check and fix style violations
 
 ## Document Templates
 

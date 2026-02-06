@@ -1,7 +1,6 @@
 ---
 name: commit
 description: Create a git commit with Conventional Commits format
-allowed-tools: Bash(git status:*), Bash(git fetch:*), Bash(git log:*), Bash(git diff:*), Read, Glob
 ---
 
 # Commit

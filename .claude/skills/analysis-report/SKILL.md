@@ -23,3 +23,5 @@ Use [references/analysis-report-template.md](references/analysis-report-template
 3. **Build Query**: Use `/bq-query` skill to design and execute queries.
    - Requirements and schema from Steps 1-2 provide context
    - Interpret results and document findings
+
+4. **Verify Style Compliance**: Use `/lint-doc <filename>` to check and fix style violations
