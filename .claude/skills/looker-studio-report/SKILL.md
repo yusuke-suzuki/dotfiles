@@ -11,19 +11,33 @@ description: Design Looker Studio reports for ongoing monitoring. Use when creat
 
 Use [references/looker-studio-template.md](references/looker-studio-template.md) to document the report design.
 
-1. **Define Purpose**: What needs to be monitored? What decisions will users make based on this report?
+1. **Define Purpose** (Section 1): What needs to be monitored? What decisions will users make based on this report?
 
-2. **Discover Data**: Explore available datasets and understand schema.
+2. **Discover Data** (Section 2): Explore available datasets and understand schema.
    - Ask user for project/dataset context and business background
    - Use `/bq-query` skill for BigQuery schema exploration
    - If prior analysis exists, reference it and skip detailed exploration
 
-3. **Design Report**:
+3. **Define Metrics** (Section 3): Define key metrics and dimensions to monitor.
+   - Identify what needs to be measured
+   - Define calculation methods and data sources
+
+4. **Design Data Sources** (Section 4): Design BigQuery custom queries for Looker Studio.
    - Check existing resources: Similar reports or queries already exist?
    - Align time granularity with usage frequency (daily/weekly/monthly)
-   - Design data sources, pages, and charts
+   - Pre-aggregate data in SQL for performance
+   - Document query, field definitions, and parameters
 
-4. **Verify Style Compliance**: Use `/lint-doc <filename>` to check and fix style violations
+5. **Design Pages** (Section 5): Design report pages, charts, and layout.
+   - Design page structure and layout
+   - Select appropriate chart types for each metric
+   - Configure chart settings and filters
+
+6. **Configure Sharing** (Section 6): Set up access permissions for the report.
+   - Define who needs view/edit access
+   - Document sharing settings
+
+7. **Verify Style Compliance**: Use `/lint-doc <filename>` to check and fix style violations
 
 ## Best Practices
 
