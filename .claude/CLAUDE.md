@@ -5,7 +5,6 @@
 User-level settings and instructions take precedence over project-level ones:
 
 - `~/.claude/CLAUDE.md` overrides `.claude/CLAUDE.md` or `CLAUDE.md`
-- `~/.claude/commands/` overrides `.claude/commands/` (same filename)
 - `~/.claude/skills/` overrides `.claude/skills/` (same filename)
 
 When conflicts exist, always follow user-level instructions.

@@ -5,18 +5,15 @@ description: Check documents against style rules and fix violations. Use after w
 
 # Document Linting
 
-**Rules**: Apply [document-writing](../../rules/document-writing.md) and [text-formatting-ja](../../rules/text-formatting-ja.md).
-
 ## Workflow
 
 ### 1. Target Identification
 
-- If file path provided as argument, use that file
-- Otherwise, ask user which file to check
+Identify the document to check from recent context (recently edited or discussed files). If no clear target, ask user to provide the file path.
 
 ### 2. Rule Check
 
-Read the target file and check against each rule. For Japanese documents, apply both rules. For English documents, apply document-writing only.
+Read the target file and check against [document-writing](rules/document-writing.md) and [text-formatting-ja](rules/text-formatting-ja.md). For Japanese documents, apply both rules. For English documents, apply document-writing only.
 
 ### 3. Report Findings
 

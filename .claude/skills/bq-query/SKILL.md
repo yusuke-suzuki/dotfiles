@@ -5,8 +5,6 @@ description: Design and execute BigQuery queries. Use for schema exploration, wr
 
 # BigQuery Query
 
-**Rules**: Follow [coding-standards](../../rules/coding-standards.md) for SQL naming and readability.
-
 ## Prerequisites
 
 Check gcloud configuration before running queries:

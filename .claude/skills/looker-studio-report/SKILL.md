@@ -5,11 +5,9 @@ description: Design Looker Studio reports for ongoing monitoring. Use when creat
 
 # Looker Studio Report Design
 
-**Rules**: Follow [document-writing](../../rules/document-writing.md) and [text-formatting-ja](../../rules/text-formatting-ja.md) for Japanese documents.
-
 ## Workflow
 
-Use [references/looker-studio-template.md](references/looker-studio-template.md) to document the report design.
+Use [templates/looker-studio-template.md](templates/looker-studio-template.md) to document the report design.
 
 1. **Define Purpose** (Section 1): What needs to be monitored? What decisions will users make based on this report?
 
@@ -36,8 +34,6 @@ Use [references/looker-studio-template.md](references/looker-studio-template.md)
 6. **Configure Sharing** (Section 6): Set up access permissions for the report.
    - Define who needs view/edit access
    - Document sharing settings
-
-7. **Verify Style Compliance**: Use `/lint-doc <filename>` to check and fix style violations
 
 ## Best Practices
 
