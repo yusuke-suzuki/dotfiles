@@ -147,3 +147,6 @@ GROUP BY [日付フィールド名]
 |-----|-------|
 | 閲覧 | [Google Group または個人のメールアドレス] |
 | 編集 | [Google Group または個人のメールアドレス] |
+
+---
+Generated with [Claude Code](https://claude.ai/code)
