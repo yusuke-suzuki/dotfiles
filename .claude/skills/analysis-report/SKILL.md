@@ -24,12 +24,12 @@ Use [templates/analysis-report-template.md](templates/analysis-report-template.m
 
 2. **Discover Data** (Section 2): Explore available datasets and understand schema.
    - Ask user for project/dataset context and business background
-   - Use `/bq-query` skill for BigQuery schema exploration
+   - Use `/bq-studio` skill for BigQuery schema exploration
    - `db/schema.rb` for Rails projects
    - API docs or sample data for external services
    - Document schema and table relationships in the report
 
-3. **Build Query** (Section 3): Use `/bq-query` skill to design and execute queries.
+3. **Build Query** (Section 3): Use `/bq-studio` skill to design and execute queries.
    - Requirements and schema from Steps 1-2 provide context
    - Document query design and raw results in each subsection (SQL and results together)
 

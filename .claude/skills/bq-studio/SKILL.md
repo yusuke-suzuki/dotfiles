@@ -1,9 +1,9 @@
 ---
-name: bq-query
+name: bq-studio
 description: Design and execute BigQuery queries. Use for schema exploration, writing SQL from requirements, running queries, checking costs, or validating syntax.
 ---
 
-# BigQuery Query
+# BigQuery Studio
 
 ## Prerequisites
 

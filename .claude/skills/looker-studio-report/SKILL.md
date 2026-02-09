@@ -13,7 +13,7 @@ Use [templates/looker-studio-template.md](templates/looker-studio-template.md) t
 
 2. **Discover Data** (Section 2): Explore available datasets and understand schema.
    - Ask user for project/dataset context and business background
-   - Use `/bq-query` skill for BigQuery schema exploration
+   - Use `/bq-studio` skill for BigQuery schema exploration
    - If prior analysis exists, reference it and skip detailed exploration
 
 3. **Define Metrics** (Section 3): Define key metrics and dimensions to monitor.
