@@ -63,12 +63,12 @@ npx skills add yusuke-suzuki/dotfiles --all -g
 
 **Analysis Workflow**
 ```bash
-npx skills add yusuke-suzuki/dotfiles -g -s "bq-query analysis-report"
+npx skills add yusuke-suzuki/dotfiles -g -s "bq-studio analysis-report"
 ```
 
 **Looker Studio Workflow**
 ```bash
-npx skills add yusuke-suzuki/dotfiles -g -s "bq-query looker-studio-report"
+npx skills add yusuke-suzuki/dotfiles -g -s "bq-studio looker-studio-report"
 ```
 
 **Technical Writing Workflow**
