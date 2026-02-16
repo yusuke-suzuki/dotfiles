@@ -43,14 +43,15 @@ You are assisting with creating a git commit. Follow these steps:
 - Type: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, etc.
 - Description: imperative mood, present tense (e.g., "add" not "added")
 - Subject line: maximum 50 characters (including type and scope)
-- Body: wrap at 72 characters, explain the "why" not the "what"
-- Blank line between subject and body
+- Body: one sentence per line, wrap at 72 characters, explain the "why" not the "what"
+- Blank line between subject and body, and between logical paragraphs
 
 **Example:**
 ```
 feat: add user authentication
 
 Implement JWT-based authentication to secure API endpoints.
+
 This addresses the security requirements in issue #123.
 ```
 
