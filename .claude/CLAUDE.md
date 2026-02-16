@@ -81,3 +81,4 @@ Decision depth should be proportional to the scope of impact and irreversibility
 - Use `--help` and dry-run options to verify command behavior before execution
 - Run commands in isolated environments to prevent unintended side effects
 - When debugging external tool issues, prefer non-destructive verification methods (e.g., using read-only commands, checking logs, or inspecting state without making changes)
+- When editing content within code blocks (` ``` `) in documents, verify correctness by executing the code. This applies to every edit regardless of size — including renames, constant changes, and incremental modifications
