@@ -3,13 +3,14 @@ set -e
 
 # Dotfiles Installer
 # This script installs:
-#   - Claude Code skills and CLAUDE.md
+#   - Claude Code CLAUDE.md, rules, and skills
 #   - mise configuration
 # Run this script from the cloned repository directory
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SOURCE_DIR="$SCRIPT_DIR/.claude"
 CLAUDE_DIR="$HOME/.claude"
+RULES_DIR="$CLAUDE_DIR/rules"
 SKILLS_DIR="$CLAUDE_DIR/skills"
 MISE_CONFIG_DIR="$HOME/.config/mise"
 
@@ -25,12 +26,21 @@ fi
 
 # Clean and recreate directories
 echo "🧹 Cleaning existing configurations..."
-rm -rf "$SKILLS_DIR"
-mkdir -p "$SKILLS_DIR"
+rm -rf "$RULES_DIR" "$SKILLS_DIR"
+mkdir -p "$RULES_DIR" "$SKILLS_DIR"
 
 # Install CLAUDE.md
 echo "📝 Installing CLAUDE.md..."
 cp "$SOURCE_DIR/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
+
+# Install rules
+echo "📏 Installing rules..."
+for rule_file in "$SOURCE_DIR"/rules/*.md; do
+    if [ -f "$rule_file" ]; then
+        echo "   Installing rule: $(basename "$rule_file")"
+        cp "$rule_file" "$RULES_DIR"
+    fi
+done
 
 # Install skills
 echo ""
@@ -74,6 +84,11 @@ echo "Installation complete!"
 echo ""
 echo "Installed files:"
 echo "  - $CLAUDE_DIR/CLAUDE.md"
+for rule_file in "$RULES_DIR"/*.md; do
+    if [ -f "$rule_file" ]; then
+        echo "  - $rule_file"
+    fi
+done
 for skill_dir in "$SKILLS_DIR"/*/; do
     if [ -d "$skill_dir" ]; then
         echo "  - $skill_dir"

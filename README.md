@@ -7,6 +7,7 @@ Personal dotfiles for managing development environment configurations.
 ### Claude Code Configuration
 
 - **CLAUDE.md** - Professional engineering principles
+- **rules/** - Always-on rules applied across all conversations
 - **skills/** - Specialized capabilities for specific tasks
 
 ### mise Configuration
@@ -26,6 +27,7 @@ cd ~/dotfiles
 ```text
 ~/.claude/
 ├── CLAUDE.md
+├── rules/
 └── skills/
 
 ~/.config/mise/
@@ -62,21 +64,25 @@ npx skills add yusuke-suzuki/dotfiles --all -g
 ### By Workflow
 
 **Analysis Workflow**
+
 ```bash
 npx skills add yusuke-suzuki/dotfiles -g -s "bq-studio analysis-report"
 ```
 
 **Looker Studio Workflow**
+
 ```bash
 npx skills add yusuke-suzuki/dotfiles -g -s "bq-studio looker-studio-report"
 ```
 
 **Technical Writing Workflow**
+
 ```bash
 npx skills add yusuke-suzuki/dotfiles -g -s "technical-writing"
 ```
 
 **Git Workflow**
+
 ```bash
 npx skills add yusuke-suzuki/dotfiles -g -s "commit fixup publish sync resolve-comments"
 ```
