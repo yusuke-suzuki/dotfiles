@@ -13,6 +13,7 @@ This repository's `.claude/` directory contains the **source files** for Claude 
 - `.claude/skills/` - User-level skills
 
 **When editing Claude configuration files:**
+
 - ALWAYS modify files in `<repository-root>/.claude/` directory
 - These are version-controlled source files
 - Changes should be committed to git
@@ -36,6 +37,7 @@ This repository's `.claude/` directory contains the **source files** for Claude 
 ✓ **CORRECT:** Editing `.claude/CLAUDE.md` or `.claude/rules/*.md` in this repository
 
 When asked to modify Claude configuration:
+
 - Edit `.claude/CLAUDE.md` (NOT `~/.claude/CLAUDE.md`)
 - Edit `.claude/rules/*.md` (NOT `~/.claude/rules/*.md`)
 - Edit `.claude/skills/*/` (NOT `~/.claude/skills/*/`)

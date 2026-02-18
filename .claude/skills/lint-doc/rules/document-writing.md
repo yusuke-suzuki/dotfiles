@@ -12,6 +12,8 @@ When modifying a document:
 2. **Update all affected sections** - When the story changes, maintain consistency throughout
 3. **Remove obsolete content** - Delete content that becomes redundant after modifications
 
+Documents must be self-contained. Do not use relative links to other local files — they break when the document is shared outside the repository (e.g., Notion, Google Docs).
+
 Documents are deliverables, not workspaces. Never add:
 
 - Progress tracking sections ("Next Steps", "TODO", checklists)
@@ -26,6 +28,7 @@ All code and queries in documents must be verified before inclusion.
 
 - SQL: Validate syntax with `bq query --dry_run`, execute to confirm, and include actual results
 - Code: Include only in executable state
+- When editing content within code blocks, verify correctness by executing the code. This applies to every edit regardless of size — including renames, constant changes, and incremental modifications
 - Never fabricate data
 
 ## Data-Driven
