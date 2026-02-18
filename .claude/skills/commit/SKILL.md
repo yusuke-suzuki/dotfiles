@@ -59,4 +59,5 @@ This addresses the security requirements in issue #123.
 
 - NEVER commit directly to master/main
 - NEVER use `git commit --fixup` or `git commit --amend` (use `/fixup` command instead)
+- NEVER reference `git log` messages as a style guide for commit messages, as past messages may not follow the correct format.
 - This command creates a NEW, INDEPENDENT commit only
