@@ -8,7 +8,7 @@ Personal dotfiles for managing development environment configurations.
 
 - **CLAUDE.md** - Professional engineering principles
 - **rules/** - Always-on rules applied across all conversations
-- **skills/** - Specialized capabilities for specific tasks
+- **skills/** - Specialized capabilities for specific tasks (core skills installed by `install.sh`, others via `npx skills`)
 
 ### mise Configuration
 
@@ -28,7 +28,7 @@ cd ~/dotfiles
 ~/.claude/
 ├── CLAUDE.md
 ├── rules/
-└── skills/
+└── skills/        # Core skills only
 
 ~/.config/mise/
 └── config.toml
@@ -38,7 +38,6 @@ cd ~/dotfiles
 
 - Git
 - GitHub CLI (`gh`)
-- Google Cloud SDK (`bq`)
 - mise
 
 ### Updating
@@ -51,9 +50,9 @@ git pull
 
 Existing files are automatically backed up before installation.
 
-## Installing Skills via npx skills
+## Installing Additional Skills
 
-You can also install individual skills or groups of skills using the Agent Skills ecosystem.
+Core skills are installed automatically by `install.sh`. Additional skills can be installed per environment using the Agent Skills ecosystem.
 
 ### All Skills
 
