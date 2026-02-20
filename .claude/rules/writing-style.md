@@ -19,3 +19,11 @@ When editing existing text, match the established style:
 
 - **Japanese**: Match formality (です/ます vs である/だ). Never mix within the same context.
 - **English**: Match tone and voice (formal, casual, technical).
+
+## Signature
+
+When generating documents, PR descriptions, or other published content, always end with:
+
+```text
+🤖 Generated with [Claude Code](https://claude.ai/code)
+```
