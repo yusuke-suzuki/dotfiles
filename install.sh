@@ -3,8 +3,9 @@ set -e
 
 # Dotfiles Installer
 # This script installs:
-#   - Claude Code CLAUDE.md, rules, and skills
+#   - Claude Code CLAUDE.md, rules, and core skills
 #   - mise configuration
+# Additional skills can be installed via `npx skills`
 # Run this script from the cloned repository directory
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -13,6 +14,9 @@ CLAUDE_DIR="$HOME/.claude"
 RULES_DIR="$CLAUDE_DIR/rules"
 SKILLS_DIR="$CLAUDE_DIR/skills"
 MISE_CONFIG_DIR="$HOME/.config/mise"
+
+# Core skills installed by default
+CORE_SKILLS=(commit fixup publish sync resolve-comments lint-doc)
 
 echo "Installing dotfiles..."
 echo ""
@@ -24,10 +28,10 @@ if [ ! -d "$SOURCE_DIR" ]; then
     exit 1
 fi
 
-# Clean and recreate directories
-echo "🧹 Cleaning existing configurations..."
-rm -rf "$RULES_DIR" "$SKILLS_DIR"
-mkdir -p "$RULES_DIR" "$SKILLS_DIR"
+# Clean and recreate rules directory
+echo "🧹 Cleaning existing rules..."
+rm -rf "$RULES_DIR"
+mkdir -p "$RULES_DIR"
 
 # Install CLAUDE.md
 echo "📝 Installing CLAUDE.md..."
@@ -42,15 +46,18 @@ for rule_file in "$SOURCE_DIR"/rules/*.md; do
     fi
 done
 
-# Install skills
+# Install core skills
 echo ""
-echo "📚 Installing skills..."
-for skill_dir in "$SOURCE_DIR"/skills/*/; do
+echo "🔧 Installing core skills..."
+mkdir -p "$SKILLS_DIR"
+for skill_name in "${CORE_SKILLS[@]}"; do
+    skill_dir="$SOURCE_DIR/skills/$skill_name"
     if [ -d "$skill_dir" ]; then
-        skill_name=$(basename "$skill_dir")
-        dest_dir="$SKILLS_DIR/$skill_name"
         echo "   Installing skill: $skill_name"
-        cp -r "$skill_dir" "$dest_dir"
+        rm -rf "$SKILLS_DIR/$skill_name"
+        cp -r "$skill_dir" "$SKILLS_DIR/$skill_name"
+    else
+        echo "   ⚠️  Skill not found: $skill_name"
     fi
 done
 
@@ -89,29 +96,20 @@ for rule_file in "$RULES_DIR"/*.md; do
         echo "  - $rule_file"
     fi
 done
-for skill_dir in "$SKILLS_DIR"/*/; do
-    if [ -d "$skill_dir" ]; then
-        echo "  - $skill_dir"
+for skill_name in "${CORE_SKILLS[@]}"; do
+    if [ -d "$SKILLS_DIR/$skill_name" ]; then
+        echo "  - $SKILLS_DIR/$skill_name/"
     fi
 done
 if [ "$MISE_INSTALLED" = true ]; then
     echo "  - $MISE_CONFIG_DIR/config.toml"
 fi
-echo ""
-echo "Claude Code skills:"
-for skill_dir in "$SKILLS_DIR"/*/; do
-    if [ -d "$skill_dir" ]; then
-        skill_name=$(basename "$skill_dir")
-        skill_file="$skill_dir/SKILL.md"
-        if [ -f "$skill_file" ]; then
-            description=$(grep -m1 "^description:" "$skill_file" | sed 's/^description:[[:space:]]*//')
-            printf "  %-18s - %s\n" "$skill_name" "$description"
-        fi
-    fi
-done
 if [ "$MISE_INSTALLED" = true ]; then
     echo ""
     echo "mise setup:"
     echo "  Add the following to your shell config (e.g., ~/.bashrc, ~/.zshrc):"
     echo '    eval "$(mise activate)"'
 fi
+echo ""
+echo "To install additional skills:"
+echo "  npx skills add yusuke-suzuki/dotfiles --all -g"
