@@ -43,42 +43,19 @@ gh pr view
 
 **If no PR exists:**
 
-- Create a new PR following the conventions below
-- Ask user whether to create as draft or ready for review
-
-## PR Description Conventions
-
-### Template Selection
-
-1. Check for project template:
+1. Select template:
    ```bash
    find . -maxdepth 2 -iname "pull_request_template.md" -print -quit
    ```
+   - **Project template exists**: Read and use it (match its language)
+   - **No project template**: Ask user which language to use:
+     - English (default) → [templates/pr-template.md](templates/pr-template.md)
+     - Japanese (敬語) → [templates/pr-template-ja.md](templates/pr-template-ja.md)
 
-2. Select template based on result:
-   - **Project template exists**: Read and use the project template
-   - **No project template**: Read [templates/pr-template.md](templates/pr-template.md) and use it
+2. Ask user whether to create as draft or ready for review
+3. Create the PR
 
-**IMPORTANT**: Always read the selected template file before creating the PR description. Never create a PR description without first reading a template.
-
-### Title
-
-- MUST match a commit message subject line exactly
-- If multiple commits, ask user which to use
-
-### Language
-
-- Match template language if project template exists
-- Default: English
-- Japanese: Use polite form (敬語)
-
-### Signature
-
-Always end with:
-
-```text
-🤖 Generated with [Claude Code](https://claude.ai/code)
-```
+**IMPORTANT**: Always read the selected template file before creating the PR description.
 
 ## 4. Final Output
 

@@ -1,16 +1,13 @@
-## Summary
+# Summary
+
 Brief description (2-3 sentences)
 
-## Motivation
+# Motivation
+
 Why are these changes needed?
 
-## Changes
+# Changes
+
 - Key changes (what, not how)
 
-## Testing
-- [ ] Tests added/updated
-- [ ] Manual testing completed
-
-## Checklist
-- [ ] Follows style guidelines
-- [ ] Documentation updated
+<!-- Add additional sections below as needed (e.g., Testing, Checklist) -->
