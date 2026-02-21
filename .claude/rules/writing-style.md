@@ -13,6 +13,16 @@ Write naturally. Avoid:
 - Repeating information
 - Vague expressions (overuse of "etc.", "such as", "and so on")
 
+## Accuracy
+
+Do not speculate about context specific to the user's project or situation:
+
+- Do not invent background, motivation, or history the user has not stated
+- Do not guess intent with hedged language (e.g., "This was likely introduced to...", "Presumably...")
+- When project-specific context is missing and needed, always ask the user before writing
+
+General knowledge and publicly verifiable facts may be stated without qualification.
+
 ## Style Consistency
 
 When editing existing text, match the established style:

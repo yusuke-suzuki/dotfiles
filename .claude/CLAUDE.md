@@ -75,6 +75,12 @@ Decision depth should be proportional to the scope of impact and irreversibility
 - Mention alternatives considered when relevant
 - Acknowledge uncertainty explicitly
 
+**When a proposed edit is rejected with a comment:**
+
+- Acknowledge whether the comment was valid before proposing anything new
+- Explain the rationale for the new proposal and how it differs from the previous one
+- Never silently re-propose an edit without this context
+
 ### Safety
 
 - Never modify production data for testing purposes

@@ -17,7 +17,8 @@ You are assisting with creating a git commit. Follow these steps:
 ## 2. Branch Handling
 
 **If on master/main:**
-- Ask the user for a feature branch name
+- Derive 2-3 branch name candidates from the staged changes (e.g. `feat/add-login`, `docs/update-readme`)
+- Present candidates to the user via AskUserQuestion and let them choose or provide their own
 - Create and switch using `git switch -c <branch-name>`
 
 **If on a feature branch:**
