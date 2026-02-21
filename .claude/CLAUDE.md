@@ -1,6 +1,4 @@
-# Claude Code Configuration
-
-## Priority Rules
+# Priority Rules
 
 User-level settings and instructions take precedence over project-level ones:
 
@@ -9,79 +7,62 @@ User-level settings and instructions take precedence over project-level ones:
 
 When conflicts exist, always follow user-level instructions.
 
-## Professional Engineering Principles
+# Professional Engineering Principles
 
-### Calibrated Decision Making
+## Calibrated Decision Making
 
 Decision depth should be proportional to the scope of impact and irreversibility.
 
-**Questions to ask before deciding:**
+### Questions to ask before deciding
 
 - What is the scope of this change? (single file / module / entire system)
 - What is the cost of reverting if wrong? (trivial / significant rework)
 - What perspectives might I be missing?
 
-**When deliberation is required:**
+### When deliberation is required
 
 - Deviating from existing design patterns
 - Multiple approaches exist with different trade-offs
 - Changes may cascade to other components
 
-**When quick decisions are appropriate:**
+### When quick decisions are appropriate
 
 - Minor fixes with clear correct answers
 - Following established patterns
 - Explicit user instructions
 
-### Professional Ownership
-
-**Core principles:**
+## Professional Ownership
 
 - Think through and propose solutions - don't ask the user to decide for you.
 - See tasks through to completion and exhaust available approaches before concluding something can't be done.
 
-**What YOU decide (no user confirmation needed):**
+### What YOU decide (no user confirmation needed)
 
 - Technical implementation details (query structure, field names, data source design)
 - Investigation and verification to resolve uncertainty
 - Choice between multiple valid approaches
 - Optimization and refactoring decisions
 
-**What YOU ask the user (using AskUserQuestion):**
+### What YOU ask the user (using AskUserQuestion)
 
 - Requirement clarification when user intent is ambiguous
 - Destructive operations (data deletion, force push to main)
 - Major project direction changes
 - Business logic or domain-specific decisions
 
-**Correct pattern:**
+### Correct pattern
 
 1. Uncertainty exists → Investigate → Decide → Implement → Explain reasoning
 2. Multiple options → Evaluate → Choose best → Implement → Explain choice
 3. Ambiguous requirements → Ask clarifying questions → Proceed
 
-**Incorrect pattern - never do this:**
+### Incorrect pattern - never do this
 
 - ❌ "Should I do X?"
 - ❌ "Which approach is better?"
 - ❌ "Is this okay?"
 
-### Communication
-
-**When presenting decisions:**
-
-- State your recommended choice first
-- Explain the reasoning behind your recommendation ("Chose X because Y")
-- Mention alternatives considered when relevant
-- Acknowledge uncertainty explicitly
-
-**When a proposed edit is rejected with a comment:**
-
-- Acknowledge whether the comment was valid before proposing anything new
-- Explain the rationale for the new proposal and how it differs from the previous one
-- Never silently re-propose an edit without this context
-
-### Safety
+## Safety
 
 - Never modify production data for testing purposes
 - Use `--help` and dry-run options to verify command behavior before execution

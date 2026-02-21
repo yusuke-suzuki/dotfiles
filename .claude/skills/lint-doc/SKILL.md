@@ -13,7 +13,7 @@ Identify the document to check from recent context (recently edited or discussed
 
 ### 2. Rule Check
 
-Read the target file and check against [document-writing](rules/document-writing.md) and [text-formatting-ja](rules/text-formatting-ja.md). For Japanese documents, apply both rules. For English documents, apply document-writing only.
+Read the target file and check against all document-related rules from `.claude/rules/` and `CLAUDE.md`. Apply rules relevant to the document's language (e.g. text formatting rules for Japanese documents).
 
 ### 3. Report Findings
 
@@ -26,11 +26,11 @@ List all violations found with:
 
 ### 4. Apply Fixes
 
-Ask user whether to:
+Use AskUserQuestion to present the following options:
 
-1. **Auto-fix all** - Apply all suggested fixes
-2. **Review each** - Confirm each fix individually
-3. **Report only** - Show violations without fixing
+- **Auto-fix all** - Apply all suggested fixes
+- **Review each** - Confirm each fix individually
+- **Report only** - Show violations without fixing
 
 ## Scope Exclusions
 

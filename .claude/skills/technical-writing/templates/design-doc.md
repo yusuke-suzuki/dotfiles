@@ -1,10 +1,3 @@
-# Document Templates
-
-## Design Doc (問題解決型)
-
-プロジェクトの問題定義から解決策までを記述する。
-
-```markdown
 # 1. 概要
 [1-2 段落で全体像。問題、解決策、期待効果を簡潔に]
 
@@ -56,7 +49,4 @@
 [エラー時の挙動、リトライ戦略、ロールバック手順]
 
 ---
-Generated with [Claude Code](https://claude.ai/code)
-```
-
-**注**: セクション 5-9 は必要な場合のみ記載。
+🤖 Generated with [Claude Code](https://claude.ai/code)

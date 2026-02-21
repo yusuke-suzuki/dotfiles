@@ -22,25 +22,6 @@ Documents are deliverables, not workspaces. Never add:
 
 Use the TodoWrite tool for task management instead.
 
-## Content Verification
-
-All code and queries in documents must be verified before inclusion.
-
-- SQL: Validate syntax with `bq query --dry_run`, execute to confirm, and include actual results
-- Code: Include only in executable state
-- When editing content within code blocks, verify correctness by executing the code. This applies to every edit regardless of size — including renames, constant changes, and incremental modifications
-- Never fabricate data
-
-## Data-Driven
-
-- Include real data, not hypotheticals
-- Define KPIs with baselines and targets
-- Quantify impact (counts, costs, time)
-
-## Diagrams
-
-Use Mermaid notation for diagrams. Do not use ASCII art.
-
 ## Progressive Disclosure
 
 - Explain concepts before details
