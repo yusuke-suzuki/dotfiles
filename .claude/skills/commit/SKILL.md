@@ -27,9 +27,9 @@ You are assisting with creating a git commit. Follow these steps:
 
 ## 3. Commit Creation
 
-- Stage changes with `git add .` or ask user which files to stage
-- Craft a commit message
-- Execute `git commit`
+- Analyze the uncommitted changes and group them by semantic intent
+- If changes fall into multiple distinct groups, create one commit per group
+- For each group: `git add <files>`, craft a commit message, then `git commit`
 
 ## Key Constraints
 
