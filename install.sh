@@ -3,9 +3,8 @@ set -e
 
 # Dotfiles Installer
 # This script installs:
-#   - Claude Code CLAUDE.md, rules, and core skills
+#   - Claude Code CLAUDE.md, rules, and skills
 #   - mise configuration
-# Additional skills can be installed via `npx skills`
 # Run this script from the cloned repository directory
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -14,9 +13,6 @@ CLAUDE_DIR="$HOME/.claude"
 RULES_DIR="$CLAUDE_DIR/rules"
 SKILLS_DIR="$CLAUDE_DIR/skills"
 MISE_CONFIG_DIR="$HOME/.config/mise"
-
-# Core skills installed by default
-CORE_SKILLS=(commit fixup publish sync resolve-comments lint-doc)
 
 echo "Installing dotfiles..."
 echo ""
@@ -46,18 +42,16 @@ for rule_file in "$SOURCE_DIR"/rules/*.md; do
     fi
 done
 
-# Install core skills
+# Install skills
 echo ""
-echo "🔧 Installing core skills..."
+echo "🔧 Installing skills..."
 mkdir -p "$SKILLS_DIR"
-for skill_name in "${CORE_SKILLS[@]}"; do
-    skill_dir="$SOURCE_DIR/skills/$skill_name"
+for skill_dir in "$SOURCE_DIR"/skills/*/; do
     if [ -d "$skill_dir" ]; then
+        skill_name=$(basename "$skill_dir")
         echo "   Installing skill: $skill_name"
         rm -rf "$SKILLS_DIR/$skill_name"
         cp -r "$skill_dir" "$SKILLS_DIR/$skill_name"
-    else
-        echo "   ⚠️  Skill not found: $skill_name"
     fi
 done
 
@@ -96,9 +90,9 @@ for rule_file in "$RULES_DIR"/*.md; do
         echo "  - $rule_file"
     fi
 done
-for skill_name in "${CORE_SKILLS[@]}"; do
-    if [ -d "$SKILLS_DIR/$skill_name" ]; then
-        echo "  - $SKILLS_DIR/$skill_name/"
+for skill_dir in "$SKILLS_DIR"/*/; do
+    if [ -d "$skill_dir" ]; then
+        echo "  - $skill_dir"
     fi
 done
 if [ "$MISE_INSTALLED" = true ]; then
@@ -110,6 +104,3 @@ if [ "$MISE_INSTALLED" = true ]; then
     echo "  Add the following to your shell config (e.g., ~/.bashrc, ~/.zshrc):"
     echo '    eval "$(mise activate)"'
 fi
-echo ""
-echo "To install additional skills:"
-echo "  npx skills add yusuke-suzuki/dotfiles --all -g"
