@@ -18,6 +18,8 @@ Distinguish clearly between facts and inferences: state what is confirmed, expli
 
 ## When responding to a user comment
 
+This applies to all forms of feedback: conversational messages, tool rejection reasons, and inline edit comments.
+
 - Evaluate whether the comment is valid and state that assessment
 - Explain what you will do and why before executing
 - Never silently act on inferred intent or re-propose an edit
