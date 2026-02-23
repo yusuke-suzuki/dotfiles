@@ -15,14 +15,18 @@ Get the latest semver tag:
 git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -1
 ```
 
-If no tags exist, treat the current version as `v0.1.0` and skip to step 3.
+If no tags exist, treat the current version as `v0.1.0`, proceed to step 2 using all commits, then skip to step 3.
 
 ## 2. Changes Since Last Release
 
-List commits with full messages since the latest tag:
+List commits with full messages since the latest tag (or all commits if no tags exist):
 
 ```bash
+# If a tag exists:
 git log <latest-tag>..HEAD --format="%h %s%n%b"
+
+# If no tags exist:
+git log HEAD --format="%h %s%n%b"
 ```
 
 Read the commit subjects and bodies to understand the nature of each change.
@@ -92,5 +96,5 @@ gh release edit <next-tag> --draft=false
 ## 7. Final Output
 
 - Pushed tag: `<next-tag>`
-- GitHub Actions: show run URL from `gh run list --branch <next-tag>`
+- GitHub Actions: show run URL from `gh run list --branch <next-tag> --limit 1 --json url --template '{{range .}}{{.url}}{{end}}'`
 - GitHub release: show URL from `gh release view <next-tag> --json url -q .url`
