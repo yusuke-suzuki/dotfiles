@@ -7,7 +7,18 @@ description: Determine next semver tag, push it to trigger production deployment
 
 You are assisting with creating a new release by pushing a semver tag and publishing a GitHub release.
 
-## 1. Current Version
+## 1. Preflight Check
+
+Verify the current branch is the default branch:
+
+```bash
+git rev-parse --abbrev-ref HEAD
+```
+
+If the current branch is not `main` or `master`, stop immediately and tell the
+user which branch they are on. Do not proceed with any release steps.
+
+## 2. Current Version
 
 Get the latest semver tag:
 
@@ -15,9 +26,9 @@ Get the latest semver tag:
 git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -1
 ```
 
-If no tags exist, treat the current version as `v0.1.0`, proceed to step 2 using all commits, then skip to step 3.
+If no tags exist, treat the current version as `v0.1.0`, proceed to step 3 using all commits, then skip to step 4.
 
-## 2. Changes Since Last Release
+## 3. Changes Since Last Release
 
 List commits with full messages since the latest tag (or all commits if no tags exist):
 
@@ -32,7 +43,7 @@ git log HEAD --format="%h %s%n%b"
 Read the commit subjects and bodies to understand the nature of each change.
 Display a brief summary of what changed.
 
-## 3. Version Bump Determination
+## 4. Version Bump Determination
 
 Assess the overall impact of the changes:
 
@@ -51,7 +62,7 @@ Which version bump type?
 - major: vX.Y.Z → v(X+1).0.0
 ```
 
-## 4. Push Tag
+## 5. Push Tag
 
 Compute the next version from the bump type. Display: `<current-tag> → <next-tag>`
 
@@ -70,7 +81,7 @@ Show workflow runs triggered by the tag push:
 gh run list --branch <next-tag>
 ```
 
-## 5. Create Draft GitHub Release
+## 6. Create Draft GitHub Release
 
 Create a draft release using GitHub's auto-generated release notes:
 
@@ -83,7 +94,7 @@ gh release create <next-tag> \
 
 Display the draft release URL.
 
-## 6. Publish Release
+## 7. Publish Release
 
 Ask the user to confirm publishing via AskUserQuestion.
 
@@ -93,7 +104,7 @@ On confirmation:
 gh release edit <next-tag> --draft=false
 ```
 
-## 7. Final Output
+## 8. Final Output
 
 - Pushed tag: `<next-tag>`
 - GitHub Actions: show run URL from `gh run list --branch <next-tag> --limit 1 --json url --template '{{range .}}{{.url}}{{end}}'`
