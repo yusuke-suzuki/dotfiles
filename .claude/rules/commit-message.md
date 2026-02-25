@@ -22,6 +22,17 @@ Apply when creating git commits.
 - Explain the rationale for the change (the "why"),
   not just what was modified or how it was implemented
 
+## After /fixup or --autosquash rebase
+
+After squashing fixup commits, the amended commit represents the final
+state as a single coherent unit. There is no prior "buggy version" in
+the history.
+
+Write the message against the actual diff — not against your memory of
+what changed between iterations. Avoid phrases like "also fixes bugs
+found during review", as buggy versions are not part of the commit
+history.
+
 ### Examples
 
 **Bad** - describes what changed, sentences not separated by newlines:

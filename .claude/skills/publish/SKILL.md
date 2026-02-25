@@ -47,8 +47,12 @@ gh pr view
    ```bash
    find . -maxdepth 2 -iname "pull_request_template.md" -print -quit
    ```
-   - **Project template exists**: Read and use it (match its language)
-   - **No project template**: Ask user which language to use:
+   - **Project template exists**: Read it and use it verbatim as the
+     body skeleton. Preserve all sections including empty ones. Fill in
+     only the content within each section; do not add, remove, or
+     reorder sections. Match its language.
+   - **No project template**: Always ask the user via `AskUserQuestion`
+     which language to use. Do not infer from the conversation language.
      - English (default) → [templates/pr-template.md](templates/pr-template.md)
      - Japanese (敬語) → [templates/pr-template-ja.md](templates/pr-template-ja.md)
 

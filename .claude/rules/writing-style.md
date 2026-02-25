@@ -37,3 +37,7 @@ When generating documents, PR descriptions, or other published content, always e
 ```text
 🤖 Generated with [Claude Code](https://claude.ai/code)
 ```
+
+PR descriptions always require the signature at the very end, including
+when a project PR template is used. Append the signature after the
+template's existing closing line.
