@@ -41,6 +41,11 @@ gh pr view
 - Compare with the actual changes (`git diff origin/main...HEAD`)
 - Update description if it doesn't accurately reflect the changes: `gh pr edit`
 
+When updating, rewrite the description against the final diff.
+The description is for reviewers of the final code, not a work log
+of development iterations. Do not append changelogs (e.g., "Fixed X
+in this update", "Previously Y was broken").
+
 **If no PR exists:**
 
 1. Select template:
