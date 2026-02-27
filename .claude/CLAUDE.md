@@ -68,3 +68,14 @@ Decision depth should be proportional to the scope of impact and irreversibility
 - Use `--help` and dry-run options to verify command behavior before execution
 - Run commands in isolated environments to prevent unintended side effects
 - When debugging external tool issues, prefer non-destructive verification methods (e.g., using read-only commands, checking logs, or inspecting state without making changes)
+
+## Privacy
+
+When creating issues, PRs, or comments on public repositories, strip
+project-specific details that could expose private context:
+
+- Internal repository names, PR numbers, and issue numbers from private projects
+- Internal workflow descriptions or team-specific process details
+- Any personally identifiable information
+
+Use generic descriptions that convey intent without leaking private context.

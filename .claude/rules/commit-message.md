@@ -22,6 +22,18 @@ Apply when creating git commits.
 - Explain the rationale for the change (the "why"),
   not just what was modified or how it was implemented
 
+## Closing Issues
+
+When the commit resolves a GitHub issue, include a closing keyword in
+the body to auto-close the issue on merge:
+
+```
+fixes #123
+```
+
+Place the keyword on its own line at the end of the body, before the
+`Co-Authored-By` trailer. Common keywords: `fixes`, `closes`, `resolves`.
+
 ## After /fixup or --autosquash rebase
 
 After squashing fixup commits, the amended commit represents the final

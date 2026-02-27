@@ -36,20 +36,32 @@ git rebase --autosquash origin/main
 
 ## 4. Commit Message Review
 
-After rebase completes, verify the commit message matches the changes:
+After rebase completes, verify the commit message in two phases.
+
+### Phase 1: Evaluate
 
 1. Display the rebased commit:
 
    ```bash
-   git show HEAD --stat
+   git show HEAD
    ```
 
-2. Compare the commit message body with the actual changes
+2. Read `.claude/rules/commit-message.md` — especially the
+   "After /fixup or --autosquash rebase" section.
 
-3. If the message is inaccurate or incomplete:
-   - Draft a corrected commit message following the `commit-message` rule
-   - Explain what needs to be updated and why
-   - Update with `git commit --amend`
+3. Evaluate whether the existing message accurately describes the
+   purpose of the final diff as a single coherent unit.
+
+4. If the message is accurate, skip amending and proceed to Step 5.
+
+### Phase 2: Amend (only if needed)
+
+If the message does not accurately describe the commit's purpose:
+
+1. Draft a corrected message based on the final diff —
+   not on what changed between iterations
+2. Explain what is inaccurate and why
+3. Update with `git commit --amend`
 
 ## 5. Post-Rebase Actions
 
@@ -67,6 +79,7 @@ After message review:
 
 - Use `--fixup=<hash>` to create fixup commits targeting specific commits
 - `--autosquash` automatically merges fixup commits during rebase
-- Review commit messages after rebase - compare with actual changes
-- Update messages with `git commit --amend` when they don't accurately reflect the changes
+- After rebase, evaluate the existing message before amending — it is
+  often already accurate and needs no change
+- Read `commit-message.md` before drafting any corrected message
 - Commit messages follow the `commit-message` rule
