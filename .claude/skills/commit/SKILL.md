@@ -25,13 +25,21 @@ You are assisting with creating a git commit. Follow these steps:
 - Display the current branch name
 - Show existing commits relative to main
 
-## 3. Commit Creation
+## 3. Diff Analysis
 
+Understand the changes before staging:
+
+- Review staged changes: `git diff --staged`
+- Review unstaged changes: `git diff`
+- Group changes by semantic intent (one logical change per commit)
+
+## 4. Commit Creation
+
+- Never stage files that contain secrets (.env, credentials, private keys)
 - When writing the message body, explain WHY the change is needed.
   Do not list every file or sub-change — the diff shows that.
   Focus on the core motivation; omit supporting changes unless
   they have independent rationale a reviewer needs to understand.
-- Analyze the uncommitted changes and group them by semantic intent
 - If changes fall into multiple distinct groups, create one commit per group
 - For each group: `git add <files>`, craft a commit message, then `git commit`
 
