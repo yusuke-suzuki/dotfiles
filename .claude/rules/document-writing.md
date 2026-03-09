@@ -22,6 +22,14 @@ Documents are deliverables, not workspaces. Never add:
 
 Use the TodoWrite tool for task management instead.
 
+## Templates
+
+When a template is provided (PR templates, issue templates, etc.),
+preserve its structure and formatting. Do not remove sections,
+reorder items, or alter formatting (strikethrough, checkboxes, HTML
+comments, etc.). Fill in the provided sections; add new sections
+only if the template explicitly allows it.
+
 ## Progressive Disclosure
 
 - Explain concepts before details

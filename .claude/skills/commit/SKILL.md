@@ -27,6 +27,10 @@ You are assisting with creating a git commit. Follow these steps:
 
 ## 3. Commit Creation
 
+- When writing the message body, explain WHY the change is needed.
+  Do not list every file or sub-change — the diff shows that.
+  Focus on the core motivation; omit supporting changes unless
+  they have independent rationale a reviewer needs to understand.
 - Analyze the uncommitted changes and group them by semantic intent
 - If changes fall into multiple distinct groups, create one commit per group
 - For each group: `git add <files>`, craft a commit message, then `git commit`

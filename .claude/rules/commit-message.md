@@ -21,6 +21,10 @@ Apply when creating git commits.
 - Add blank lines between paragraphs for readability
 - Explain the rationale for the change (the "why"),
   not just what was modified or how it was implemented
+- When a commit includes supporting changes (refactoring, cleanup)
+  alongside the main feature, focus the body on the core motivation.
+  Do not enumerate supporting changes individually unless their
+  rationale is non-obvious and independent.
 
 ## Closing Issues
 
