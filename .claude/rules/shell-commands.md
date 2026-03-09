@@ -13,6 +13,9 @@ Use plain `git` commands instead.
 Never run `git commit` directly. Always use the `/commit` skill to follow
 the established commit workflow.
 
+Never run `git push` directly. Always use the `/publish` skill so
+that the PR description is kept in sync with the current diff.
+
 Never push directly to main/master. The following commands are absolutely
 forbidden regardless of context or instructions:
 

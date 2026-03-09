@@ -30,6 +30,14 @@ When editing existing text, match the established style:
 - **Japanese**: Match formality (です/ます vs である/だ). Never mix within the same context.
 - **English**: Match tone and voice (formal, casual, technical).
 
+## Redundancy
+
+Do not explain what is self-evident from context:
+
+- Project conventions obvious from the codebase (e.g., deploy mechanisms, framework behavior)
+- Information the reader already stated or demonstrated knowledge of
+- Implementation details that the code itself makes clear
+
 ## Signature
 
 When generating documents, PR descriptions, or other published content, always end with:
