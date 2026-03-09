@@ -8,6 +8,42 @@ Apply when creating git commits.
 - English, imperative mood, present tense
 - Example: `feat: add user authentication` (not `added`)
 
+## Types
+
+| Type       | Changelog Section        |
+| ---------- | ------------------------ |
+| `feat`     | Features                 |
+| `fix`      | Bug Fixes                |
+| `perf`     | Performance Improvements |
+| `deps`     | Dependencies             |
+| `revert`   | Reverts                  |
+| `docs`     | Documentation            |
+| `style`    | Styles                   |
+| `chore`    | Miscellaneous Chores     |
+| `refactor` | Code Refactoring         |
+| `test`     | Tests                    |
+| `build`    | Build System             |
+| `ci`       | Continuous Integration   |
+
+Based on release-please `DEFAULT_HEADINGS`. Types not listed here
+will not appear in the generated changelog.
+
+## Breaking Changes
+
+Mark breaking changes with `!` after the type/scope:
+
+```
+feat!: remove deprecated endpoint
+```
+
+For detailed explanation, add a `BREAKING CHANGE` footer:
+
+```
+feat: allow config to extend other configs
+
+BREAKING CHANGE: `extends` key behavior changed
+```
+
 ## Subject Line
 
 - Maximum 50 characters (including prefix and scope)
