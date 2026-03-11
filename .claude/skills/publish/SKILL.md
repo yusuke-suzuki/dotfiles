@@ -48,7 +48,11 @@ in this update", "Previously Y was broken").
 
 **If no PR exists:**
 
-1. Select template:
+1. Choose title:
+   - MUST match a commit message subject line exactly
+   - If multiple commits, ask user which to use
+
+2. Select template:
    ```bash
    find . -maxdepth 2 -iname "pull_request_template.md" -print -quit
    ```
@@ -61,8 +65,8 @@ in this update", "Previously Y was broken").
      - English (default) → [templates/pr-template.md](templates/pr-template.md)
      - Japanese (敬語) → [templates/pr-template-ja.md](templates/pr-template-ja.md)
 
-2. Ask user whether to create as draft or ready for review
-3. Create the PR
+3. Ask user whether to create as draft or ready for review
+4. Create the PR
 
 **IMPORTANT**: Always read the selected template file before creating the PR description.
 
