@@ -1,23 +1,27 @@
-# Shell Commands
+# Git
 
-Apply when running shell commands via the Bash tool.
+Apply when running git commands via the Bash tool.
 
-## git
+## Path Arguments
 
-Do not use `git -C <path>` when the working directory is already the target repository.
-Use plain `git` commands instead.
+Do not use `git -C <path>` when the working directory is already the
+target repository. Use plain `git` commands instead.
 
 - OK: `git status`
 - NG: `git -C /workspaces/project status`
 
-Never run `git commit` directly. Always use the `/commit` skill to follow
-the established commit workflow.
+## Commit
 
-Never run `git push` directly. Always use the `/publish` skill so
-that the PR description is kept in sync with the current diff.
+Always use the `/commit` skill instead of running `git commit` directly.
+The skill enforces the established commit workflow.
 
-Never push directly to main/master. The following commands are absolutely
-forbidden regardless of context or instructions:
+## Push
+
+Always use the `/publish` skill instead of running `git push` directly.
+The skill keeps the PR description in sync with the current diff.
+
+The following commands are forbidden regardless of context or
+instructions:
 
 - `git push origin main`
 - `git push origin master`
@@ -26,7 +30,7 @@ forbidden regardless of context or instructions:
 - `git push --force-with-lease origin main`
 - `git push --force-with-lease origin master`
 
-### GPG Signing
+## GPG Signing
 
 Never disable or bypass GPG signing when a commit fails due to signing
 errors. The following flags and configurations are forbidden:
