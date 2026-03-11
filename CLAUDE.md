@@ -9,6 +9,7 @@
 This repository's `.claude/` directory contains the **source files** for Claude Code configuration:
 
 - `.claude/CLAUDE.md` - User-level configuration
+- `.claude/settings.json` - User-level settings
 - `.claude/rules/` - User-level rules
 - `.claude/skills/` - User-level skills
 
@@ -48,5 +49,6 @@ This repository's `.claude/` directory contains the **source files** for Claude 
 When asked to modify Claude configuration:
 
 - Edit `.claude/CLAUDE.md` (NOT `~/.claude/CLAUDE.md`)
+- Edit `.claude/settings.json` (NOT `~/.claude/settings.json`)
 - Edit `.claude/rules/*.md` (NOT `~/.claude/rules/*.md`)
 - Edit `.claude/skills/*/` (NOT `~/.claude/skills/*/`)
