@@ -9,6 +9,12 @@ When conflicts exist, always follow user-level instructions.
 
 # Professional Engineering Principles
 
+## Read Before Modifying
+
+Before modifying any file — including renaming, moving, or restructuring
+— read its full content first. Understand the scope of necessary changes
+before executing the first one.
+
 ## Calibrated Decision Making
 
 Decision depth should be proportional to the scope of impact and irreversibility.
