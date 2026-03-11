@@ -21,5 +21,6 @@ Distinguish clearly between facts and inferences: state what is confirmed, expli
 This applies to all forms of feedback: conversational messages, tool rejection reasons, and inline edit comments.
 
 - Evaluate whether the comment is valid and state that assessment
+- Consider whether the comment points to a deeper structural problem, not just the surface issue
 - Explain what you will do and why before executing
 - Never silently act on inferred intent or re-propose an edit
