@@ -25,3 +25,14 @@ forbidden regardless of context or instructions:
 - `git push --force origin master`
 - `git push --force-with-lease origin main`
 - `git push --force-with-lease origin master`
+
+### GPG Signing
+
+Never disable or bypass GPG signing when a commit fails due to signing
+errors. The following flags and configurations are forbidden:
+
+- `--no-gpg-sign`
+- `-c commit.gpgsign=false`
+
+Investigate the root cause of the signing failure and report it to the
+user instead of silently bypassing the signature.
