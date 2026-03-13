@@ -68,8 +68,17 @@ Present your analysis and recommendation to the user for each comment. The user 
 - Draft a reply with clear rationale (e.g., "Won't fix because...", "Intentional design because...")
 - **Match the language of the original comment** (e.g., reply in Japanese if the comment is in Japanese)
 - Reply to the last comment in the thread (use its `databaseId` as `comment_id`)
-- Post the reply: `gh api /repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies -X POST -f body="..."`
-- Resolve the thread:
+- **Step 1 — Reply** (must succeed before proceeding to Step 2):
+
+```
+POST /repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies
+```
+
+```bash
+gh api /repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies -X POST -f body="..."
+```
+
+- **Step 2 — Resolve** (only after the reply in Step 1 succeeds):
 
 ```bash
 gh api graphql -f query='
@@ -79,6 +88,8 @@ mutation {
   }
 }'
 ```
+
+**Never run reply and resolve in parallel.** If the reply fails, do not resolve the thread.
 
 ## 4. Summary
 

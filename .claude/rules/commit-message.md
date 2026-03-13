@@ -47,7 +47,7 @@ BREAKING CHANGE: `extends` key behavior changed
 ## Subject Line
 
 - Maximum 50 characters (including prefix and scope)
-- Verify: `echo -n "subject" | wc -c`
+- Verify: `echo -n "subject" | wc -m`
 
 ## Body
 
