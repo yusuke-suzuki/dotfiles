@@ -36,6 +36,10 @@ Understand the changes before staging:
 ## 4. Commit Creation
 
 - Never stage files that contain secrets (.env, credentials, private keys)
+- **Verify subject length before committing:**
+  Run `echo -n "<subject>" | wc -m` and confirm the result is ≤ 50.
+  If it exceeds 50, shorten the subject and re-verify. Do not proceed
+  with `git commit` until the check passes.
 - When writing the message body, explain WHY the change is needed.
   Do not list every file or sub-change — the diff shows that.
   Focus on the core motivation; omit supporting changes unless
