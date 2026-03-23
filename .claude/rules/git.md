@@ -13,7 +13,9 @@ target repository. Use plain `git` commands instead.
 ## Commit
 
 Always use the `/commit` skill instead of running `git commit` directly.
-The skill enforces the established commit workflow.
+The skill owns the full workflow from branch creation through commit.
+Do not create branches manually outside the skill — branch creation
+is part of the `/commit` workflow when on master/main.
 
 ## Push
 
