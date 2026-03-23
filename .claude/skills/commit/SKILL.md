@@ -19,11 +19,15 @@ You are assisting with creating a git commit. Follow these steps:
 **If on master/main:**
 - Derive 2-3 branch name candidates from the staged changes (e.g. `feat/add-login`, `docs/update-readme`)
 - Present candidates to the user via AskUserQuestion and let them choose or provide their own
-- Create and switch using `git switch -c <branch-name>`
+- Always create a new branch with `git switch -c <branch-name>`
+- NEVER switch to an existing branch. If the chosen name conflicts
+  with an existing branch, inform the user and ask for a different name.
 
 **If on a feature branch:**
 - Display the current branch name
 - Show existing commits relative to main
+- Ask the user via AskUserQuestion to confirm that committing to
+  this branch is correct before proceeding
 
 ## 3. Diff Analysis
 
