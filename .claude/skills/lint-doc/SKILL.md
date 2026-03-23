@@ -11,11 +11,20 @@ description: Check documents against style rules and fix violations. Use after w
 
 Identify the document to check from recent context (recently edited or discussed files). If no clear target, ask user to provide the file path.
 
-### 2. Rule Check
+### 2. Rule Collection
 
-Read the target file and check against all document-related rules from `.claude/rules/` and `CLAUDE.md`. Apply rules relevant to the document's language (e.g. text formatting rules for Japanese documents).
+Collect the rules to check against:
 
-### 3. Report Findings
+1. **General rules** — All document-related rules from `.claude/rules/` and `CLAUDE.md`. Apply rules relevant to the document's language (e.g. text formatting rules for Japanese documents).
+2. **Skill-specific rules** — If the document was created by a skill (e.g. `analysis-report`, `technical-writing`), read that skill's definition and extract any writing guidelines, constraints, or anti-patterns defined there.
+
+Determine the originating skill from conversation context. If unclear, ask the user.
+
+### 3. Rule Check
+
+Read the target file and check against all collected rules (both general and skill-specific).
+
+### 4. Report Findings
 
 List all violations found with:
 
@@ -24,7 +33,7 @@ List all violations found with:
 - Current text
 - Suggested fix
 
-### 4. Apply Fixes
+### 5. Apply Fixes
 
 Use AskUserQuestion to present the following options:
 
