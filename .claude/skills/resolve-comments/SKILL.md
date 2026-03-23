@@ -56,6 +56,8 @@ Present your analysis and recommendation to the user for each comment. The user 
 
 ## 3. Handle Response
 
+**Principle:** Reply to every comment to maintain an audit trail of resolution decisions. This is mandatory for all comments, regardless of author (human, bot, or automated tool), and applies even if no human is expected to read the reply.
+
 **If fix required:**
 
 - Make the necessary code changes
