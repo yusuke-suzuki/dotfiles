@@ -53,17 +53,24 @@ in this update", "Previously Y was broken").
    - If multiple commits, ask user which to use
 
 2. Select template:
-   ```bash
-   find . -maxdepth 2 -iname "pull_request_template.md" -print -quit
+   Use Glob to search for a project-level PR template:
    ```
+   Glob pattern: **/pull_request_template.md
+   ```
+   If multiple files match, prefer the one closest to the repository
+   root (fewest path segments).
    - **Project template exists**: Read it and use it verbatim as the
      body skeleton. Preserve all sections including empty ones. Fill in
      only the content within each section; do not add, remove, or
      reorder sections. Match its language.
-   - **No project template**: Always ask the user via `AskUserQuestion`
-     which language to use. Do not infer from the conversation language.
-     - English (default) → [templates/pr-template.md](templates/pr-template.md)
-     - Japanese (敬語) → [templates/pr-template-ja.md](templates/pr-template-ja.md)
+   - **No project template**: **MANDATORY GATE** — Ask the user via
+     `AskUserQuestion` which language to use before proceeding.
+     Do not infer from the conversation language. Do not skip this step.
+     - English (default) → `{SKILL_BASE_DIR}/templates/pr-template.md`
+     - Japanese (敬語) → `{SKILL_BASE_DIR}/templates/pr-template-ja.md`
+
+     Replace `{SKILL_BASE_DIR}` with the absolute path from the
+     "Base directory" runtime header provided when this skill is invoked.
 
 3. Ask user whether to create as draft or ready for review
 4. Create the PR
