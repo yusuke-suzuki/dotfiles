@@ -6,17 +6,18 @@ description: Review the session for rule violations, analyze root causes, and cr
 # Retrospective
 
 You are conducting a retrospective on the current session. The goal is
-to identify violations of CLAUDE.md and rules, analyze root causes,
-and propose countermeasures as a GitHub issue.
+to identify violations of CLAUDE.md, rules, and skill workflows,
+analyze root causes, and propose countermeasures as a GitHub issue.
 
 ## 1. Violation Inventory
 
 Review the conversation history and list each instance where your
-behavior violated `~/.claude/CLAUDE.md` or any rule in
-`~/.claude/rules/`. For each violation, record:
+behavior violated `~/.claude/CLAUDE.md`, any rule in
+`~/.claude/rules/`, or any skill workflow in `~/.claude/skills/`.
+For each violation, record:
 
 - **What happened** — the concrete action or omission
-- **Which rule was violated** — cite the file and section
+- **Which rule or skill was violated** — cite the file and section
 - **When it occurred** — brief context of the conversation point
 
 Only include confirmed violations. Do not pad the list with
@@ -30,10 +31,15 @@ Group related violations and identify underlying patterns. Ask:
 - Is the violated rule unclear, missing, or scoped too narrowly?
 - Did the violation stem from a gap in the rules themselves or from
   failure to follow existing rules?
+- Did a skill's workflow lack clarity, miss a step, or guide the
+  agent toward the wrong action?
 
-Distinguish between rule gaps (the rule doesn't exist or is
-insufficient) and execution failures (the rule exists but was not
-followed).
+Distinguish between:
+
+- **Rule gaps** — the rule doesn't exist or is insufficient
+- **Execution failures** — the rule exists but was not followed
+- **Skill workflow deficiencies** — the skill's instructions are
+  unclear, incomplete, or produce suboptimal results
 
 ## 3. Countermeasures
 
@@ -64,15 +70,22 @@ to the user. Use AskUserQuestion to confirm:
 
 - Whether the analysis is accurate
 - Whether any countermeasures should be added, removed, or revised
+- Whether the issue body contains sensitive information (internal
+  URLs, tokens, PII, private repository references)
 
 Incorporate feedback before proceeding.
 
 ## 5. Create GitHub Issue
 
-Create an issue on the dotfiles repository:
+Create an issue on the dotfiles repository. Use `--body-file` with a
+heredoc to prevent shell expansion of special characters in the body.
 
 ```bash
-gh issue create -R yusuke-suzuki/dotfiles
+gh issue create -R yusuke-suzuki/dotfiles \
+  --title "<title>" \
+  --body-file - <<'EOF'
+<body>
+EOF
 ```
 
 **Title format:** `retro: <concise summary of the session's failures>`
@@ -104,5 +117,4 @@ performed.
   the work; implementation happens in separate commits.
 - Do NOT create an issue if no violations were found. Inform the
   user and end the workflow.
-- Use the conversation language for the issue body. Ask the user
-  via AskUserQuestion if the language is ambiguous.
+- Write the issue title and body in English.
