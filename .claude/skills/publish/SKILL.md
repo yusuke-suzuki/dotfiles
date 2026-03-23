@@ -32,14 +32,15 @@ git push --force-with-lease
 After pushing, check for existing PR:
 
 ```bash
-gh pr view
+gh pr list --head "$(git branch --show-current)" --limit 1
 ```
 
-**If PR exists:**
+**If PR exists** (output contains a row):
 
-- Review the current PR description
+- Extract the PR number from the first column
+- Review the current PR description: `gh pr view <number>`
 - Compare with the actual changes (`git diff origin/main...HEAD`)
-- Update description if it doesn't accurately reflect the changes: `gh pr edit`
+- Update description if it doesn't accurately reflect the changes: `gh pr edit <number>`
 
 When updating, rewrite the description against the final diff.
 The description is for reviewers of the final code, not a work log
