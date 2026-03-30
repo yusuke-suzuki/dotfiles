@@ -11,6 +11,10 @@ You are assisting with pushing commits and managing pull requests. Follow these 
 
 - Run `git status` to check current branch and sync status
 - Run `git fetch origin` to get latest remote updates
+- Detect the default branch:
+  ```bash
+  gh repo view --json defaultBranchRef -q '.defaultBranchRef.name'
+  ```
 - Determine push strategy based on branch state
 
 ## 2. Push Strategy
@@ -39,7 +43,7 @@ gh pr list --head "$(git branch --show-current)" --limit 1
 
 - Extract the PR number from the first column
 - Review the current PR description: `gh pr view <number>`
-- Compare with the actual changes (`git diff origin/main...HEAD`)
+- Compare with the actual changes (`git diff origin/<default>...HEAD`)
 - Update description if it doesn't accurately reflect the changes: `gh pr edit <number>`
 
 When updating, rewrite the description against the final diff.
@@ -51,7 +55,10 @@ in this update", "Previously Y was broken").
 
 1. Choose title:
    - MUST match a commit message subject line exactly
-   - If multiple commits, ask user which to use
+   - If multiple commits, select the one that best represents the
+     overall change (prefer `feat`/`fix` over `chore`/`refactor`;
+     prefer the commit with the broadest scope)
+   - Announce which commit message was chosen as the title
 
 2. Select template:
    Use Glob to search for a project-level PR template:
@@ -64,21 +71,21 @@ in this update", "Previously Y was broken").
      body skeleton. Preserve all sections including empty ones. Fill in
      only the content within each section; do not add, remove, or
      reorder sections. Match its language.
-   - **No project template**: **MANDATORY GATE** — Ask the user via
-     `AskUserQuestion` which language to use before proceeding.
-     Do not infer from the conversation language. Do not skip this step.
-     - English (default) → `{SKILL_BASE_DIR}/templates/pr-template.md`
+   - **No project template**: Ask the user via `AskUserQuestion` which
+     language to use. Do not infer from the conversation language.
+     - English → `{SKILL_BASE_DIR}/templates/pr-template.md`
      - Japanese (敬語) → `{SKILL_BASE_DIR}/templates/pr-template-ja.md`
 
      Replace `{SKILL_BASE_DIR}` with the absolute path from the
      "Base directory" runtime header provided when this skill is invoked.
 
-3. Ask user whether to create as draft or ready for review
-4. Create the PR
+3. Create the PR as **draft** by default.
+   Only create as ready for review if the user explicitly requested it
+   (e.g., "ready", "not draft", "ready for review").
 
 **IMPORTANT**: Always read the selected template file before creating the PR description.
 
 ## 4. Final Output
 
 - Display the PR URL
-- Show the current commit history relative to main
+- Show the current commit history relative to the default branch
