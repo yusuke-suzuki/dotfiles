@@ -11,30 +11,49 @@ You are assisting with fixing up an existing commit using interactive rebase. Fo
 
 - Run `git status` to see if there are uncommitted changes
 - Run `git fetch origin` to get latest remote updates
-- Display existing commits with `git log origin/main..HEAD --oneline`
+- Detect the default branch:
+  ```bash
+  gh repo view --json defaultBranchRef -q '.defaultBranchRef.name'
+  ```
+- Display existing commits with `git log origin/<default>..HEAD --oneline`
 
-## 2. Create Fixup Commit
+## 2. Identify Target Commit
 
-If there are uncommitted changes:
+Determine the fixup target automatically based on the branch state:
 
-1. Show the commit history
-2. Ask user which commit hash to fixup (or identify it based on context)
-3. Stage changes with `git add .` or ask which files to stage
-4. Create a fixup commit:
+**If the branch has 1 commit:**
+- The target is HEAD. Proceed directly to Step 3.
+
+**If the branch has multiple commits:**
+- Compare the changed files and diff content against each commit
+  in the branch to identify the target.
+- **Target identified:** Proceed to Step 3 with that commit.
+- **Target not identifiable:** Analyze the changes and commit
+  history, then invoke the appropriate skill automatically:
+  - If the changes are a new independent feature or fix:
+    invoke `/commit` via the Skill tool.
+  - If the commit history needs consolidation:
+    invoke `/squash` via the Skill tool, then re-invoke
+    `/fixup` after squash completes.
+
+## 3. Create Fixup Commit
+
+1. Stage changes with `git add <files>`
+2. Create a fixup commit:
 
    ```bash
-   git commit --fixup=<commit-hash>
+   git commit --fixup=<target-hash>
    ```
 
-## 3. Autosquash Rebase
+## 4. Autosquash Rebase
 
 Run non-interactive rebase with autosquash:
 
 ```bash
-git rebase --autosquash origin/main
+git rebase --autosquash origin/<default>
 ```
 
-## 4. Commit Message Review
+## 5. Commit Message Review
 
 After rebase completes, verify the commit message in two phases.
 
@@ -52,7 +71,7 @@ After rebase completes, verify the commit message in two phases.
 3. Evaluate whether the existing message accurately describes the
    purpose of the final diff as a single coherent unit.
 
-4. If the message is accurate, skip amending and proceed to Step 5.
+4. If the message is accurate, skip amending and proceed to Step 6.
 
 ### Phase 2: Amend (only if needed)
 
@@ -63,14 +82,14 @@ If the message does not accurately describe the commit's purpose:
 2. Explain what is inaccurate and why
 3. Update with `git commit --amend`
 
-## 5. Post-Rebase Actions
+## 6. Post-Rebase Actions
 
 After message review:
 
 1. Display the final commit history:
 
    ```bash
-   git log origin/main..HEAD --oneline
+   git log origin/<default>..HEAD --oneline
    ```
 
 2. Inform the user to run `/publish` to push changes and update the PR

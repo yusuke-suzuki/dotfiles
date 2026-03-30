@@ -11,23 +11,28 @@ You are assisting with creating a git commit. Follow these steps:
 
 - Run `git status` to see uncommitted changes
 - Run `git fetch origin` to get latest remote updates
-- Identify current branch (master/main or feature branch)
-- If on a feature branch, show commits with `git log origin/main..HEAD --oneline`
+- Detect the default branch:
+  ```bash
+  gh repo view --json defaultBranchRef -q '.defaultBranchRef.name'
+  ```
+- Identify current branch (default branch or feature branch)
+- If on a feature branch, show commits with `git log origin/<default>..HEAD --oneline`
 
 ## 2. Branch Handling
 
-**If on master/main:**
-- Derive 2-3 branch name candidates from the staged changes (e.g. `feat/add-login`, `docs/update-readme`)
-- Present candidates to the user via AskUserQuestion and let them choose or provide their own
-- Always create a new branch with `git switch -c <branch-name>`
+**If on the default branch:**
+- Derive the most descriptive branch name from the staged changes
+  (e.g. `feat/add-login`, `docs/update-readme`)
+- Create the branch: `git switch -c <branch-name>`
+- Announce the chosen name and reasoning
 - NEVER switch to an existing branch. If the chosen name conflicts
-  with an existing branch, inform the user and ask for a different name.
+  with an existing branch, append a short disambiguator or choose
+  an alternative name.
 
 **If on a feature branch:**
-- Display the current branch name
-- Show existing commits relative to main
-- Ask the user via AskUserQuestion to confirm that committing to
-  this branch is correct before proceeding
+- Display the current branch name and existing commits relative to
+  the default branch
+- Proceed to create the commit on this branch
 
 ## 3. Diff Analysis
 
@@ -53,7 +58,7 @@ Understand the changes before staging:
 
 ## Key Constraints
 
-- NEVER commit directly to master/main
+- NEVER commit directly to the default branch (master/main)
 - NEVER use `git commit --fixup` or `git commit --amend` (use `/fixup` command instead)
 - NEVER reference `git log` messages as a style guide for commit messages, as past messages may not follow the correct format.
 - This command creates a NEW, INDEPENDENT commit only

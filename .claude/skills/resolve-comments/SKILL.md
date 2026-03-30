@@ -44,17 +44,37 @@ query {
 }'
 ```
 
-## 2. Analyze and Propose Response
+## 2. Analyze and Draft Response Plan
 
-For each unresolved comment, analyze the feedback and make a professional judgment:
+For each unresolved comment:
 
-1. **Assess validity**: Is the feedback technically correct? Does it improve the code?
-2. **Evaluate trade-offs**: Consider complexity, scope, and practical impact
-3. **Propose action**: Recommend either fixing or explaining why no change is needed
+1. Read the relevant source code to understand the full context
+2. Assess the feedback: Is it technically correct? Does it improve the code?
+3. Evaluate trade-offs: complexity, scope, practical impact
+4. Do not accept suggestions uncritically — weigh them against the
+   code's design intent and existing patterns
+5. Draft a recommended action: fix (with specific changes) or
+   explain why no change is needed (with rationale)
 
-Present your analysis and recommendation to the user for each comment. The user makes the final decision, but you should provide clear reasoning for your recommendation.
+## 3. Present Plan for Review
 
-## 3. Handle Response
+Enter plan mode and write a response plan to the plan file containing
+all comments and their proposed resolutions:
+
+- For each comment, include:
+  - The comment text (quoted)
+  - File path and line number
+  - Your analysis of the feedback's validity
+  - Recommended action: **Fix** (describe what to change) or
+    **No change** (explain why)
+- Exit plan mode to present the plan for user review
+
+The user reviews the plan and either approves or provides corrections.
+Do not proceed to Step 4 until the plan is approved.
+
+## 4. Execute Approved Plan
+
+After approval, process all comments according to the plan:
 
 **Principle:** Reply to every comment to maintain an audit trail of resolution decisions. This is mandatory for all comments, regardless of author (human, bot, or automated tool), and applies even if no human is expected to read the reply.
 
@@ -93,7 +113,7 @@ mutation {
 
 **Never run reply and resolve in parallel.** If the reply fails, do not resolve the thread.
 
-## 4. Summary
+## 5. Summary
 
 After processing all comments:
 

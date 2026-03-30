@@ -11,7 +11,11 @@ You are assisting with syncing a feature branch with the latest main branch. Fol
 
 - Run `git status` to check for uncommitted changes (must be clean)
 - Run `git fetch origin` to retrieve remote updates
-- Display unpushed commits with `git log origin/main..HEAD --oneline`
+- Detect the default branch:
+  ```bash
+  gh repo view --json defaultBranchRef -q '.defaultBranchRef.name'
+  ```
+- Display unpushed commits with `git log origin/<default>..HEAD --oneline`
 
 ## 2. Pre-Sync Validation
 
@@ -26,7 +30,7 @@ You are assisting with syncing a feature branch with the latest main branch. Fol
 Execute the rebase:
 
 ```bash
-git rebase origin/main
+git rebase origin/<default>
 ```
 
 If conflicts occur:
