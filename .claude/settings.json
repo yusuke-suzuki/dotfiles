@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(bq ls:*)",
+      "Bash(bq query --use_legacy_sql=false --dry_run:*)",
       "Bash(bq show:*)",
+      "Bash(gcloud config get-value:*)",
+      "Bash(gh api -X GET:*)",
+      "Bash(gh api graphql -f query='query:*)",
       "Bash(gh issue view:*)",
       "Bash(gh pr checks:*)",
       "Bash(gh pr list:*)",
@@ -18,7 +22,9 @@
       "Bash(git rev-parse:*)",
       "Bash(git show:*)",
       "Bash(git status:*)",
-      "Bash(git tag --sort:*)"
+      "Bash(git tag --sort:*)",
+      "Bash(npx skills add * --list:*)",
+      "Bash(npx skills list:*)"
     ]
   },
   "language": "japanese",

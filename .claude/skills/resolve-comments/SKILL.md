@@ -13,7 +13,7 @@ First, get PR info and review comments:
 
 ```bash
 gh pr view --json number,headRepositoryOwner
-gh api /repos/{owner}/{repo}/pulls/{number}/comments
+gh api -X GET /repos/{owner}/{repo}/pulls/{number}/comments
 ```
 
 Format and display comments showing: author, file path, line number, diff hunk, and comment body.
@@ -21,8 +21,7 @@ Format and display comments showing: author, file path, line number, diff hunk, 
 Then, for actions that require thread IDs (reply/resolve), fetch via GraphQL:
 
 ```bash
-gh api graphql -f query='
-query {
+gh api graphql -f query='query {
   repository(owner: "OWNER", name: "REPO") {
     pullRequest(number: NUMBER) {
       reviewThreads(first: 50) {
@@ -97,14 +96,13 @@ POST /repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies
 ```
 
 ```bash
-gh api /repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies -X POST -f body="..."
+gh api -X POST /repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies -f body="..."
 ```
 
 - **Step 2 — Resolve** (only after the reply in Step 1 succeeds):
 
 ```bash
-gh api graphql -f query='
-mutation {
+gh api graphql -f query='mutation {
   resolveReviewThread(input: {threadId: "THREAD_ID"}) {
     thread { isResolved }
   }
