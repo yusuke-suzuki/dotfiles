@@ -65,15 +65,18 @@ must be a durable change to rules, skills, or CLAUDE.md.
 
 ## 4. User Review
 
-Present the full analysis (violations, root causes, countermeasures)
-to the user. Use AskUserQuestion to confirm:
+Enter plan mode and write the full analysis (violations, root causes,
+countermeasures) to the plan file. Exit plan mode to present it for
+user review.
 
-- Whether the analysis is accurate
-- Whether any countermeasures should be added, removed, or revised
-- Whether the issue body contains sensitive information (internal
-  URLs, tokens, PII, private repository references)
+The user reviews the plan and may:
 
-Incorporate feedback before proceeding.
+- Correct inaccurate analysis
+- Add, remove, or revise countermeasures
+- Remove sensitive information (internal URLs, tokens, PII, private
+  repository references) before the issue is created
+
+Do not proceed to Step 5 until the user approves the plan.
 
 ## 5. Create GitHub Issue
 
