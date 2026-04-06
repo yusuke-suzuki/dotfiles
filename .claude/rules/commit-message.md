@@ -6,6 +6,7 @@ Apply when creating git commits.
 
 - Conventional Commits format
 - English, imperative mood, present tense
+- Always write in English regardless of the language of the changed files
 - Example: `feat: add user authentication` (not `added`)
 
 ## Types
