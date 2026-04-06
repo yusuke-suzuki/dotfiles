@@ -1,35 +1,17 @@
 # Tool Usage
 
-Apply when using tools to read, write, or modify files.
+Use dedicated tools instead of Bash equivalents.
 
-## File Search
+| Operation      | Dedicated tool | Bash (denied in settings.json) |
+| -------------- | -------------- | ------------------------------ |
+| File search    | Glob           | `find`                         |
+| Content search | Grep           | `grep`, `rg`                   |
+| Read files     | Read           | `cat`                          |
+| Edit files     | Edit           | `sed`, `awk`                   |
 
-Use the Glob tool for all file search operations. Never use `ls`,
-`find`, or `locate` via Bash, even when Glob returns no results.
+If Glob or Grep returns no results, adjust the pattern or search
+path and retry. Do not fall back to Bash alternatives.
 
-If Glob returns no results, adjust the pattern or search path and
-retry with Glob. Do not fall back to Bash alternatives.
-
-### Incorrect pattern
-
-- ❌ Glob returns empty → use `ls` via Bash
-- ❌ Glob returns empty → use `find` via Bash
-- ❌ Glob returns empty → use `locate` via Bash
-
-## Tool Precondition Errors
-
-When a dedicated tool (Edit, Write) returns a precondition error
-(e.g., "file not read yet"), satisfy the precondition using the
-appropriate tool and retry. Never fall back to Bash equivalents
-(cat, sed, awk) to bypass the error.
-
-### Correct pattern
-
-1. Edit fails with "unread file" error
-2. Read the file with the Read tool
-3. Retry with Edit
-
-### Incorrect pattern
-
-- ❌ Edit fails → use `sed -i` via Bash
-- ❌ Read tool unavailable → use `cat` via Bash
+When a dedicated tool returns a precondition error (e.g., "file not
+read yet"), satisfy the precondition and retry. For example, if Edit
+fails because the file was not read, use Read first, then retry Edit.
