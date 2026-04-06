@@ -2,15 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(bq ls:*)",
-      "Bash(bq query --use_legacy_sql=false --dry_run:*)",
+      "Bash(bq query:*)",
       "Bash(bq show:*)",
       "Bash(gcloud config get-value:*)",
       "Bash(gh api -X GET:*)",
-      "Bash(gh api graphql -f query='query:*)",
+      "Bash(gh api graphql -f 'query=query {:*)",
       "Bash(gh issue view:*)",
       "Bash(gh pr checks:*)",
-      "Bash(gh pr list:*)",
       "Bash(gh pr diff:*)",
+      "Bash(gh pr list:*)",
       "Bash(gh pr view:*)",
       "Bash(gh release view:*)",
       "Bash(gh repo view:*)",
@@ -26,6 +26,22 @@
       "Bash(git tag --sort:*)",
       "Bash(npx skills add * --list:*)",
       "Bash(npx skills list:*)"
+    ],
+    "deny": [
+      "Bash(git push origin main*)",
+      "Bash(git push origin master*)",
+      "Bash(git push --force origin main*)",
+      "Bash(git push --force origin master*)",
+      "Bash(git push --force-with-lease origin main*)",
+      "Bash(git push --force-with-lease origin master*)",
+      "Bash(git * --no-gpg-sign*)",
+      "Bash(git * -c commit.gpgsign=false*)",
+      "Bash(grep *)",
+      "Bash(find *)",
+      "Bash(rg *)",
+      "Bash(sed *)",
+      "Bash(cat *)",
+      "Bash(awk *)"
     ]
   },
   "language": "japanese",
