@@ -1,6 +1,6 @@
 ---
 name: commit
-description: Create a git commit with Conventional Commits format
+description: Create a git commit with Conventional Commits format. Invoke as soon as changes are ready — branch creation, staging, and message authoring are all part of this workflow.
 ---
 
 # Commit

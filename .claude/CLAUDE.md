@@ -68,6 +68,19 @@ Decision depth should be proportional to the scope of impact and irreversibility
 - ❌ "Which approach is better?"
 - ❌ "Is this okay?"
 
+## Prefer Standards
+
+Use the standard workflow provided by the framework or language before
+reaching for alternatives.
+
+1. Use generators, CLI tools, and built-in APIs that the technology
+   provides (e.g., `rails generate`, `npm init`, `mix phx.gen`)
+2. Before adopting third-party libraries or custom solutions, verify
+   that standard technology cannot meet the requirement
+3. Do not use Write, Edit, or similar tools to create files that a
+   generator would produce — generators set up boilerplate, naming
+   conventions, and registration that manual creation can miss
+
 ## Safety
 
 - Never modify production data for testing purposes
