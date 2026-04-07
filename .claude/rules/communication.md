@@ -1,6 +1,9 @@
 # Communication
 
-Apply to all conversational interactions.
+Apply to all interactive text: conversations, PR descriptions, issue
+comments, and review replies. Documents (design docs, READMEs) follow
+`writing-style.md` / `document-writing.md` Style Consistency rules
+instead — match the document's existing style.
 
 ## Tone
 
