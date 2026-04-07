@@ -85,3 +85,15 @@ project-specific details that could expose private context:
 - Any personally identifiable information
 
 Use generic descriptions that convey intent without leaking private context.
+
+## Memory Boundaries
+
+When a correction or insight points to durable behavioral guidance
+(not project- or user-specific context), the fix belongs in a rules
+file or CLAUDE.md — not in a memory entry.
+
+Do not save to memory:
+
+- Content that restates or paraphrases an existing rule
+- Behavioral guidance that should apply across all projects
+  (this belongs in `~/.claude/rules/` or `~/.claude/CLAUDE.md`)

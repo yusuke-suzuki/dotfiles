@@ -45,10 +45,16 @@ Understand the changes before staging:
 ## 4. Commit Creation
 
 - Never stage files that contain secrets (.env, credentials, private keys)
-- **Verify subject length before committing:**
-  Run `echo -n "<subject>" | wc -m` and confirm the result is ≤ 50.
-  If it exceeds 50, shorten the subject and re-verify. Do not proceed
-  with `git commit` until the check passes.
+- **Verify the drafted commit message against all rules in
+  `~/.claude/rules/commit-message.md` before running `git commit`.**
+  Check at minimum:
+  - Subject line is ≤ 50 characters
+    (run `echo -n "<subject>" | wc -m` to confirm)
+  - Subject and body are written in English
+  - Format follows Conventional Commits
+  - Body explains the rationale, not the mechanics
+  If any check fails, fix the message and re-verify. Do not proceed
+  with `git commit` until all checks pass.
 - When writing the message body, explain WHY the change is needed.
   Do not list every file or sub-change — the diff shows that.
   Focus on the core motivation; omit supporting changes unless
