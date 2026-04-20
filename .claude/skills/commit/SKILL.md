@@ -21,7 +21,7 @@ You are assisting with creating a git commit. Follow these steps:
 ## 2. Branch Handling
 
 **If on the default branch:**
-- Derive the most descriptive branch name from the staged changes
+- Derive the most descriptive branch name from the current changes
   (e.g. `feat/add-login`, `docs/update-readme`)
 - Create the branch: `git switch -c <branch-name>`
 - Announce the chosen name and reasoning
@@ -29,10 +29,24 @@ You are assisting with creating a git commit. Follow these steps:
   with an existing branch, append a short disambiguator or choose
   an alternative name.
 
-**If on a feature branch:**
+**If on a feature branch whose existing commits relate to the current
+changes:**
 - Display the current branch name and existing commits relative to
   the default branch
 - Proceed to create the commit on this branch
+
+**If on a feature branch whose existing commits are unrelated to the
+current changes** (e.g. left over from a different task after
+switching focus):
+- Announce the mismatch between the branch's history and the current
+  changes so the user can intervene if needed
+- Derive a new branch name from the current changes and create it
+  off the latest remote default so uncommitted work does not pass
+  through the local default branch:
+  `git switch -c <branch-name> origin/<default>`
+- Announce the chosen name and reasoning (as in the default-branch case)
+- If uncertain whether the existing commits are related, ask the user
+  before branching rather than guessing
 
 ## 3. Diff Analysis
 

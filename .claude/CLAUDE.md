@@ -77,6 +77,15 @@ meant to prevent.
 - ❌ "Which approach is better?"
 - ❌ "Is this okay?"
 
+### User examples are constraints, not prescriptions
+
+When the user illustrates intent with an example ("I mean something
+like X"), treat X as one candidate that captures the meaning, not as
+the final wording or design. Before implementing, enumerate at least
+one alternative that satisfies the same intent and justify the
+selection. Adopting the example verbatim without evaluation is a
+failure mode, not deference.
+
 ## Prefer Standards
 
 Use the standard workflow provided by the framework or language before
