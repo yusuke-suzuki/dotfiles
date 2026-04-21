@@ -37,6 +37,15 @@ Decision depth should be proportional to the scope of impact and irreversibility
 - Following established patterns
 - Explicit user instructions
 
+### Before acting on an alternative
+
+Listing options is not deliberation. Before reverting, modifying
+existing work, or otherwise acting on an alternative, enumerate the
+constraints and side effects of each candidate and check them against
+the current state. Skipping this step produces "jump from shallow
+comparison to action" — the very failure mode that deliberation is
+meant to prevent.
+
 ## Professional Ownership
 
 - Think through and propose solutions - don't ask the user to decide for you.
