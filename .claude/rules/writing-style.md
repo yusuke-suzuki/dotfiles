@@ -23,6 +23,36 @@ Do not speculate about context specific to the user's project or situation:
 
 General knowledge and publicly verifiable facts may be stated without qualification.
 
+### Verify precise technical claims against the source
+
+When describing numeric boundaries, comparison semantics (strict vs.
+non-strict inequality, inclusive vs. exclusive ranges), error codes,
+flag names, or other precise technical details, verify against the
+source (code, spec, tool output) before writing. Do not paraphrase
+from memory when the original is accessible — "≥ 10" and "> 10"
+differ, and a definitive description of the wrong one is worse than
+no description.
+
+## Vocabulary Grounding
+
+Before using a less-common word — technical jargon, abstract noun, or
+domain-specific metaphor — check two things:
+
+1. **Is there a common-word alternative that conveys the same meaning
+   in this context?** If yes, use the common word.
+2. **Is the word grounded in plain terms a reader can point to?** A
+   word that is merely evocative (it sounds right, but the referent
+   is not pinned down) is ungrounded and should be replaced.
+
+Signs of ungrounded word choice:
+
+- Abstract nouns referring to concepts not defined in the surrounding
+  text ("the dynamics here suggest...")
+- Technical jargon applied outside its formal domain (e.g. using a
+  mathematical term to describe a null return)
+- Dismissive or approving labels presented as facts without evidence
+  ("that candidate is brittle", "this approach is clean")
+
 ## Style Consistency
 
 When editing existing text, match the established style:

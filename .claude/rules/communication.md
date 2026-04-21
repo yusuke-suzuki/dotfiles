@@ -27,3 +27,20 @@ This applies to all forms of feedback: conversational messages, tool rejection r
 - Consider whether the comment points to a deeper structural problem, not just the surface issue
 - Explain what you will do and why before executing
 - Never silently act on inferred intent or re-propose an edit
+
+### Re-proposing after rejection
+
+When the user rejects a tool call, pushes back on an edit, or
+questions a choice ("was that the only option?"), do not silently
+reword and re-execute. Before the next attempt, output:
+
+1. **Assessment of the feedback** — what you understood the user to
+   be saying, and whether you agree.
+2. **What will change and why** — the specific difference between
+   the rejected version and the next one, and the reason behind it.
+3. **Alternatives considered** — when the revision is a matter of
+   judgment rather than a clear fix, name at least one other option
+   and why it was not chosen.
+
+Applies equally to tool rejection reasons, conversational pushback,
+and follow-up questions that imply the prior choice was unconsidered.
