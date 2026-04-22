@@ -14,9 +14,9 @@ into a single commit. Follow these steps:
 - Run `git fetch origin` to get latest remote updates
 - Detect the default branch:
   ```bash
-  gh repo view --json defaultBranchRef -q '.defaultBranchRef.name'
+  git symbolic-ref refs/remotes/origin/HEAD --short
   ```
-- Display existing commits with `git log origin/<default>..HEAD --oneline`
+- Display existing commits with `git log <default>..HEAD --oneline`
 - If the branch has only 1 commit, inform the user that squash is
   not needed and exit.
 
@@ -37,14 +37,14 @@ Combine all commits into one:
 
 ```bash
 # Move HEAD back to the default branch while keeping all changes staged
-git reset --soft origin/<default>
+git reset --soft <default>
 # Create a single commit from the staged changes
 git commit
 ```
 
 ## 4. Commit Message
 
-Write the message against the full diff (`origin/<default>..HEAD`),
+Write the message against the full diff (`<default>..HEAD`),
 not as a summary of the previous individual commits.
 
 - Apply all rules from `commit-message.md`
