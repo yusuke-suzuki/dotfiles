@@ -80,8 +80,9 @@ Do not proceed to Step 5 until the user approves the plan.
 
 ## 5. Create GitHub Issue
 
-Create an issue on the dotfiles repository. Use `--body-file` with a
-heredoc to prevent shell expansion of special characters in the body.
+Create an issue on the dotfiles repository.
+
+**With `gh`**: use `--body-file` with a heredoc to prevent shell expansion of special characters in the body.
 
 ```bash
 gh issue create -R yusuke-suzuki/dotfiles \
@@ -90,6 +91,8 @@ gh issue create -R yusuke-suzuki/dotfiles \
 <body>
 EOF
 ```
+
+**With GitHub MCP**: use the `issue_write` tool with `owner: "yusuke-suzuki"`, `repo: "dotfiles"`, and the title and body as parameters. If the tool rejects cross-repository targeting, inform the user and end the workflow.
 
 **Title format:** `retro: <concise summary of the session's failures>`
 

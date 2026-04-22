@@ -21,7 +21,3 @@ is part of the `/commit` workflow when on master/main.
 
 Always use the `/publish` skill instead of running `git push` directly.
 The skill keeps the PR description in sync with the current diff.
-
-Pushing to main/master and bypassing GPG signing are denied in
-settings.json. If a commit fails due to signing errors, investigate
-the root cause and report it instead of bypassing the signature.

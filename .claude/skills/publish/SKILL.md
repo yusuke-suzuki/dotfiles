@@ -13,7 +13,7 @@ You are assisting with pushing commits and managing pull requests. Follow these 
 - Run `git fetch origin` to get latest remote updates
 - Detect the default branch:
   ```bash
-  gh repo view --json defaultBranchRef -q '.defaultBranchRef.name'
+  git symbolic-ref refs/remotes/origin/HEAD --short
   ```
 - Determine push strategy based on branch state
 
@@ -35,16 +35,36 @@ git push --force-with-lease
 
 After pushing, check for existing PR:
 
+**With `gh`**:
+
 ```bash
-gh pr list --head "$(git branch --show-current)" --limit 1
+gh pr list --head <current-branch> --limit 1
 ```
+
+**With GitHub MCP**: use the `list_pull_requests` tool with owner and repo, and filter by the current branch as the head.
 
 **If PR exists** (output contains a row):
 
 - Extract the PR number from the first column
-- Review the current PR description: `gh pr view <number>`
-- Compare with the actual changes (`git diff origin/<default>...HEAD`)
-- Update description if it doesn't accurately reflect the changes: `gh pr edit <number>`
+- Review the current PR description:
+
+  **With `gh`**:
+
+  ```bash
+  gh pr view <number>
+  ```
+
+  **With GitHub MCP**: use the `pull_request_read` tool with owner, repo, and the PR number.
+- Compare with the actual changes (`git diff <default>...HEAD`)
+- Update description if it doesn't accurately reflect the changes:
+
+  **With `gh`**:
+
+  ```bash
+  gh pr edit <number>
+  ```
+
+  **With GitHub MCP**: use the `update_pull_request` tool with owner, repo, and the PR number.
 
 When updating, rewrite the description against the final diff.
 The description is for reviewers of the final code, not a work log
@@ -79,7 +99,16 @@ in this update", "Previously Y was broken").
      Replace `{SKILL_BASE_DIR}` with the absolute path from the
      "Base directory" runtime header provided when this skill is invoked.
 
-3. Create the PR as **draft** by default.
+3. Create the PR as **draft** by default:
+
+   **With `gh`**:
+
+   ```bash
+   gh pr create --draft --title "..." --body-file ...
+   ```
+
+   **With GitHub MCP**: use the `create_pull_request` tool with owner, repo, title, body, head, base, and `draft: true`.
+
    Only create as ready for review if the user explicitly requested it
    (e.g., "ready", "not draft", "ready for review").
 

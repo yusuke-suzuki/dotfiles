@@ -7,6 +7,15 @@ description: Resolve PR review comments
 
 You are assisting with resolving PR review comments. Follow these steps:
 
+## Preconditions
+
+This skill requires the `gh` CLI. The GitHub MCP server does not
+expose tools for pull request review threads — fetching thread IDs
+and resolving them require GraphQL, which is not available through
+MCP. If `gh` is unavailable (e.g., on Claude Code Web), inform the
+user that `/resolve-comments` is not supported in this environment
+and end the workflow.
+
 ## 1. Fetch Review Comments
 
 First, get PR info and review comments:

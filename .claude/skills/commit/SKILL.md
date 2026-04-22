@@ -13,10 +13,10 @@ You are assisting with creating a git commit. Follow these steps:
 - Run `git fetch origin` to get latest remote updates
 - Detect the default branch:
   ```bash
-  gh repo view --json defaultBranchRef -q '.defaultBranchRef.name'
+  git symbolic-ref refs/remotes/origin/HEAD --short
   ```
 - Identify current branch (default branch or feature branch)
-- If on a feature branch, show commits with `git log origin/<default>..HEAD --oneline`
+- If on a feature branch, show commits with `git log <default>..HEAD --oneline`
 
 ## 2. Branch Handling
 
@@ -43,7 +43,7 @@ switching focus):
 - Derive a new branch name from the current changes and create it
   off the latest remote default so uncommitted work does not pass
   through the local default branch:
-  `git switch -c <branch-name> origin/<default>`
+  `git switch -c <branch-name> <default>`
 - Announce the chosen name and reasoning (as in the default-branch case)
 - If uncertain whether the existing commits are related, ask the user
   before branching rather than guessing

@@ -13,9 +13,9 @@ You are assisting with fixing up an existing commit using interactive rebase. Fo
 - Run `git fetch origin` to get latest remote updates
 - Detect the default branch:
   ```bash
-  gh repo view --json defaultBranchRef -q '.defaultBranchRef.name'
+  git symbolic-ref refs/remotes/origin/HEAD --short
   ```
-- Display existing commits with `git log origin/<default>..HEAD --oneline`
+- Display existing commits with `git log <default>..HEAD --oneline`
 
 ## 2. Identify Target Commit
 
@@ -50,7 +50,7 @@ Determine the fixup target automatically based on the branch state:
 Run non-interactive rebase with autosquash:
 
 ```bash
-git rebase --autosquash origin/<default>
+git rebase --autosquash <default>
 ```
 
 ## 5. Commit Message Review
@@ -89,7 +89,7 @@ After message review:
 1. Display the final commit history:
 
    ```bash
-   git log origin/<default>..HEAD --oneline
+   git log <default>..HEAD --oneline
    ```
 
 2. Inform the user to run `/publish` to push changes and update the PR

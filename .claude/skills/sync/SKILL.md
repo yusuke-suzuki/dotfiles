@@ -13,9 +13,9 @@ You are assisting with syncing a feature branch with the latest main branch. Fol
 - Run `git fetch origin` to retrieve remote updates
 - Detect the default branch:
   ```bash
-  gh repo view --json defaultBranchRef -q '.defaultBranchRef.name'
+  git symbolic-ref refs/remotes/origin/HEAD --short
   ```
-- Display unpushed commits with `git log origin/<default>..HEAD --oneline`
+- Display unpushed commits with `git log <default>..HEAD --oneline`
 
 ## 2. Pre-Sync Validation
 
@@ -30,7 +30,7 @@ You are assisting with syncing a feature branch with the latest main branch. Fol
 Execute the rebase:
 
 ```bash
-git rebase origin/<default>
+git rebase <default>
 ```
 
 If conflicts occur:
