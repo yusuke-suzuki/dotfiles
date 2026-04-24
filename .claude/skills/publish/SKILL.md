@@ -81,9 +81,9 @@ in this update", "Previously Y was broken").
    - Announce which commit message was chosen as the title
 
 2. Select template:
-   Use Glob to search for a project-level PR template:
+   Search for a project-level PR template using `find`:
    ```
-   Glob pattern: **/pull_request_template.md
+   find . -iname 'pull_request_template.md'
    ```
    If multiple files match, prefer the one closest to the repository
    root (fewest path segments).
