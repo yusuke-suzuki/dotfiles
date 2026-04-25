@@ -41,9 +41,6 @@
       "Bash(git switch --discard-changes*)",
       "Bash(git * --no-gpg-sign*)",
       "Bash(git * -c commit.gpgsign=false*)",
-      "Bash(grep *)",
-      "Bash(find *)",
-      "Bash(rg *)",
       "Bash(sed *)",
       "Bash(cat *)",
       "Bash(awk *)"
