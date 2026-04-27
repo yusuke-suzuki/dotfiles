@@ -114,6 +114,25 @@ in this update", "Previously Y was broken").
 
 **IMPORTANT**: Always read the selected template file before creating the PR description.
 
+When passing the body to `gh pr create` or `gh pr edit`, use a HEREDOC
+inline within the command. Do not stage the body to a local file
+(e.g. `/tmp/pr-body.md`) and pass it via `--body-file <path>`.
+
+OK:
+
+```bash
+gh pr create --title "..." --body-file - <<'EOF'
+body content here
+EOF
+```
+
+NG: `Write /tmp/pr-body.md`, then `gh pr create --title "..." --body-file /tmp/pr-body.md`
+
+The user reviews tool calls before they run. Inline HEREDOC puts the
+body in the call so they see it before approving. A separate Write
+step bypasses this — once the file exists, the follow-up `gh` call
+sends content the user has not yet reviewed.
+
 ## 4. Final Output
 
 - Display the PR URL

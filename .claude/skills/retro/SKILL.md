@@ -84,7 +84,10 @@ Do not proceed to Step 5 until the user approves the plan.
 
 Create an issue on the dotfiles repository.
 
-**With `gh`**: use `--body-file` with a heredoc to prevent shell expansion of special characters in the body.
+**With `gh`**: use a HEREDOC inline within the command. Do not stage
+the body to a local file (e.g. `/tmp/issue-body.md`) — once the file
+exists, the follow-up `gh` call sends content the user has not yet
+reviewed.
 
 ```bash
 gh issue create -R yusuke-suzuki/dotfiles \
