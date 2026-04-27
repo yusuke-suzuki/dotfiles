@@ -65,9 +65,11 @@ must be a durable change to rules, skills, or CLAUDE.md.
 
 ## 4. User Review
 
-Enter plan mode and write the full analysis (violations, root causes,
-countermeasures) to the plan file. Exit plan mode to present it for
-user review.
+Use the `EnterPlanMode` tool to enter plan mode, then write the full
+analysis (violations, root causes, countermeasures) to the plan file.
+The plan is a user-facing deliverable, so write it in the user's
+response language (`language` in `~/.claude/settings.json`). Use the
+`ExitPlanMode` tool to present it for user review.
 
 The user reviews the plan and may:
 

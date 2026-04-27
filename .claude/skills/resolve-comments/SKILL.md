@@ -7,27 +7,21 @@ description: Resolve PR review comments
 
 You are assisting with resolving PR review comments. Follow these steps:
 
-## Preconditions
-
-This skill requires the `gh` CLI. The GitHub MCP server does not
-expose tools for pull request review threads — fetching thread IDs
-and resolving them require GraphQL, which is not available through
-MCP. If `gh` is unavailable (e.g., on Claude Code Web), inform the
-user that `/resolve-comments` is not supported in this environment
-and end the workflow.
-
 ## 1. Fetch Review Comments
 
-First, get PR info and review comments:
+Identify the PR for the current branch:
+
+**With `gh`**:
 
 ```bash
 gh pr view --json number,headRepositoryOwner
-gh api -X GET /repos/{owner}/{repo}/pulls/{number}/comments
 ```
 
-Format and display comments showing: author, file path, line number, diff hunk, and comment body.
+**With GitHub MCP**: use the `list_pull_requests` tool with owner, repo, and the current branch as the head.
 
-Then, for actions that require thread IDs (reply/resolve), fetch via GraphQL:
+Fetch review threads with thread IDs, resolution state, and embedded comments:
+
+**With `gh`**: fetch via GraphQL since thread IDs are not exposed by the REST API:
 
 ```bash
 gh api graphql -f query='query {
@@ -37,12 +31,14 @@ gh api graphql -f query='query {
         nodes {
           id
           isResolved
-          comments(first: 10) {
+          comments(first: 50) {
             nodes {
               databaseId
+              author { login }
               body
               path
               line
+              diffHunk
             }
           }
         }
@@ -51,6 +47,10 @@ gh api graphql -f query='query {
   }
 }'
 ```
+
+**With GitHub MCP**: use the `pull_request_read` tool with `method: "get_review_comments"`, owner, repo, and the PR number. The response returns review threads with `id`, `isResolved`, and embedded comments containing `databaseId`, author, body, path, line, and diff hunk.
+
+Format and display unresolved threads showing: author, file path, line number, diff hunk, and comment body.
 
 ## 2. Analyze and Draft Response Plan
 
@@ -66,8 +66,11 @@ For each unresolved comment:
 
 ## 3. Present Plan for Review
 
-Enter plan mode and write a response plan to the plan file containing
-all comments and their proposed resolutions:
+Use the `EnterPlanMode` tool to enter plan mode, then write a
+response plan to the plan file containing all comments and their
+proposed resolutions. The plan is a user-facing deliverable, so
+write it in the user's response language (`language` in
+`~/.claude/settings.json`).
 
 - For each comment, include:
   - The comment text (quoted)
@@ -75,7 +78,7 @@ all comments and their proposed resolutions:
   - Your analysis of the feedback's validity
   - Recommended action: **Fix** (describe what to change) or
     **No change** (explain why)
-- Exit plan mode to present the plan for user review
+- Use the `ExitPlanMode` tool to present the plan for user review
 
 The user reviews the plan and either approves or provides corrections.
 Do not proceed to Step 4 until the plan is approved.
@@ -89,26 +92,29 @@ After approval, process all comments according to the plan:
 **If fix required:**
 
 - Make the necessary code changes
-- Reply to acknowledge the fix (e.g., "Done")
-- Resolve the thread
+- Draft a brief acknowledgment as the reply (e.g., "Done")
 - Inform user to use `/fixup` or `/commit` after all fixes are complete
 
 **If no action needed:**
 
 - Draft a reply with clear rationale (e.g., "Won't fix because...", "Intentional design because...")
 - **Match the language of the original comment** (e.g., reply in Japanese if the comment is in Japanese)
-- Reply to the last comment in the thread (use its `databaseId` as `comment_id`)
-- **Step 1 — Reply** (must succeed before proceeding to Step 2):
 
-```
-POST /repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies
-```
+**Step 1 — Reply** (must succeed before proceeding to Step 2):
+
+Reply to the last comment in the thread (use its `databaseId` as `comment_id`).
+
+**With `gh`**:
 
 ```bash
 gh api -X POST /repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies -f body="..."
 ```
 
-- **Step 2 — Resolve** (only after the reply in Step 1 succeeds):
+**With GitHub MCP**: use the `add_reply_to_pull_request_comment` tool with owner, repo, pullNumber, commentId, and the reply body.
+
+**Step 2 — Resolve** (only after the reply in Step 1 succeeds):
+
+**With `gh`**:
 
 ```bash
 gh api graphql -f query='mutation {
@@ -117,6 +123,8 @@ gh api graphql -f query='mutation {
   }
 }'
 ```
+
+**With GitHub MCP**: use the `pull_request_review_write` tool with `method: "resolve_thread"` and the thread ID obtained in Step 1's fetch.
 
 **Never run reply and resolve in parallel.** If the reply fails, do not resolve the thread.
 
