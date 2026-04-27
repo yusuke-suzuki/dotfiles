@@ -55,10 +55,9 @@ Signs of ungrounded word choice:
 
 ## Style Consistency
 
-When editing existing text, match the established style:
-
-- **Japanese**: Match formality (です/ます vs である/だ). Never mix within the same context.
-- **English**: Match tone and voice (formal, casual, technical).
+When editing existing text, match the established tone and voice
+(formal, casual, technical). For language-specific axes (e.g.,
+Japanese formality), see the language-specific style files.
 
 ## Redundancy
 
