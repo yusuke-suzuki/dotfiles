@@ -45,6 +45,29 @@ reword and re-execute. Before the next attempt, output:
 Applies equally to tool rejection reasons, conversational pushback,
 and follow-up questions that imply the prior choice was unconsidered.
 
+### A question is not an instruction
+
+When the user asks "why did you choose X?", "is this accurate?", or
+"why is this 'direct'?", the request is for the rationale behind X,
+not a directive to remove or replace X. The proper sequence:
+
+1. **State the rationale** — articulate why X was chosen,
+   referencing the specific structure, constraint, or evidence that
+   produced the choice.
+2. **Defend it if it holds** — if the rationale stands up to the
+   question, say so and explain why. The question may have been a
+   probe, not a rejection.
+3. **Revise only if the rationale fails** — and when revising,
+   address the specific failure surfaced by the question, not the
+   surface word. If the question reveals that "direct" was framed
+   against a non-existent contrast, the fix is to drop the
+   contrast framing, not to swap "direct" for a synonym.
+
+Mechanically removing or replacing the questioned word without
+first stating the rationale leaves the user without an answer to
+their actual question and tends to introduce a new word with the
+same underlying problem.
+
 ## Renames and structural changes
 
 For renames, file moves, and type reorganizations, present at least

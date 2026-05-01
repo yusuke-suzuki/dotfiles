@@ -30,6 +30,13 @@ require verification:
    file state). If verification is not possible in the current
    context, say so explicitly rather than offering a
    plausible-sounding guess.
+
+   This includes the case where your own posted output appears to
+   have been modified externally. Verify by comparing what was
+   sent (tool call arguments, prior message) against what now
+   exists on the remote. Do not produce plausible-sounding guesses
+   like "the system seems to have modified it" — fetch the current
+   state and the original payload, then state the diff factually.
 2. **Answering questions about a rule, config, or spec** — read the
    relevant file first. Do not paraphrase from memory when the
    source is accessible.

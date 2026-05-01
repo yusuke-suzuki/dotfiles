@@ -55,6 +55,13 @@ gh pr list --head <current-branch> --limit 1
   ```
 
   **With GitHub MCP**: use the `pull_request_read` tool with owner, repo, and the PR number.
+
+  **MANDATORY**: This fetch is required before any edit to the PR
+  description, regardless of what is remembered from earlier in the
+  conversation. Session memory is not a substitute — the remote may
+  have been updated by review, by another tool, or by a prior edit
+  that did not reach the local conversation. Skipping this step
+  produces edits that overwrite or contradict the live description.
 - Compare with the actual changes (`git diff <default>...HEAD`)
 - Update description if it doesn't accurately reflect the changes:
 

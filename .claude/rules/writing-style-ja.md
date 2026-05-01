@@ -79,6 +79,10 @@ be replaced with plain Japanese.
 
 - OK: `事前に存在していたカバレッジの欠落を解消する`
 - NG: `pre-existing なカバレッジの gap を close する`
+- OK: 「該当する項目を確認する」
+- NG: 「該当 bullet を確認する」 (`bullet` は「項目」と書ける)
+- OK: 「閾値との差」
+- NG: 「閾値までの距離」
 
 Common abstract loanwords and their Japanese equivalents:
 
@@ -95,12 +99,15 @@ Common abstract loanwords and their Japanese equivalents:
 | 「カテゴリー」 | 「分類」「区分」 |
 | 「マッピング」 | 「対応付け」 (コード内のマップデータ構造を指す場合は除く) |
 | 「ロジック」 | 「処理」「論理」 (技術文脈の固有語を除き、抽象的な利用を避ける) |
+| 「クランプ」 | 「制限する」「収める」 (CSS `clamp()` 等の固有語を除き、抽象的な利用を避ける) |
 
 Do not use Japanese words that are unnatural in technical context.
 Heuristic: "would a native speaker find this natural?"
 
 - OK: `新しい名前`
 - NG: `新名` (reads as a surname or archaic in technical writing)
+- OK: `生の値`
+- NG: `素値` (coined contraction; not idiomatic Japanese)
 
 ### Mixed-construct rules
 
@@ -115,6 +122,51 @@ rather than complete sentences.
 - OK: 「内部用の wrapper を削除する」
 - NG: 「`Bar` wrapper だけ」
 - OK: 「`Bar` 用の wrapper だけ」
+
+### Question literal katakana
+
+Words that are merely English transliterations into katakana
+(「トリビアル」「ラッパー」「アグリゲーター」「クランプ」, etc.)
+read as direct transcriptions rather than established technical
+terms. Before writing such a word, check whether plain Japanese
+conveys the same meaning.
+
+- OK: 「単純な実装」「委譲を行うクラス」「集約処理」「値を範囲に収める」
+- NG: 「トリビアルな実装」「ラッパークラス」「アグリゲーター処理」「値をクランプする」
+
+Established technical proper nouns (`JSON`, `API`, `Pull Request`,
+`HTTP`, CSS `clamp()`, etc.) remain in their original form. This
+subsection applies only to words that have a plain Japanese
+equivalent.
+
+### Don't translate English syntax mechanically
+
+Translating "X of Y" mechanically into 「Y の X」 can invert the
+modifier-of relationship between X and Y. Before settling on the
+Japanese order, determine which side contains the other and which
+side is contained.
+
+- OK: 「`FooClient` が公開する API」 (`FooClient` owns the API)
+- NG: 「公開 API の `FooClient` ラッパークラス」 (inverts the
+  relationship — reads as if the API owns `FooClient`)
+
+Before stringing together English noun phrases in Japanese,
+confirm you can state the relationship explicitly as either "X が
+Y を 〜する" or "Y は X の一部である".
+
+### Apply the same vocabulary check inside vocabulary discussions
+
+In conversations where word choice itself is the topic (replies
+to feedback about vocabulary, for example), it is easy to coin
+fresh unnatural katakana or direct translations inside the very
+reply that addresses the feedback. Apply this section's checks
+and `writing-style.md` "Vocabulary Grounding" to those replies in
+particular.
+
+Before sending the reply, read it in isolation and confirm no new
+katakana transliterations or direct translations have been
+introduced. Do not let the surrounding feedback context lower the
+vocabulary bar.
 
 ## Style Consistency
 
