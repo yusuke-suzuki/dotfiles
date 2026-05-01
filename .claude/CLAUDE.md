@@ -15,6 +15,13 @@ Before modifying any file — including renaming, moving, or restructuring
 — read its full content first. Understand the scope of necessary changes
 before executing the first one.
 
+When the task is a rename, API migration, or call-site replacement,
+grep for the target symbol (method name, constant, type, string
+literal) across the repository before fixing the PR scope. Explicitly
+list which occurrences are in scope and which are out of scope. A
+scope description built from "the call sites I happened to see"
+misses the call sites a grep would have surfaced.
+
 ## Calibrated Decision Making
 
 Decision depth should be proportional to the scope of impact and irreversibility.

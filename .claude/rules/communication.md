@@ -44,3 +44,22 @@ reword and re-execute. Before the next attempt, output:
 
 Applies equally to tool rejection reasons, conversational pushback,
 and follow-up questions that imply the prior choice was unconsidered.
+
+## Self-review before submitting
+
+Before sending each draft (PR description, commit message, headings,
+review replies), do one read-through over your own output checking:
+
+1. **Sentence structure** — subject / object alignment, particle
+   choice in Japanese, grammar in English. Read each sentence as if
+   encountering it for the first time.
+2. **Technical accuracy** — claims about behavior, scope, and
+   history match the source. See `feedback-handling.md` "Verify
+   before answering".
+3. **Redundancy and noise** — sections that duplicate the change
+   list or restate self-evident information. See `writing-style.md`
+   "Redundancy".
+
+Apply this pass regardless of draft length. Raise priority on the
+axis where the user pushed back most recently — repeated failures on
+the same axis indicate the self-review pass missed it last time.
