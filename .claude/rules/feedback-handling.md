@@ -40,3 +40,18 @@ require verification:
    incorporating Plan / Explore agent reports into a PR description,
    commit message, or code, re-verify the technical claims against
    the source. Subagent output is unverified until you check it.
+
+## Suppress test execution during design discussions
+
+While the user is iterating on a design (back-and-forth on naming,
+structure, or approach — "discussion mode"), refrain from running
+tests, builds, or other expensive verifications until the
+discussion settles or the user explicitly requests them.
+
+Running tests during design iteration:
+
+- Slows the conversation while the design is still moving.
+- Suggests confidence in a draft that may still change.
+- Pulls focus from the design question to test output.
+
+Resume normal verification once the design is agreed.

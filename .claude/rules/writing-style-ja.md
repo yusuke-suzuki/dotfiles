@@ -72,17 +72,49 @@ Complete sentences properly. Don't end with colons:
 ## Vocabulary
 
 Prefer plain Japanese over katakana/English loanwords when natural
-Japanese exists. Established technical terms (`JSON`, `API`, `Pull
-Request`, etc.) are fine.
+Japanese exists. Acceptable katakana and English terms are
+restricted to established technical proper nouns (`JSON`, `API`,
+`Pull Request`, etc.). Abstract concepts written in katakana should
+be replaced with plain Japanese.
 
 - OK: `事前に存在していたカバレッジの欠落を解消する`
 - NG: `pre-existing なカバレッジの gap を close する`
+
+Common abstract loanwords and their Japanese equivalents:
+
+| 避ける表現 | 置き換え候補 |
+| --- | --- |
+| 「シンプル」 | 「単純」「簡潔」 |
+| 「クリア」 | 「明確」「明瞭」 |
+| 「アプローチ」 | 「方針」「方法」 |
+| 「コンテキスト」 | 「文脈」 |
+| 「ニュアンス」 | 「意味合い」「微妙な違い」 |
+| 「フィット」 | 「合う」「適する」 |
+| 「レイヤ」 | 「層」 |
+| 「メリット」「デメリット」 | 「利点」「欠点」 |
+| 「カテゴリー」 | 「分類」「区分」 |
+| 「マッピング」 | 「対応付け」 (コード内のマップデータ構造を指す場合は除く) |
+| 「ロジック」 | 「処理」「論理」 (技術文脈の固有語を除き、抽象的な利用を避ける) |
 
 Do not use Japanese words that are unnatural in technical context.
 Heuristic: "would a native speaker find this natural?"
 
 - OK: `新しい名前`
 - NG: `新名` (reads as a surname or archaic in technical writing)
+
+### Mixed-construct rules
+
+When embedding English nouns in Japanese sentences, supply the
+required particles and do not end the sentence on a noun
+(体言止め). Missing particles and 体言止め read as note fragments
+rather than complete sentences.
+
+- NG: 「`Foo` だけ root namespace 直接」
+- OK: 「`Foo` だけ root の namespace を直接参照する」
+- NG: 「内部用 wrapper 削除」
+- OK: 「内部用の wrapper を削除する」
+- NG: 「`Bar` wrapper だけ」
+- OK: 「`Bar` 用の wrapper だけ」
 
 ## Style Consistency
 

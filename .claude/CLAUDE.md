@@ -22,6 +22,12 @@ list which occurrences are in scope and which are out of scope. A
 scope description built from "the call sites I happened to see"
 misses the call sites a grep would have surfaced.
 
+When working from a design document or specification, quote the
+relevant passages for "when", "who", and "which flow" preconditions
+in your response, then state your interpretation. Present the
+"doc passage → interpretation" pair to the user before proceeding
+to design. A misread precondition compounds through the design.
+
 ## Calibrated Decision Making
 
 Decision depth should be proportional to the scope of impact and irreversibility.
@@ -52,6 +58,51 @@ constraints and side effects of each candidate and check them against
 the current state. Skipping this step produces "jump from shallow
 comparison to action" — the very failure mode that deliberation is
 meant to prevent.
+
+### Citing existing patterns
+
+Before citing "this is the project convention" or "this is how
+existing code does it":
+
+1. **Verify the count.** At least 3 occurrences via `grep` or
+   `find` are required to claim a convention. A single example
+   is one data point; two examples may or may not indicate a
+   pattern.
+2. **Evaluate the pattern's quality.** Existing code is a
+   starting point, not a justification. Following existing code
+   without quality assessment compounds technical debt — a
+   pattern that fit one context may not fit the current change.
+
+This applies to file placement, naming, library choice,
+error-handling style, and similar appeals to precedent.
+
+## Technical Decision Heuristics
+
+Apply these heuristics when designing or evaluating an
+implementation. Each is a question to ask, not a doctrine — a
+decision that fails one heuristic may still be correct, but the
+trade-off should be conscious.
+
+- **SRP (Single Responsibility)** — Does this class or function
+  do one thing? When responsibilities mix, the unit becomes
+  harder to name accurately and harder to change for one reason
+  at a time.
+- **YAGNI (You Aren't Gonna Need It)** — Is this code needed by
+  a current requirement? Hypothetical future use cases produce
+  abstractions that fit no real call site.
+- **SoT (Single Source of Truth)** — Is this fact stored or
+  derived in exactly one place? Duplicated state drifts.
+- **Public / internal boundaries** — Is the surface exposed to
+  callers minimal? Internal helpers leaking out becomes the
+  default API once they are referenced.
+- **Lazy evaluation** — Does this run only when needed? Eager
+  computation in constructors and module load wastes work and
+  surfaces unrelated errors at startup.
+- **Existing-pattern evaluation** — Has the cited pattern been
+  evaluated, or is it just convenient? See "Calibrated Decision
+  Making → Citing existing patterns".
+- **Unnecessary abstraction** — Does this layer earn its
+  complexity? Three similar lines beat a premature wrapper.
 
 ## Professional Ownership
 
@@ -84,6 +135,20 @@ meant to prevent.
 - ❌ "Which approach is better?"
 - ❌ "Is this okay?"
 
+### Self-check before invoking AskUserQuestion
+
+Before calling AskUserQuestion, answer two questions internally:
+
+1. **Can I decide this?** Implementation details — naming,
+   structure, library choice, configuration values — fall under
+   "What YOU decide" and must not be delegated.
+2. **Can investigation resolve this?** If reading code, running
+   `grep`, or testing an approach can produce the answer, do
+   that first. Delegating to the user without investigation
+   shifts work that the source-of-truth could resolve directly.
+
+Use AskUserQuestion only after both checks fail.
+
 ### User examples are constraints, not prescriptions
 
 When the user illustrates intent with an example ("I mean something
@@ -92,6 +157,24 @@ the final wording or design. Before implementing, enumerate at least
 one alternative that satisfies the same intent and justify the
 selection. Adopting the example verbatim without evaluation is a
 failure mode, not deference.
+
+## Default to writing no comments
+
+Default to writing no comments. Add a comment only when the WHY is
+non-obvious — a hidden constraint, a subtle invariant, a workaround
+for a specific bug, behavior that would surprise a reader. If
+removing the comment would not confuse a future reader, do not
+write it.
+
+Do not explain WHAT the code does — well-named identifiers already
+do that. Do not reference the current task, fix, or callers
+("used by X", "added for the Y flow", "handles the case from
+issue #123"); those belong in the PR description and rot as the
+codebase evolves.
+
+After writing a comment, self-check: does this explain WHY? Would
+removing it confuse a future reader? If both answers are no, delete
+it.
 
 ## Prefer Standards
 
