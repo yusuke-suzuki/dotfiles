@@ -51,6 +51,15 @@ require verification:
    incorporating Plan / Explore agent reports into a PR description,
    commit message, or code, re-verify the technical claims against
    the source. Subagent output is unverified until you check it.
+5. **Claiming a term or pattern is common practice** — when
+   asked whether a vocabulary item, syntactic pattern, or
+   design convention is widely used, cite actual occurrences:
+   project grep results, public documentation, named library or
+   spec references. If none can be cited, say so plainly. Do
+   not invent plausible-sounding example usages — fabricated
+   examples mislead the user into trusting an unverified
+   convention, and the fabrication often reads as analytical
+   because the example "sounds right".
 
 ## Suppress test execution during design discussions
 
