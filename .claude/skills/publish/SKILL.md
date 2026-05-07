@@ -63,6 +63,13 @@ gh pr list --head <current-branch> --limit 1
   that did not reach the local conversation. Skipping this step
   produces edits that overwrite or contradict the live description.
 - Compare with the actual changes (`git diff <default>...HEAD`)
+- When domain terminology has shifted on the branch (renames in
+  spec text, prose, comments, identifiers), check that the
+  PR-description vocabulary matches the current terms — not the
+  prior terms. "API contract unchanged" is not sufficient
+  evidence that the PR body is current; prose vocabulary drifts
+  independently of code contracts and must be verified against the
+  current spec wording.
 - Update description if it doesn't accurately reflect the changes:
 
   **With `gh`**:
