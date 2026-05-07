@@ -41,6 +41,10 @@ reword and re-execute. Before the next attempt, output:
 3. **Alternatives considered** — when the revision is a matter of
    judgment rather than a clear fix, name at least one other option
    and why it was not chosen.
+4. **Premise that broke** — name the prior premise (assumption,
+   inferred constraint, design choice) the new feedback
+   invalidates. Without naming it, position shifts read as
+   arbitrary even when the new direction is correct.
 
 Applies equally to tool rejection reasons, conversational pushback,
 and follow-up questions that imply the prior choice was unconsidered.
@@ -78,6 +82,23 @@ proposer and small wording shifts produce large readability
 differences. Adopting a single in-mind candidate without comparison
 is the failure mode this rule prevents.
 
+## Reply length to PR / review comments
+
+Default to "conclusion + one-line rationale" for replies to PR
+review comments. The diff already carries most of the information;
+prose should add the reasoning the diff cannot show.
+
+Do not restate in prose:
+
+- What changed (the diff shows it)
+- Where the change is (the file and line are linked from the
+  comment)
+- That a suggestion was applied (the resolved state shows it)
+
+Add prose only when the rationale, trade-off, or remaining caveat
+is non-obvious from the diff alone. Length scales with the depth
+of the rationale, not with the size of the change.
+
 ## Self-review before submitting
 
 Before sending each draft (PR description, commit message, headings,
@@ -92,6 +113,11 @@ review replies), do one read-through over your own output checking:
 3. **Redundancy and noise** — sections that duplicate the change
    list or restate self-evident information. See `writing-style.md`
    "Redundancy".
+4. **Vocabulary discipline** — scan for metaphors, katakana
+   loanwords, and abstract jargon; replace with plain alternatives
+   where one conveys the same meaning. See `writing-style.md`
+   "Pre-publication vocabulary check" and `writing-style-ja.md`
+   "Question literal katakana".
 
 Apply this pass regardless of draft length. Raise priority on the
 axis where the user pushed back most recently — repeated failures on
