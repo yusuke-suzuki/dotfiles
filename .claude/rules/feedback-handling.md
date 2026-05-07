@@ -42,7 +42,11 @@ require verification:
    source is accessible.
 3. **Stating a technical fact** (numeric boundary, semantics,
    naming, history) — verify against source code or `git log`
-   rather than relying on recollection.
+   rather than relying on recollection. Before writing the claim,
+   record the specific file path and line range (or commit id)
+   the claim rests on as an internal note. A claim without a
+   concrete source pointer is unverified, regardless of how
+   confident the recollection feels.
 4. **Carrying subagent output into a deliverable** — when
    incorporating Plan / Explore agent reports into a PR description,
    commit message, or code, re-verify the technical claims against
