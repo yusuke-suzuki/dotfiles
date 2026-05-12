@@ -56,12 +56,18 @@ Format and display unresolved threads showing: author, file path, line number, d
 
 For each unresolved comment:
 
-1. Read the relevant source code to understand the full context
-2. Assess the feedback: Is it technically correct? Does it improve the code?
-3. Evaluate trade-offs: complexity, scope, practical impact
-4. Do not accept suggestions uncritically — weigh them against the
+1. Verify the premise: can the flagged scenario actually occur?
+   Check the spec, naming constraints, type system, or other
+   invariants. If the scenario is impossible, draft a "No change"
+   reply citing the constraint and skip the remaining steps for
+   this comment — a theoretically valid concern about an
+   impossible scenario does not warrant a fix.
+2. Read the relevant source code to understand the full context
+3. Assess the feedback: Is it technically correct? Does it improve the code?
+4. Evaluate trade-offs: complexity, scope, practical impact
+5. Do not accept suggestions uncritically — weigh them against the
    code's design intent and existing patterns
-5. Draft a recommended action: fix (with specific changes) or
+6. Draft a recommended action: fix (with specific changes) or
    explain why no change is needed (with rationale)
 
 ## 3. Present Plan for Review
