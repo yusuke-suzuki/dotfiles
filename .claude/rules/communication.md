@@ -122,3 +122,17 @@ review replies), do one read-through over your own output checking:
 Apply this pass regardless of draft length. Raise priority on the
 axis where the user pushed back most recently — repeated failures on
 the same axis indicate the self-review pass missed it last time.
+
+### Iteration discipline
+
+After each rejection, run the full four-step pass on the next
+draft. Targeted edits often re-introduce issues on axes that were
+correct in the rejected version — rewording for vocabulary can
+break sentence structure, narrowing scope can lose technical
+accuracy.
+
+Repeated cross-axis failures in one thread (rejection #1 on
+technical accuracy, rejection #2 on vocabulary, rejection #3 on
+scope ambiguity) indicate the per-iteration pass is being skipped,
+not that the rules need to expand. Short reply iterations are not
+exempt from the full pass.

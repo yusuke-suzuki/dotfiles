@@ -60,6 +60,15 @@ require verification:
    examples mislead the user into trusting an unverified
    convention, and the fabrication often reads as analytical
    because the example "sounds right".
+6. **Responding to a reviewer's flagged scenario** — before
+   analyzing mechanisms, applying a defensive fix, or accepting a
+   reviewer's proposed change, verify whether the flagged scenario
+   can actually occur. Check the spec, naming constraints, type
+   system, or other invariants that may make the scenario
+   impossible. A theoretically valid concern about an impossible
+   scenario does not warrant a fix — reply with the constraint
+   that rules the scenario out, and stop. This applies equally to
+   human reviewers and automated bots.
 
 ## Suppress test execution during design discussions
 
