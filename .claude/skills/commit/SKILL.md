@@ -69,6 +69,14 @@ Understand the changes before staging:
   - Body explains the rationale, not the mechanics
   If any check fails, fix the message and re-verify. Do not proceed
   with `git commit` until all checks pass.
+- When the body contains more than a single sentence, invoke the
+  `copyeditor` agent on the body before running `git commit`. Use
+  the `Agent` tool with `subagent_type: copyeditor`, pass the
+  drafted message body and the destination "commit message body",
+  and include the branch name, the staged file paths, and any
+  PR / issue numbers the body references so the agent can verify
+  facts. Apply the agent's findings; if a finding is rejected,
+  state the reason inline.
 - When writing the message body, explain WHY the change is needed.
   Do not list every file or sub-change — the diff shows that.
   Focus on the core motivation; omit supporting changes unless

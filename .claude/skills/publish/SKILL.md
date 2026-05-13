@@ -85,6 +85,10 @@ The description is for reviewers of the final code, not a work log
 of development iterations. Do not append changelogs (e.g., "Fixed X
 in this update", "Previously Y was broken").
 
+Before sending the updated body to `gh pr edit` (or the GitHub MCP
+`update_pull_request` tool), invoke the `copyeditor` agent on the
+draft. See "Copyedit before submitting" below.
+
 **If no PR exists:**
 
 1. Choose title:
@@ -128,6 +132,10 @@ in this update", "Previously Y was broken").
 
 **IMPORTANT**: Always read the selected template file before creating the PR description.
 
+Before sending the body to `gh pr create` (or the GitHub MCP
+`create_pull_request` tool), invoke the `copyeditor` agent on the
+draft. See "Copyedit before submitting" below.
+
 When passing the body to `gh pr create` or `gh pr edit`, use a HEREDOC
 inline within the command. Do not stage the body to a local file
 (e.g. `/tmp/pr-body.md`) and pass it via `--body-file <path>`.
@@ -147,7 +155,29 @@ body in the call so they see it before approving. A separate Write
 step bypasses this — once the file exists, the follow-up `gh` call
 sends content the user has not yet reviewed.
 
-## 4. Final Output
+## 4. Copyedit before submitting
+
+Before any `gh pr create` or `gh pr edit` call, invoke the
+`copyeditor` agent on the drafted PR body.
+
+Use the `Agent` tool with `subagent_type: copyeditor`. Pass:
+
+1. The draft body verbatim.
+2. The destination: "PR description" plus the target PR number
+   when editing.
+3. Context for fact verification: current branch, base branch,
+   referenced PR / issue numbers, file paths mentioned in the
+   draft.
+
+Apply the agent's findings before submitting. If a finding is
+rejected, state the reason inline — silent rejection defeats
+the gate.
+
+For findings marked "could not verify", either supply the
+missing source to the agent and re-run, or rephrase the claim
+to remove the unverifiable assertion.
+
+## 5. Final Output
 
 - Display the PR URL
 - Show the current commit history relative to the default branch

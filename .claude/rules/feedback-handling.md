@@ -40,27 +40,11 @@ require verification:
 2. **Answering questions about a rule, config, or spec** — read the
    relevant file first. Do not paraphrase from memory when the
    source is accessible.
-3. **Stating a technical fact** (numeric boundary, semantics,
-   naming, history) — verify against source code or `git log`
-   rather than relying on recollection. Before writing the claim,
-   record the specific file path and line range (or commit id)
-   the claim rests on as an internal note. A claim without a
-   concrete source pointer is unverified, regardless of how
-   confident the recollection feels.
-4. **Carrying subagent output into a deliverable** — when
+3. **Carrying subagent output into a deliverable** — when
    incorporating Plan / Explore agent reports into a PR description,
    commit message, or code, re-verify the technical claims against
    the source. Subagent output is unverified until you check it.
-5. **Claiming a term or pattern is common practice** — when
-   asked whether a vocabulary item, syntactic pattern, or
-   design convention is widely used, cite actual occurrences:
-   project grep results, public documentation, named library or
-   spec references. If none can be cited, say so plainly. Do
-   not invent plausible-sounding example usages — fabricated
-   examples mislead the user into trusting an unverified
-   convention, and the fabrication often reads as analytical
-   because the example "sounds right".
-6. **Responding to a reviewer's flagged scenario** — before
+4. **Responding to a reviewer's flagged scenario** — before
    analyzing mechanisms, applying a defensive fix, or accepting a
    reviewer's proposed change, verify whether the flagged scenario
    can actually occur. Check the spec, naming constraints, type
