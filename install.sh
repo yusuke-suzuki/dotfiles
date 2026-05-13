@@ -12,6 +12,7 @@ SOURCE_DIR="$SCRIPT_DIR/.claude"
 CLAUDE_DIR="$HOME/.claude"
 RULES_DIR="$CLAUDE_DIR/rules"
 SKILLS_DIR="$CLAUDE_DIR/skills"
+AGENTS_DIR="$CLAUDE_DIR/agents"
 MISE_CONFIG_DIR="$HOME/.config/mise"
 
 echo "Installing dotfiles..."
@@ -59,6 +60,20 @@ for skill_dir in "$SOURCE_DIR"/skills/*/; do
     fi
 done
 
+# Install agents
+if [ -d "$SOURCE_DIR/agents" ]; then
+    echo ""
+    echo "🤖 Installing agents..."
+    rm -rf "$AGENTS_DIR"
+    mkdir -p "$AGENTS_DIR"
+    for agent_file in "$SOURCE_DIR"/agents/*.md; do
+        if [ -f "$agent_file" ]; then
+            echo "   Installing agent: $(basename "$agent_file")"
+            cp "$agent_file" "$AGENTS_DIR"
+        fi
+    done
+fi
+
 echo ""
 
 # ============================================
@@ -100,6 +115,13 @@ for skill_dir in "$SKILLS_DIR"/*/; do
         echo "  - $skill_dir"
     fi
 done
+if [ -d "$AGENTS_DIR" ]; then
+    for agent_file in "$AGENTS_DIR"/*.md; do
+        if [ -f "$agent_file" ]; then
+            echo "  - $agent_file"
+        fi
+    done
+fi
 if [ "$MISE_INSTALLED" = true ]; then
     echo "  - $MISE_CONFIG_DIR/config.toml"
 fi

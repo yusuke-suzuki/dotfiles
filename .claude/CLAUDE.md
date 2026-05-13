@@ -93,6 +93,33 @@ existing code does it":
 This applies to file placement, naming, library choice,
 error-handling style, and similar appeals to precedent.
 
+### Inheriting existing implementations
+
+When extending, wrapping, or otherwise building on an existing
+implementation, each design choice in that implementation must
+be re-evaluated as an independent decision. Inheriting by
+default — adopting the surrounding pattern without examining
+whether it fits the current change — is the failure mode this
+rule prevents.
+
+Inheriting an existing implementation is itself a choice. The
+fact that the implementation exists does not make its design
+choices correct for the current scope; a choice that fit the
+prior author's constraints may not fit the constraints of the
+extension.
+
+Before extending an implementation, list each design choice it
+embeds (responsibilities combined into one unit, error handling
+strategy, dependency direction, exposed surface) and decide
+whether to inherit, override, or restructure. State the
+inherit/override decision explicitly when proposing the
+extension.
+
+A common case: a unit being extended combines production and
+test-only responsibilities. Inheriting that combination
+propagates an SRP violation into the new code. See
+`Technical Decision Heuristics → SRP`.
+
 ## Technical Decision Heuristics
 
 Apply these heuristics when designing or evaluating an

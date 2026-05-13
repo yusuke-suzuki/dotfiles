@@ -23,86 +23,18 @@ Do not speculate about context specific to the user's project or situation:
 
 General knowledge and publicly verifiable facts may be stated without qualification.
 
-### Verify precise technical claims against the source
+## Vocabulary
 
-When describing numeric boundaries, comparison semantics (strict vs.
-non-strict inequality, inclusive vs. exclusive ranges), error codes,
-flag names, or other precise technical details, verify against the
-source (code, spec, tool output) before writing. Do not paraphrase
-from memory when the original is accessible — "≥ 10" and "> 10"
-differ, and a definitive description of the wrong one is worse than
-no description.
+Prefer plain words. Replace abstract jargon, domain-foreign
+metaphors, evaluative adjectives without concrete indicators,
+and ungrounded abstract nouns with the plainest alternative
+that carries the same meaning.
 
-## Vocabulary Grounding
-
-Before using a less-common word — technical jargon, abstract noun, or
-domain-specific metaphor — check two things:
-
-1. **Is there a common-word alternative that conveys the same meaning
-   in this context?** If yes, use the common word.
-2. **Is the word grounded in plain terms a reader can point to?** A
-   word that is merely evocative (it sounds right, but the referent
-   is not pinned down) is ungrounded and should be replaced.
-
-Signs of ungrounded word choice:
-
-- Abstract nouns referring to concepts not defined in the surrounding
-  text ("the dynamics here suggest...")
-- Technical jargon applied outside its formal domain (e.g. using a
-  mathematical term to describe a null return)
-- Dismissive or approving labels presented as facts without evidence
-  ("that candidate is brittle", "this approach is clean")
-
-### Modifier-of relationships
-
-For "X of Y" / "X's Y" / possessive forms, verify which side is the
-container and which is the contained before writing. The same words
-in opposite order describe opposite structures, and the wrong order
-inverts the technical claim.
-
-Before using a possessive form, answer:
-
-- Does X contain Y, or does Y represent X?
-- Which side is the public surface, and which is the implementation
-  detail?
-
-- OK: `the public API exposed by FooClient` (FooClient owns the API)
-- NG: `FooClient is the wrapper class of the public API` (inverts
-  the relationship — the API does not own a wrapper; the wrapper
-  exposes the API)
-
-### Borrowed expressions need re-verification
-
-Phrasings copied from other reviewers, bots, prior documents, or
-the surrounding conversation are not pre-verified. The originating
-context may differ from yours, and grammatical inversions can be
-preserved without notice.
-
-Before reusing a borrowed phrase, run the same Vocabulary Grounding
-checks as for original wording: Is each word grounded? Does the
-modifier-of relationship match the structure being described? Does
-the phrase carry an evaluative claim that needs evidence?
-
-### Pre-publication vocabulary check
-
-Before sending text containing any of the following, run a
-last-pass check:
-
-1. **Evaluative adjectives** (`thin`, `trivial`, `obvious`,
-   `clean`, `brittle`, `important`) — replace with a concrete
-   indicator (line count, dependency count, named property), or
-   delete if the indicator does not exist.
-2. **Technical contrasts** (`direct vs. indirect`, `sync vs.
-   async`, `eager vs. lazy`) — verify the contrast against the
-   actual structure. If both sides do not exist in the code, the
-   contrast is false framing.
-3. **Less-common words** — confirm a plain alternative does not
-   convey the same meaning. If a plain word works, prefer it.
-
-- OK: `FooClient delegates to BarClient via a single method call`
-- NG: `FooClient is a thin wrapper that directly invokes BarClient`
-  ("thin" lacks a concrete indicator; "directly" implies a
-  contrast with an indirect path that does not exist)
+The `copyeditor` agent runs the detailed checks (modifier-of
+relationships, evaluative adjective replacement, false-contrast
+framing, fact verification against source). The intent at the
+authoring stage is to catch the obvious cases before invoking
+it.
 
 ## Style Consistency
 

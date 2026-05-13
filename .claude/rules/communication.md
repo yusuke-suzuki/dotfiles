@@ -53,7 +53,23 @@ and follow-up questions that imply the prior choice was unconsidered.
 
 When the user asks "why did you choose X?", "is this accurate?", or
 "why is this 'direct'?", the request is for the rationale behind X,
-not a directive to remove or replace X. The proper sequence:
+not a directive to remove or replace X.
+
+Before responding, classify the input as a question or an
+instruction. Treat the input as a question when any of the
+following signals are present:
+
+- Interrogative words (`why`, `what`, `how`, `when`, `which`,
+  「なぜ」「どうして」「何」「どう」「どこ」「いつ」)
+- Trailing `?` or `？`
+- Japanese question-like sentence endings:
+  「〜じゃない？」「〜だっけ？」「〜って何？」
+  「〜で合ってる？」「〜ですか？」「〜なの？」
+- Confirmatory phrasings asking whether something holds:
+  "is X right?", "does X hold?", 「X で正しい？」「X は妥当？」
+
+If any of these are present, the input is a question and the
+proper sequence is:
 
 1. **State the rationale** — articulate why X was chosen,
    referencing the specific structure, constraint, or evidence that
@@ -115,9 +131,9 @@ review replies), do one read-through over your own output checking:
    "Redundancy".
 4. **Vocabulary discipline** — scan for metaphors, katakana
    loanwords, and abstract jargon; replace with plain alternatives
-   where one conveys the same meaning. See `writing-style.md`
-   "Pre-publication vocabulary check" and `writing-style-ja.md`
-   "Question literal katakana".
+   where one conveys the same meaning. The `copyeditor` agent runs
+   detailed checks after this pass; catch the obvious cases here
+   so the agent has less to find.
 
 Apply this pass regardless of draft length. Raise priority on the
 axis where the user pushed back most recently — repeated failures on
