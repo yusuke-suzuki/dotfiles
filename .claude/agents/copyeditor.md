@@ -139,12 +139,47 @@ Apply to both English and Japanese prose.
   | 「ロジック」 | 「処理」「論理」 (技術文脈の固有語を除き、抽象的な利用を避ける) |
   | 「クランプ」 | 「制限する」「収める」 (CSS `clamp()` 等の固有語を除き、抽象的な利用を避ける) |
 
-- **Unnatural coined Japanese words.** Compounds that read as
-  archaic or as proper nouns in technical context.
-  - OK: `新しい名前`
-  - NG: `新名` (reads as a surname)
-  - OK: `生の値`
-  - NG: `素値` (coined contraction)
+- **Unnatural coined Japanese words.** Words and compounds
+  that are not established Japanese — coined contractions,
+  archaic surname-like readings, or compounds constructed by
+  mechanically translating each English morpheme. The shape
+  may look like Japanese but the result has no dictionary
+  entry and no established usage in technical writing.
+
+  Failure modes and examples:
+
+  - **Coined contractions / proper-noun-like compounds.**
+    Short compounds that elide natural morphemes or read as
+    surnames.
+    - OK: `新しい名前`
+    - NG: `新名` (reads as a surname)
+    - OK: `生の値`
+    - NG: `素値` (coined contraction)
+  - **Mechanical morpheme concatenation.** Compounds where
+    each morpheme is a direct gloss of one word in an obvious
+    English source phrase, joined into a noun stack without
+    particles or verbs. The translation runs at the word
+    level rather than at the concept level.
+    - OK: 「逐次計算」「即時評価」「動的解決」 (established
+      compounds with dictionary entries)
+    - OK: 「実行時に値を計算する」 (decomposed sentence)
+    - NG: 「その場計算」 (literal of "on-the-spot
+      computation"; depending on intended meaning, use
+      「逐次計算」「即時計算」「動的計算」「実行時計算」 etc.)
+    - NG: 「即興分岐生成」 (literal of "ad-hoc branch
+      generation"; decompose to 「動的に分岐を生成する」)
+    - NG: 「現位置更新」 (literal of "in-place update"; use
+      「直接更新する」 or the established loanword
+      「インプレース更新」 if it fits the surrounding style)
+    - NG: 「文脈窓」 (literal of "context window"; the
+      established term is 「コンテキストウィンドウ」)
+
+  Verification: when uncertain whether a compound is
+  established, search Japanese technical sources via
+  `WebFetch` before passing. A compound with no hits in
+  normal usage is a coinage, not a term. Replace with the
+  established compound for the intended concept, or decompose
+  into a sentence with explicit verbs and particles.
 - **Particle errors.** Subject / object marker mismatches
   (が / を / は / に / で). Read each sentence in isolation
   and confirm each particle fits the verb's argument structure.

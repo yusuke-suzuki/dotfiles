@@ -56,9 +56,10 @@ katakana should be replaced with plain Japanese.
 
 The `copyeditor` agent runs the detailed checks (literal
 katakana replacement, English-to-Japanese syntax inversion,
-mixed-construct particle correctness, half-width spacing and
-parentheses, sentence completion). The intent at the authoring
-stage is to catch the obvious cases before invoking it.
+mixed-construct particle correctness, coined Japanese
+compounds, half-width spacing and parentheses, sentence
+completion). The intent at the authoring stage is to catch
+the obvious cases before invoking it.
 
 ## Style Consistency
 
