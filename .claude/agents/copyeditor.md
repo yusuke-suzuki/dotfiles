@@ -230,7 +230,8 @@ Apply to both English and Japanese prose.
   that...`) — these invent motivation the source does not
   state. Replace with the verified motivation or delete.
 - **Evaluative adjectives** (`thin`, `trivial`, `obvious`,
-  `clean`, `brittle`, `important`, `seamless`, `robust`) —
+  `clean`, `brittle`, `important`, `seamless`, `robust`,
+  `revolutionary`, `game-changing`, `cutting-edge`) —
   replace with a concrete indicator (line count, dependency
   count, named property) or delete.
 - **Technical contrasts** (`direct vs. indirect`, `sync vs.

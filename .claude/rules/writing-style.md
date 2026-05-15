@@ -4,9 +4,9 @@ Apply to all text output (documents, PR descriptions, commit messages, comments)
 
 ## Tone
 
-Write naturally. Avoid intensifiers without quantitative evidence,
-meta-phrasings, vague enumeration markers, and repetition. The
-`copyeditor` agent runs the detailed checks.
+Write naturally. Avoid exaggerated expressions, meta-phrasings,
+and vague enumeration markers. The `copyeditor` agent runs the
+detailed checks.
 
 ## Accuracy
 
