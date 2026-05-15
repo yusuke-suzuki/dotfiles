@@ -38,22 +38,12 @@ only if the template explicitly allows it.
 
 ## Writing Style
 
-Write naturally. Avoid:
+Tone and vocabulary rules in `writing-style.md` and
+`writing-style-ja.md` apply. Documents additionally:
 
-- Bullet lists where prose flows better
-- Exaggerated or emphatic expressions:
-  - "revolutionary", "game-changing", "seamless", "robust", "cutting-edge"
-  - "very", "extremely", "significantly" (without quantitative evidence)
-  - "This is important because...", "It's worth noting...", "Crucially..."
-- Repeating information
-- Vague expressions (overuse of "etc.", "such as", "and so on")
-
-### Style Consistency
-
-When editing existing documents, match the established writing style:
-
-- **Japanese documents**: Match the formality level (敬語 vs 常体)
-  - If the document uses です/ます (polite form), continue with polite form
-  - If the document uses である/だ (plain form), continue with plain form
-- **English documents**: Match the tone and voice (formal, casual, technical)
-- Never mix styles within the same document, except in clearly demarcated sections (e.g., quoted text, appendices, or code examples)
+- Avoid bullet lists where prose flows better.
+- Match the established formality (敬語 vs 常体 for Japanese; formal,
+  casual, or technical voice for English) when editing existing
+  documents. Never mix styles within the same document, except in
+  clearly demarcated sections (quoted text, appendices, code
+  examples).

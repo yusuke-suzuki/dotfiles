@@ -4,37 +4,27 @@ Apply to all text output (documents, PR descriptions, commit messages, comments)
 
 ## Tone
 
-Write naturally. Avoid:
-
-- Exaggerated or emphatic expressions:
-  - "revolutionary", "game-changing", "seamless", "robust", "cutting-edge"
-  - "very", "extremely", "significantly" (without quantitative evidence)
-  - "This is important because...", "It's worth noting...", "Crucially..."
-- Repeating information
-- Vague expressions (overuse of "etc.", "such as", "and so on")
+Write naturally. Avoid intensifiers without quantitative evidence,
+meta-phrasings, vague enumeration markers, and repetition. The
+`copyeditor` agent runs the detailed checks.
 
 ## Accuracy
 
-Do not speculate about context specific to the user's project or situation:
+Do not speculate about context specific to the user's project or
+situation:
 
 - Do not invent background, motivation, or history the user has not stated
-- Do not guess intent with hedged language (e.g., "This was likely introduced to...", "Presumably...")
+- Do not guess intent with hedged language (the `copyeditor` agent
+  runs the detailed checks)
 - When project-specific context is missing and needed, always ask the user before writing
 
-General knowledge and publicly verifiable facts may be stated without qualification.
+General knowledge and publicly verifiable facts may be stated without
+qualification.
 
 ## Vocabulary
 
-Prefer plain words. Replace abstract jargon, domain-foreign
-metaphors, evaluative adjectives without concrete indicators,
-and ungrounded abstract nouns with the plainest alternative
-that carries the same meaning.
-
-The `copyeditor` agent runs the detailed checks (modifier-of
-relationships, evaluative adjective replacement, false-contrast
-framing, fact verification against source). The intent at the
-authoring stage is to catch the obvious cases before invoking
-it.
+Prefer plain words over jargon, metaphors, and abstract nouns. The
+`copyeditor` agent runs the detailed checks.
 
 ## Style Consistency
 

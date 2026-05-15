@@ -198,9 +198,37 @@ Apply to both English and Japanese prose.
   「徹底的に〜する」「全く〜ない」「絶対に〜」「断ち切る」
   「一掃する」「根絶する」. Replace with specific quantitative
   wording.
+- **Relative references.** Replace relative pointers with
+  concrete references (class name, method name, PR number,
+  commit id). Time-relative references rot as the document
+  ages.
+  - **Time-relative pointers** — 「以前」「現在」「今後」
+    「経過措置として残置」.
+    - OK: 「この処理は issue #123 の解消後に削除する」
+    - NG: 「この処理は今後削除する」
+  - **Old/new contrasts** — 「旧」「新」「新旧」.
+    - OK: 「PR #100 で導入された `FooClient` の delegate を
+      `BarClient` に切り替える」
+    - NG: 「旧 client から新 client に切り替える」
+  - **Directional references** — 「〜側」「〜方向の挙動」.
+    - OK: 「`Foo#bar` の戻り値が変わる」
+    - NG: 「`Foo` 側の挙動が変わる」
 
 **English and language-agnostic checks:**
 
+- **Intensifiers without quantitative evidence** (`very`,
+  `extremely`, `significantly`, `highly`, `incredibly`) —
+  replace with a measured indicator or delete.
+- **Meta-phrasings** (`This is important because...`, `It's
+  worth noting...`, `Crucially...`, `Notably...`) — state
+  the claim directly without the framing phrase.
+- **Vague enumeration markers** (`etc.`, `such as`, `and so
+  on`, `among others`) — list the relevant items concretely
+  or drop the marker.
+- **Hedged speculation about prior context** (`This was
+  likely introduced to...`, `Presumably...`, `It seems
+  that...`) — these invent motivation the source does not
+  state. Replace with the verified motivation or delete.
 - **Evaluative adjectives** (`thin`, `trivial`, `obvious`,
   `clean`, `brittle`, `important`, `seamless`, `robust`) —
   replace with a concrete indicator (line count, dependency
