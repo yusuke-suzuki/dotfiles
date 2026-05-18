@@ -45,9 +45,24 @@ Use the `Agent` tool with `subagent_type: copyeditor`. Pass:
 
 1. The draft text verbatim.
 2. The destination (plan file, PR review reply, etc.).
-3. Any context the agent needs to verify facts: branch name,
-   referenced PR / issue numbers, file paths mentioned in the
-   draft.
+3. Fact-verification pointers the agent may need to look up
+   sources: branch name, referenced PR / issue numbers, file
+   paths mentioned in the draft. Limit this to look-up pointers
+   — nothing more.
+
+Do not pass inspection scope to the agent. The copyeditor's
+inspection categories are defined in its own spec, and narrowing
+the scope risks the agent reviewing only the listed perspectives
+and missing the rest. Do not include:
+
+- Lists of check categories ("check katakana loanwords and
+  particles") — the agent already runs all inspection
+  categories.
+- Severity ranking or priority hints ("focus on fact
+  verification") — the agent's output is already ordered by
+  severity.
+- Excerpts from `writing-style.md` / `writing-style-ja.md` —
+  the agent already incorporates those rules into its checks.
 
 Apply the agent's findings before sending the draft. If a
 finding is rejected, state the reason in your response — silent
