@@ -5,8 +5,7 @@ description: Squash all branch commits into a single commit
 
 # Squash
 
-You are assisting with squashing all commits on the current branch
-into a single commit. Follow these steps:
+You are assisting with squashing all commits on the current branch into a single commit. Follow these steps:
 
 ## 1. Initial Assessment
 
@@ -17,19 +16,14 @@ into a single commit. Follow these steps:
   git symbolic-ref refs/remotes/origin/HEAD --short
   ```
 - Display existing commits with `git log <default>..HEAD --oneline`
-- If the branch has only 1 commit, inform the user that squash is
-  not needed and exit.
+- If the branch has only 1 commit, inform the user that squash is not needed and exit.
 
 ## 2. Semantic Consistency Check
 
 Analyze the commits to determine whether they belong together:
 
 - If all commits serve the same purpose: proceed to Step 3.
-- If semantically distinct commits are mixed (e.g., an unrelated
-  feature addition and a bug fix on the same branch): warn the user
-  via AskUserQuestion that the commits appear to address different
-  concerns. Suggest splitting into separate branches if appropriate.
-  Only proceed if the user confirms.
+- If semantically distinct commits are mixed (e.g., an unrelated feature addition and a bug fix on the same branch): warn the user via AskUserQuestion that the commits appear to address different concerns. Suggest splitting into separate branches if appropriate. Only proceed if the user confirms.
 
 ## 3. Squash Commits
 
@@ -44,16 +38,13 @@ git commit
 
 ## 4. Commit Message
 
-Write the message against the full diff (`<default>..HEAD`),
-not as a summary of the previous individual commits.
+Write the message against the full diff (`<default>..HEAD`), not as a summary of the previous individual commits.
 
 - Apply all rules from `commit-message.md`
 - Subject ≤ 50 characters (verify with `echo -n "<subject>" | wc -m`)
 - Body explains WHY, not WHAT — do not enumerate sub-changes
 - Each sentence on its own line, wrap at 72 characters
-- Do not reference the pre-squash commit history (e.g., avoid
-  "combine feature X and fix Y"). Describe the final state as a
-  single coherent intent.
+- Do not reference the pre-squash commit history (e.g., avoid "combine feature X and fix Y"). Describe the final state as a single coherent intent.
 
 ## 5. Post-Squash Actions
 

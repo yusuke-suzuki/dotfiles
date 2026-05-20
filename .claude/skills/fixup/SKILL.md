@@ -25,16 +25,11 @@ Determine the fixup target automatically based on the branch state:
 - The target is HEAD. Proceed directly to Step 3.
 
 **If the branch has multiple commits:**
-- Compare the changed files and diff content against each commit
-  in the branch to identify the target.
+- Compare the changed files and diff content against each commit in the branch to identify the target.
 - **Target identified:** Proceed to Step 3 with that commit.
-- **Target not identifiable:** Analyze the changes and commit
-  history, then invoke the appropriate skill automatically:
-  - If the changes are a new independent feature or fix:
-    invoke `/commit` via the Skill tool.
-  - If the commit history needs consolidation:
-    invoke `/squash` via the Skill tool, then re-invoke
-    `/fixup` after squash completes.
+- **Target not identifiable:** Analyze the changes and commit history, then invoke the appropriate skill automatically:
+  - If the changes are a new independent feature or fix: invoke `/commit` via the Skill tool.
+  - If the commit history needs consolidation: invoke `/squash` via the Skill tool, then re-invoke `/fixup` after squash completes.
 
 ## 3. Create Fixup Commit
 
@@ -65,11 +60,9 @@ After rebase completes, verify the commit message in two phases.
    git show HEAD
    ```
 
-2. Read `.claude/rules/commit-message.md` — especially the
-   "After /fixup or --autosquash rebase" section.
+2. Read `.claude/rules/commit-message.md` — especially the "After /fixup or --autosquash rebase" section.
 
-3. Evaluate whether the existing message accurately describes the
-   purpose of the final diff as a single coherent unit.
+3. Evaluate whether the existing message accurately describes the purpose of the final diff as a single coherent unit.
 
 4. If the message is accurate, skip amending and proceed to Step 6.
 
@@ -77,8 +70,7 @@ After rebase completes, verify the commit message in two phases.
 
 If the message does not accurately describe the commit's purpose:
 
-1. Draft a corrected message based on the final diff —
-   not on what changed between iterations
+1. Draft a corrected message based on the final diff — not on what changed between iterations
 2. Explain what is inaccurate and why
 3. Update with `git commit --amend`
 
@@ -98,7 +90,6 @@ After message review:
 
 - Use `--fixup=<hash>` to create fixup commits targeting specific commits
 - `--autosquash` automatically merges fixup commits during rebase
-- After rebase, evaluate the existing message before amending — it is
-  often already accurate and needs no change
+- After rebase, evaluate the existing message before amending — it is often already accurate and needs no change
 - Read `commit-message.md` before drafting any corrected message
 - Commit messages follow the `commit-message` rule

@@ -26,8 +26,7 @@ Apply when creating git commits.
 | `build`    | Build System             |
 | `ci`       | Continuous Integration   |
 
-Based on release-please `DEFAULT_HEADINGS`. Types not listed here
-will not appear in the generated changelog.
+Based on release-please `DEFAULT_HEADINGS`. Types not listed here will not appear in the generated changelog.
 
 ## Breaking Changes
 
@@ -56,35 +55,24 @@ BREAKING CHANGE: `extends` key behavior changed
 - Start each sentence on a new line
 - Wrap at 72 characters
 - Add blank lines between paragraphs for readability
-- Explain the rationale for the change (the "why"),
-  not just what was modified or how it was implemented
-- When a commit includes supporting changes (refactoring, cleanup)
-  alongside the main feature, focus the body on the core motivation.
-  Do not enumerate supporting changes individually unless their
-  rationale is non-obvious and independent.
+- Explain the rationale for the change (the "why"), not just what was modified or how it was implemented
+- When a commit includes supporting changes (refactoring, cleanup) alongside the main feature, focus the body on the core motivation. Do not enumerate supporting changes individually unless their rationale is non-obvious and independent.
 
 ## Closing Issues
 
-When the commit resolves a GitHub issue, include a closing keyword in
-the body to auto-close the issue on merge:
+When the commit resolves a GitHub issue, include a closing keyword in the body to auto-close the issue on merge:
 
 ```
 fixes #123
 ```
 
-Place the keyword on its own line at the end of the body, before the
-`Co-Authored-By` trailer. Common keywords: `fixes`, `closes`, `resolves`.
+Place the keyword on its own line at the end of the body, before the `Co-Authored-By` trailer. Common keywords: `fixes`, `closes`, `resolves`.
 
 ## After /fixup or --autosquash rebase
 
-After squashing fixup commits, the amended commit represents the final
-state as a single coherent unit. There is no prior "buggy version" in
-the history.
+After squashing fixup commits, the amended commit represents the final state as a single coherent unit. There is no prior "buggy version" in the history.
 
-Write the message against the actual diff — not against your memory of
-what changed between iterations. Avoid phrases like "also fixes bugs
-found during review", as buggy versions are not part of the commit
-history.
+Write the message against the actual diff — not against your memory of what changed between iterations. Avoid phrases like "also fixes bugs found during review", as buggy versions are not part of the commit history.
 
 ### Examples
 

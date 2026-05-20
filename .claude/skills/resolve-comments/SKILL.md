@@ -56,38 +56,25 @@ Format and display unresolved threads showing: author, file path, line number, d
 
 For each unresolved comment:
 
-1. Verify the premise: can the flagged scenario actually occur?
-   Check the spec, naming constraints, type system, or other
-   invariants. If the scenario is impossible, draft a "No change"
-   reply citing the constraint and skip the remaining steps for
-   this comment — a theoretically valid concern about an
-   impossible scenario does not warrant a fix.
+1. Verify the premise: can the flagged scenario actually occur? Check the spec, naming constraints, type system, or other invariants. If the scenario is impossible, draft a "No change" reply citing the constraint and skip the remaining steps for this comment — a theoretically valid concern about an impossible scenario does not warrant a fix.
 2. Read the relevant source code to understand the full context
 3. Assess the feedback: Is it technically correct? Does it improve the code?
 4. Evaluate trade-offs: complexity, scope, practical impact
-5. Do not accept suggestions uncritically — weigh them against the
-   code's design intent and existing patterns
-6. Draft a recommended action: fix (with specific changes) or
-   explain why no change is needed (with rationale)
+5. Do not accept suggestions uncritically — weigh them against the code's design intent and existing patterns
+6. Draft a recommended action: fix (with specific changes) or explain why no change is needed (with rationale)
 
 ## 3. Present Plan for Review
 
-Use the `EnterPlanMode` tool to enter plan mode, then write a
-response plan to the plan file containing all comments and their
-proposed resolutions. The plan is a user-facing deliverable, so
-write it in the user's response language (`language` in
-`~/.claude/settings.json`).
+Use the `EnterPlanMode` tool to enter plan mode, then write a response plan to the plan file containing all comments and their proposed resolutions. The plan is a user-facing deliverable, so write it in the user's response language (`language` in `~/.claude/settings.json`).
 
 - For each comment, include:
   - The comment text (quoted)
   - File path and line number
   - Your analysis of the feedback's validity
-  - Recommended action: **Fix** (describe what to change) or
-    **No change** (explain why)
+  - Recommended action: **Fix** (describe what to change) or **No change** (explain why)
 - Use the `ExitPlanMode` tool to present the plan for user review
 
-The user reviews the plan and either approves or provides corrections.
-Do not proceed to Step 4 until the plan is approved.
+The user reviews the plan and either approves or provides corrections. Do not proceed to Step 4 until the plan is approved.
 
 ## 4. Execute Approved Plan
 
