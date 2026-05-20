@@ -24,11 +24,7 @@ Use the TodoWrite tool for task management instead.
 
 ## Templates
 
-When a template is provided (PR templates, issue templates, etc.),
-preserve its structure and formatting. Do not remove sections,
-reorder items, or alter formatting (strikethrough, checkboxes, HTML
-comments, etc.). Fill in the provided sections; add new sections
-only if the template explicitly allows it.
+When a template is provided (PR templates, issue templates, etc.), preserve its structure and formatting. Do not remove sections, reorder items, or alter formatting (strikethrough, checkboxes, HTML comments, etc.). Fill in the provided sections; add new sections only if the template explicitly allows it.
 
 ## Progressive Disclosure
 
@@ -38,12 +34,7 @@ only if the template explicitly allows it.
 
 ## Writing Style
 
-Tone and vocabulary rules in `writing-style.md` and
-`writing-style-ja.md` apply. Documents additionally:
+Tone and vocabulary rules in `writing-style.md` and `writing-style-ja.md` apply. Documents additionally:
 
 - Avoid bullet lists where prose flows better.
-- Match the established formality (敬語 vs 常体 for Japanese; formal,
-  casual, or technical voice for English) when editing existing
-  documents. Never mix styles within the same document, except in
-  clearly demarcated sections (quoted text, appendices, code
-  examples).
+- Match the established formality (敬語 vs 常体 for Japanese; formal, casual, or technical voice for English) when editing existing documents. Never mix styles within the same document, except in clearly demarcated sections (quoted text, appendices, code examples).
