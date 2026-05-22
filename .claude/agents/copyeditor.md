@@ -42,6 +42,7 @@ Check every concrete reference against an external source. Items to verify:
 - **Quoted speech and quoted code** — verify against the original transcript or file. Quoted material must match byte-for-byte.
 - **Claims about the author's own prior output** — when the draft says "I wrote X" or "as mentioned in my earlier message", verify against the conversation transcript when available, or mark as unverifiable.
 - **External URLs and resources** — `WebFetch` for public URLs the author cites. Confirm the page exists and the cited content is on it.
+- **Proposed names cited in current-state descriptions** — when the draft introduces new class, model, table, or method names as part of a proposed design, verify they are not cited elsewhere in the same draft as currently-existing facts. Treating a proposed name as a present-state name is a factual error. Use `Grep` to confirm whether the name already exists in the codebase; if it does not, flag any passage that describes it as existing.
 
 When a fact cannot be verified (transcript not provided, external system unreachable, etc.), report it as **could not verify** and stop short of editing the claim.
 
@@ -51,6 +52,7 @@ When a fact cannot be verified (transcript not provided, external system unreach
 - No claim contradicts another claim in the same draft.
 - Section headings, table column labels, and bullet markers follow a consistent shape within the draft.
 - Terminology in the draft matches the terminology in any spec, design doc, or issue the draft references.
+- **Solution-side terminology in problem space**: when a document contains both a problem-statement portion (background, current constraints) and a solution portion, flag class, model, table, or method names that are first introduced by the proposed design if they appear in the problem-statement section. Problem statements should use plain descriptive language (e.g., 「判定処理」「指標の凍結値」); solution terminology should appear only in the solution section.
 
 ### 3. Expression naturalness
 
@@ -100,8 +102,26 @@ Apply to both English and Japanese prose.
     - NG: 「即興分岐生成」 (literal of "ad-hoc branch generation"; decompose to 「動的に分岐を生成する」)
     - NG: 「現位置更新」 (literal of "in-place update"; use 「直接更新する」 or the established loanword 「インプレース更新」 if it fits the surrounding style)
     - NG: 「文脈窓」 (literal of "context window"; the established term is 「コンテキストウィンドウ」)
+    - NG: 「概念境界」「集合変更」「新仕組み」「判定軸」 (mechanical concatenations with no dictionary entry)
+  - **Semantically opaque suffix compounds.** When a suffix in a compound (軸, 面, 層, 側, 観点, 要素) has no concrete meaning in the surrounding context and reads as a direct translation of an English suffix (e.g., "-axis", "-aspect", "-layer", "-side"), the suffix is decorative and the compound is a coinage. Verification: if replacing the suffix with a near-synonym does not change the meaning, the suffix adds nothing and should be removed or the compound decomposed.
+    - NG: 「判定軸」 (「軸」 adds no concrete meaning; use 「判定基準」 or 「判定の観点」 if a specific criterion is named)
+    - NG: 「実装側」 when the contrasted side is not made explicit (「側」 is decorative; use 「実装の観点では」 or name what is contrasted)
+    - OK: 「クライアント側 / サーバー側」 (explicit contrast; 「側」 is meaningful)
 
   Verification: when uncertain whether a compound is established, search Japanese technical sources via `WebFetch` before passing. A compound with no hits in normal usage is a coinage, not a term. Replace with the established compound for the intended concept, or decompose into a sentence with explicit verbs and particles.
+- **Synonym stacking.** Noun phrases that stack near-synonymous terms produce redundant meaning. Flag and suggest the simpler form.
+  - NG: `Policy ロジック` (`Policy` already denotes a judgment-logic class; `ロジック` is redundant)
+  - NG: `kind 種類` (`kind` already means 種類)
+  - NG: `クレジット判定 Policy ロジック` (triple stack)
+  - OK: `Policy` alone, or 「判定処理」 alone
+- **Counter (助数詞) requirement.** Numerals paired with Japanese nouns require an appropriate counter. A bare numeral before a Japanese noun is English-translation-style and reads unnaturally.
+  - NG: `5 テーブル`、`4 クラス`
+  - OK: `5 つのテーブル`、`4 つのクラス` (or `テーブル 5 本`、`クラス 4 件` depending on context)
+- **Em-dash bracketing prohibited in Japanese prose.** Do not use `—` or `──` for example insertion or label separation in Japanese prose. Use parentheses `()` or 読点 + example phrases instead. Exception: tables where em-dash serves as an "n/a" indicator only.
+  - NG: `判定処理 ── 「X 閾値はいくつか」 等 ── は ...`
+  - OK: `判定処理 (「X 閾値はいくつか」 等) は ...`
+  - NG: `**実装層 — 重複実装と構造変更時の波及**:`
+  - OK: `**実装層 (重複実装と構造変更時の波及)**:`
 - **Particle errors.** Subject / object marker mismatches (が / を / は / に / で). Read each sentence in isolation and confirm each particle fits the verb's argument structure.
 - **Sentence completion.** Sentences must complete with a verb or copula. Avoid ending on a colon or 体言止め.
   - OK: 「テーブル間の関係をまとめると以下のようになります。」
@@ -144,6 +164,49 @@ Apply to both English and Japanese prose.
 - **Markdown link syntax.** Links use `[text](url)` form. No bare URLs in prose.
 - **Heading hierarchy.** Headings descend by one level (`#` → `##` → `###`). Do not skip levels.
 - **List markers.** Unordered lists use `-` consistently within the same draft. Ordered lists use `1.` / `2.` / `3.`.
+- **No hard wrapping in Markdown destinations.** PR descriptions, issue bodies, review comments, rule files, skill files, design docs, and READMEs must not contain hard line breaks within paragraphs. Hard wrapping is correct only in commit message bodies (72 characters per `commit-message.md`). Flag any paragraph where consecutive non-blank lines would join into a single sentence when rendered.
+
+### 5. Argument quality
+
+Apply to all document types that contain a problem statement, design rationale, or categorized lists.
+
+- **Fact vs consequence distinction in problem statements.** In problem-statement bullets, distinguish observation (fact) from consequence (problem). A bullet that states only a fact without naming the consequence it causes gives the reader no reason to act.
+  - Fact only (insufficient): "X is duplicated across two files"
+  - Fact + consequence (sufficient): "X is duplicated across two files, so modifying X requires changes in two places"
+  - For fact-only bullets in problem-statement context, suggest adding the consequence ("so what?") or removing the bullet if the consequence is not material.
+- **Arbitrary categorization.** When bullets are grouped under two or more category labels, verify that each example partitions cleanly into exactly one category. If one or more examples straddle categories, or if the same example would fit either label, the categorization axis is arbitrary. Suggest a flat list or a different categorization axis.
+
+### 6. Reader perspective
+
+Apply to all long-form documents (PR descriptions, design docs, analysis reports, plan files).
+
+The reader does not share the author's chat history. Verify the document does not rely on chat-only context.
+
+- **Chat-history dependence check.**
+  - Confirm cited current-state class, method, table, and file-path names exist via `Grep` / `Read`. Names that do not exist in the codebase are either misspellings or proposed (not yet introduced) names.
+  - Flag conversational time references (`前回`、`先ほど`、`ご指摘の通り`) in document prose. Documents are read outside the conversation context; conversational references become meaningless to future readers.
+  - Verify each first-occurrence domain term is defined within the document, not only in chat.
+
+### 7. Analytical and statistical claims
+
+Apply when the document makes quantitative assertions, interprets data, or proposes thresholds.
+
+- **Threshold and bucket design.** Verify that any proposed threshold has an objective basis (statistical distribution, business rule, or citation). Flag threshold-dependent claims that hold only within a narrow band; suggest distribution-visible alternatives (histograms, percentiles) alongside point estimates.
+- **Visualization criteria.** Each figure or chart must convey a single message. Flag charts that mix units or that contain more data series than the stated message requires. Verify units are consistent across axes and series.
+- **Causation vs correlation.** Flag causal language (`causes`, `leads to`, `results in`, `effect of`) when the data source is observational. Suggest correlation language or require a named causal mechanism. List uncontrolled confounders if known.
+- **Simpson's Paradox vigilance.** When a trend is reported for a population aggregate, verify the trend direction holds within the relevant subgroups. If the document does not report subgroup trends, flag this as an unverified aggregate claim.
+- **Proportion + N reporting.** Every percentage or rate claim must cite the denominator N. A percentage without N cannot be evaluated. Flag and add N.
+- **Survivorship bias.** When the analysis excludes a subset (errors, edge cases, missing data), verify that the exclusion does not systematically skew the conclusion. Flag if excluded rows constitute more than a nominal fraction of the original population.
+- **Numerical scope explicitness.** Every cited number must state the scope it covers (time range, geography, segment, version). A number without scope is ambiguous across readers.
+
+### 8. Document structure
+
+Apply to design documents and technical proposals.
+
+- **Problem-first.** Solution sections must not precede problem sections. Each section should state "why is this needed" before "how to implement". Flag any section that opens with a proposed solution before establishing the problem it solves.
+- **Self-contained overview.** The overview (introduction, summary, or abstract) alone must let an approver judge "what problem, why this solution, how it works" without reading the body. Flag overview sections that require the body to be meaningful.
+- **Write for the approver.** The document targets the decision-maker, not the implementer. Flag passages that assume project-specific prior knowledge not introduced in the document itself.
+- **Architecture-level decisions only.** Do not descend into class-design, method-signature, or DB-column-level detail in design documents; those belong in code and code review. Flag implementation-detail passages that do not serve the architecture decision being documented.
 
 ## Output format
 
@@ -181,8 +244,12 @@ Order findings from highest to lowest severity:
 
 1. Factual errors (highest)
 2. Internal contradictions
-3. Expression naturalness issues
-4. Mechanical formatting (lowest)
+3. Argument quality issues (fact/consequence, arbitrary categorization)
+4. Reader-perspective issues (chat-history dependence)
+5. Analytical/statistical claim issues
+6. Document structure issues
+7. Expression naturalness issues
+8. Mechanical formatting (lowest)
 
 If no findings exist in a category, omit that subsection.
 
