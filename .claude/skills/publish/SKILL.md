@@ -124,7 +124,9 @@ The user reviews tool calls before they run. Inline HEREDOC puts the body in the
 
 ## 4. Copyedit before submitting
 
-Before any `gh pr create` or `gh pr edit` call, invoke the `copyeditor` agent on the drafted PR body.
+Before **every** `gh pr create` or `gh pr edit` call — including iterative edits during review cycles — invoke the `copyeditor` agent on the drafted PR body. Skipping even one cycle allows vocabulary errors introduced in that cycle to go undetected.
+
+**Per-cycle invocation rule**: each time the PR description changes for any reason (reviewer feedback, terminology shift, scope update), run the copyeditor before the next `gh pr edit` call. There is no threshold below which an edit is "too small to copyedit" — the risk of re-introducing a previously-caught term is highest in small, incremental edits.
 
 Use the `Agent` tool with `subagent_type: copyeditor`. Pass:
 
