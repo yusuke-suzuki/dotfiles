@@ -61,14 +61,14 @@ Apply to both English and Japanese prose.
 **Japanese-specific checks:**
 
 - **Direct English-to-Japanese transliterations.** Words that are merely English transliterated into katakana (「トリビアル」「ラッパー」「アグリゲーター」「クランプ」, etc.) read as direct transcriptions rather than established technical terms. Replace with plain Japanese when a plain equivalent exists.
-  - OK: 「単純な実装」「委譲を行うクラス」「集約処理」「値を範囲に収める」
-  - NG: 「トリビアルな実装」「ラッパークラス」「アグリゲーター処理」「値をクランプする」
+  - OK: `単純な実装`、`委譲を行うクラス`、`集約処理`、`値を範囲に収める`
+  - NG: `トリビアルな実装`、`ラッパークラス`、`アグリゲーター処理`、`値をクランプする`
 - **Coined English/Japanese mixed phrases.** When English nouns are embedded in Japanese sentences, particles must be supplied and 体言止め avoided.
-  - NG: 「`Foo` だけ root namespace 直接」
-  - OK: 「`Foo` だけ root の namespace を直接参照する」
+  - NG: `` `Foo` だけ root namespace 直接 ``
+  - OK: `` `Foo` だけ root の namespace を直接参照する ``
 - **Mechanical translation of "X of Y".** Translating "X of Y" into 「Y の X」 can invert the modifier-of relationship. Determine which side contains the other before settling on the Japanese order.
-  - OK: 「`FooClient` が公開する API」 (`FooClient` owns the API)
-  - NG: 「公開 API の `FooClient` ラッパークラス」 (inverts the relationship)
+  - OK: `` `FooClient` が公開する API `` (`FooClient` owns the API)
+  - NG: `` 公開 API の `FooClient` ラッパークラス `` (inverts the relationship)
 - **Common abstract loanwords with Japanese equivalents.** The following loanwords should be replaced unless the surrounding text establishes them as established technical proper nouns:
 
   | 避ける表現 | 置き換え候補 |
@@ -96,24 +96,24 @@ Apply to both English and Japanese prose.
     - OK: `生の値`
     - NG: `素値` (coined contraction)
   - **Mechanical morpheme concatenation.** Compounds where each morpheme is a direct gloss of one word in an obvious English source phrase, joined into a noun stack without particles or verbs. The translation runs at the word level rather than at the concept level.
-    - OK: 「逐次計算」「即時評価」「動的解決」 (established compounds with dictionary entries)
-    - OK: 「実行時に値を計算する」 (decomposed sentence)
-    - NG: 「その場計算」 (literal of "on-the-spot computation"; depending on intended meaning, use 「逐次計算」「即時計算」「動的計算」「実行時計算」 etc.)
-    - NG: 「即興分岐生成」 (literal of "ad-hoc branch generation"; decompose to 「動的に分岐を生成する」)
-    - NG: 「現位置更新」 (literal of "in-place update"; use 「直接更新する」 or the established loanword 「インプレース更新」 if it fits the surrounding style)
-    - NG: 「文脈窓」 (literal of "context window"; the established term is 「コンテキストウィンドウ」)
-    - NG: 「概念境界」「集合変更」「新仕組み」「判定軸」 (mechanical concatenations with no dictionary entry)
+    - OK: `逐次計算`、`即時評価`、`動的解決` (established compounds with dictionary entries)
+    - OK: `実行時に値を計算する` (decomposed sentence)
+    - NG: `その場計算` (literal of "on-the-spot computation"; depending on intended meaning, use `逐次計算`、`即時計算`、`動的計算`、`実行時計算` etc.)
+    - NG: `即興分岐生成` (literal of "ad-hoc branch generation"; decompose to `動的に分岐を生成する`)
+    - NG: `現位置更新` (literal of "in-place update"; use `直接更新する` or the established loanword `インプレース更新` if it fits the surrounding style)
+    - NG: `文脈窓` (literal of "context window"; the established term is `コンテキストウィンドウ`)
+    - NG: `概念境界`、`集合変更`、`新仕組み`、`判定軸` (mechanical concatenations with no dictionary entry)
   - **Semantically opaque suffix compounds.** When a suffix in a compound (軸, 面, 層, 側, 観点, 要素) has no concrete meaning in the surrounding context and reads as a direct translation of an English suffix (e.g., "-axis", "-aspect", "-layer", "-side"), the suffix is decorative and the compound is a coinage. Verification: if replacing the suffix with a near-synonym does not change the meaning, the suffix adds nothing and should be removed or the compound decomposed.
-    - NG: 「判定軸」 (「軸」 adds no concrete meaning; use 「判定基準」 or 「判定の観点」 if a specific criterion is named)
-    - NG: 「実装側」 when the contrasted side is not made explicit (「側」 is decorative; use 「実装の観点では」 or name what is contrasted)
-    - OK: 「クライアント側 / サーバー側」 (explicit contrast; 「側」 is meaningful)
+    - NG: `判定軸` (`軸` adds no concrete meaning; use `判定基準` or `判定の観点` if a specific criterion is named)
+    - NG: `実装側` when the contrasted side is not made explicit (`側` is decorative; use `実装の観点では` or name what is contrasted)
+    - OK: `クライアント側 / サーバー側` (explicit contrast; `側` is meaningful)
 
   Verification: when uncertain whether a compound is established, search Japanese technical sources via `WebFetch` before passing. A compound with no hits in normal usage is a coinage, not a term. Replace with the established compound for the intended concept, or decompose into a sentence with explicit verbs and particles.
 - **Synonym stacking.** Noun phrases that stack near-synonymous terms produce redundant meaning. Flag and suggest the simpler form.
   - NG: `Policy ロジック` (`Policy` already denotes a judgment-logic class; `ロジック` is redundant)
   - NG: `kind 種類` (`kind` already means 種類)
   - NG: `クレジット判定 Policy ロジック` (triple stack)
-  - OK: `Policy` alone, or 「判定処理」 alone
+  - OK: `Policy` alone, or `判定処理` alone
 - **Counter (助数詞) requirement.** Numerals paired with Japanese nouns require an appropriate counter. A bare numeral before a Japanese noun is English-translation-style and reads unnaturally.
   - NG: `5 テーブル`、`4 クラス`
   - OK: `5 つのテーブル`、`4 つのクラス` (or `テーブル 5 本`、`クラス 4 件` depending on context)
@@ -124,24 +124,24 @@ Apply to both English and Japanese prose.
   - OK: `**実装層 (重複実装と構造変更時の波及)**:`
 - **Particle errors.** Subject / object marker mismatches (が / を / は / に / で). Read each sentence in isolation and confirm each particle fits the verb's argument structure.
 - **Sentence completion.** Sentences must complete with a verb or copula. Avoid ending on a colon or 体言止め.
-  - OK: 「テーブル間の関係をまとめると以下のようになります。」
-  - NG: 「テーブル間の関係をまとめると:」
+  - OK: `テーブル間の関係をまとめると以下のようになります。`
+  - NG: `テーブル間の関係をまとめると:`
 - **Half-width spacing and parentheses.** Around alphanumeric / English / markdown links, half-width spaces are required. Parentheses must be half-width `()`.
-  - OK: 「追加された権限 (18 件)」
-  - NG: 「追加された権限（18件）」
-  - OK: 「詳しくは [ガイド](./guide.md) を参照」
-  - NG: 「詳しくは[ガイド](./guide.md)を参照」
+  - OK: `追加された権限 (18 件)`
+  - NG: `追加された権限（18件）`
+  - OK: `詳しくは [ガイド](./guide.md) を参照`
+  - NG: `詳しくは[ガイド](./guide.md)を参照`
 - **Exaggerated expressions.** Avoid 「完全に〜する」 「徹底的に〜する」「全く〜ない」「絶対に〜」「断ち切る」 「一掃する」「根絶する」. Replace with specific quantitative wording.
 - **Relative references.** Replace relative pointers with concrete references (class name, method name, PR number, commit id). Time-relative references rot as the document ages.
   - **Time-relative pointers** — 「以前」「現在」「今後」 「経過措置として残置」.
-    - OK: 「この処理は issue #123 の解消後に削除する」
-    - NG: 「この処理は今後削除する」
+    - OK: `この処理は issue #123 の解消後に削除する`
+    - NG: `この処理は今後削除する`
   - **Old/new contrasts** — 「旧」「新」「新旧」.
-    - OK: 「PR #100 で導入された `FooClient` の delegate を `BarClient` に切り替える」
-    - NG: 「旧 client から新 client に切り替える」
+    - OK: `` PR #100 で導入された `FooClient` の delegate を `BarClient` に切り替える ``
+    - NG: `旧 client から新 client に切り替える`
   - **Directional references** — 「〜側」「〜方向の挙動」.
-    - OK: 「`Foo#bar` の戻り値が変わる」
-    - NG: 「`Foo` 側の挙動が変わる」
+    - OK: `` `Foo#bar` の戻り値が変わる ``
+    - NG: `` `Foo` 側の挙動が変わる ``
 
 **English and language-agnostic checks:**
 
