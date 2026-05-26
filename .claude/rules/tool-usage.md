@@ -2,6 +2,12 @@
 
 Use dedicated tools instead of Bash equivalents.
 
+## GitHub CLI vs MCP
+
+When both GitHub CLI (`gh`) and MCP GitHub tools are available, always prefer GitHub CLI. Use MCP GitHub tools only when the equivalent `gh` command does not exist or cannot achieve the desired result.
+
+## Dedicated Tools vs Bash
+
 | Operation  | Dedicated tool | Bash (denied in settings.json) |
 | ---------- | -------------- | ------------------------------ |
 | Read files | Read           | `cat`                          |
