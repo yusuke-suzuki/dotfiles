@@ -71,8 +71,6 @@ gh pr list --head <current-branch> --limit 1
 
 When updating, rewrite the description against the final diff. The description is for reviewers of the final code, not a work log of development iterations. Do not append changelogs (e.g., "Fixed X in this update", "Previously Y was broken").
 
-Before sending the updated body to `gh pr edit` (or the GitHub MCP `update_pull_request` tool), invoke the `copyeditor` agent on the draft. See "Copyedit before submitting" below.
-
 **If no PR exists:**
 
 1. Choose title:
@@ -106,8 +104,6 @@ Before sending the updated body to `gh pr edit` (or the GitHub MCP `update_pull_
 
 **IMPORTANT**: Always read the selected template file before creating the PR description.
 
-Before sending the body to `gh pr create` (or the GitHub MCP `create_pull_request` tool), invoke the `copyeditor` agent on the draft. See "Copyedit before submitting" below.
-
 When passing the body to `gh pr create` or `gh pr edit`, use a HEREDOC inline within the command. Do not stage the body to a local file (e.g. `/tmp/pr-body.md`) and pass it via `--body-file <path>`.
 
 OK:
@@ -122,23 +118,7 @@ NG: `Write /tmp/pr-body.md`, then `gh pr create --title "..." --body-file /tmp/p
 
 The user reviews tool calls before they run. Inline HEREDOC puts the body in the call so they see it before approving. A separate Write step bypasses this — once the file exists, the follow-up `gh` call sends content the user has not yet reviewed.
 
-## 4. Copyedit before submitting
-
-Before **every** `gh pr create` or `gh pr edit` call — including iterative edits during review cycles — invoke the `copyeditor` agent on the drafted PR body. Skipping even one cycle allows vocabulary errors introduced in that cycle to go undetected.
-
-**Per-cycle invocation rule**: each time the PR description changes for any reason (reviewer feedback, terminology shift, scope update), run the copyeditor before the next `gh pr edit` call. There is no threshold below which an edit is "too small to copyedit" — the risk of re-introducing a previously-caught term is highest in small, incremental edits.
-
-Use the `Agent` tool with `subagent_type: copyeditor`. Pass:
-
-1. The draft body verbatim.
-2. The destination: "PR description" plus the target PR number when editing.
-3. Context for fact verification: current branch, base branch, referenced PR / issue numbers, file paths mentioned in the draft.
-
-Apply the agent's findings before submitting. If a finding is rejected, state the reason inline — silent rejection defeats the gate.
-
-For findings marked "could not verify", either supply the missing source to the agent and re-run, or rephrase the claim to remove the unverifiable assertion.
-
-## 5. Final Output
+## 4. Final Output
 
 - Display the PR URL
 - Show the current commit history relative to the default branch

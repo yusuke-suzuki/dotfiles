@@ -4,21 +4,21 @@ Apply to all text output (documents, PR descriptions, commit messages, comments)
 
 ## Tone
 
-Write naturally. Avoid exaggerated expressions, meta-phrasings, and vague enumeration markers. The `copyeditor` agent runs the detailed checks.
+Write naturally. Avoid exaggerated expressions, meta-phrasings, and vague enumeration markers.
 
 ## Accuracy
 
 Do not speculate about context specific to the user's project or situation:
 
 - Do not invent background, motivation, or history the user has not stated
-- Do not guess intent with hedged language (the `copyeditor` agent runs the detailed checks)
+- Do not guess intent with hedged language
 - When project-specific context is missing and needed, always ask the user before writing
 
 General knowledge and publicly verifiable facts may be stated without qualification.
 
 ## Vocabulary
 
-Prefer plain words over jargon, metaphors, and abstract nouns. The `copyeditor` agent runs the detailed checks.
+Prefer plain words over jargon, metaphors, and abstract nouns.
 
 ## Style Consistency
 
