@@ -62,19 +62,7 @@ The user reviews the plan and may:
 
 Do not proceed beyond Step 4 until the user approves the plan.
 
-## 5. Copyedit before submitting
-
-Before creating the issue, invoke the `copyeditor` agent on the approved issue body.
-
-Use the `Agent` tool with `subagent_type: copyeditor`. Pass:
-
-1. The approved issue body verbatim (violations table, root causes, countermeasures).
-2. The destination: "GitHub issue body on yusuke-suzuki/dotfiles".
-3. Context for fact verification: the rule and skill file paths the body cites, and any referenced PR / issue numbers.
-
-Apply the agent's findings before issue creation. If a finding is rejected, state the reason inline.
-
-## 6. Create GitHub Issue
+## 5. Create GitHub Issue
 
 Create an issue on the dotfiles repository.
 
