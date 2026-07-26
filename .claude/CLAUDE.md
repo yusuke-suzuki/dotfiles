@@ -120,6 +120,33 @@ test-only responsibilities. Inheriting that combination
 propagates an SRP violation into the new code. See
 `Technical Decision Heuristics → SRP`.
 
+### Structural decisions
+
+For data-model and boundary decisions — where data lives, which
+table or module owns a concern, the shape of a schema — design
+greenfield-first: derive the structure the domain calls for
+while ignoring the current implementation, then subtract the
+migration cost from the current state. The current state is an
+input to cost, never a justification for structure. "The
+codebase already does X" describes the starting point; it
+cannot justify extending X.
+
+This procedure applies whether or not any precedent is
+consciously cited. The two rules above fire only when a
+citation is recognized; silent pattern-matching — absorbing
+the surrounding structure without noticing that a citation is
+being made — is the failure mode this one exists to catch.
+
+### Constraint verification
+
+Before a constraint may decide an outcome, trace it to the
+place where it binds. A vocabulary, name, or interface "used
+elsewhere" constrains the current decision only if the
+artifact being designed is actually consumed there — verify
+the reference path, not the resemblance. A constraint that
+cannot be traced to a binding site is not a constraint, and
+must not act as a tiebreaker, much less a driver.
+
 ## Technical Decision Heuristics
 
 Apply these heuristics when designing or evaluating an

@@ -54,7 +54,9 @@ Mechanically removing or replacing the questioned word without first stating the
 
 ## Renames and structural changes
 
-For renames, file moves, and type reorganizations, present at least three candidates with a short trade-off table on the first proposal, not only after rejection. Naming and structural decisions are reject-prone because the user often has a stronger opinion than the proposer and small wording shifts produce large readability differences. Adopting a single in-mind candidate without comparison is the failure mode this rule prevents.
+For renames, file moves, type reorganizations, and data-model decisions — storage placement, table ownership, schema shape — present at least three candidates with a short trade-off table on the first proposal, not only after rejection. Naming and structural decisions are reject-prone because the user often has a stronger opinion than the proposer and small wording shifts produce large readability differences. Adopting a single in-mind candidate without comparison is the failure mode this rule prevents.
+
+A structural choice that emerges mid-implementation is still a first proposal: the comparison accompanies the proposal, not the defense after a challenge.
 
 ## Reply length to PR / review comments
 

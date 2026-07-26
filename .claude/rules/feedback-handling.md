@@ -20,6 +20,7 @@ When responding from your own knowledge or reconstruction, verify against the ac
 2. **Answering questions about a rule, config, or spec** — read the relevant file first. Do not paraphrase from memory when the source is accessible.
 3. **Carrying subagent output into a deliverable** — when incorporating Plan / Explore agent reports into a PR description, commit message, or code, re-verify the technical claims against the source. Subagent output is unverified until you check it.
 4. **Responding to a reviewer's flagged scenario** — before analyzing mechanisms, applying a defensive fix, or accepting a reviewer's proposed change, verify whether the flagged scenario can actually occur. Check the spec, naming constraints, type system, or other invariants that may make the scenario impossible. A theoretically valid concern about an impossible scenario does not warrant a fix — reply with the constraint that rules the scenario out, and stop. This applies equally to human reviewers and automated bots.
+5. **Reporting the status of asynchronous work** — before stating that a background agent, job, or task is running, pending, or finished, check the task registry; do not answer from the memory of having launched it. After a user interrupt, re-verify which in-flight operations actually survived before referencing any of them — an interrupt can cancel a launch that appeared to succeed.
 
 ## Suppress test execution during design discussions
 
