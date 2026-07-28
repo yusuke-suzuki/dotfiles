@@ -39,7 +39,7 @@ cd ~/dotfiles
 - Git
 - GitHub CLI (`gh`)
 - mise
-- Node.js / npm (used by the `copyedit` skill to run textlint)
+- Node.js / npm (used by the `textlint` skill)
 
 ### Updating
 

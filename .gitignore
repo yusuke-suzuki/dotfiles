@@ -1,6 +1,6 @@
 # Claude Code local settings
 .claude/settings.local.json
 
-# copyedit skill textlint dependencies
-.claude/skills/copyedit/node_modules/
-.claude/skills/copyedit/package-lock.json
+# textlint skill dependencies
+.claude/skills/textlint/node_modules/
+.claude/skills/textlint/package-lock.json
