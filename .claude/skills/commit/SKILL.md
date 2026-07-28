@@ -5,61 +5,22 @@ description: Create a git commit with Conventional Commits format. Invoke as soo
 
 # Commit
 
-You are assisting with creating a git commit. Follow these steps:
+Message conventions live in `commit-message.md` in this skill's base directory — read it before drafting any message.
 
-## 1. Initial State Assessment
+## 1. Assess state
 
-- Run `git status` to see uncommitted changes
-- Run `git fetch origin` to get latest remote updates
-- Detect the default branch:
-  ```bash
-  git symbolic-ref refs/remotes/origin/HEAD --short
-  ```
-- Identify current branch (default branch or feature branch)
-- If on a feature branch, show commits with `git log <default>..HEAD --oneline`
+Run `git status` and `git fetch origin`, detect the default branch (`git symbolic-ref refs/remotes/origin/HEAD --short`), and review the changes (`git diff`, `git diff --staged`). On a feature branch, show `git log <default>..HEAD --oneline`.
 
-## 2. Branch Handling
+## 2. Branch
 
-**If on the default branch:**
-- Derive the most descriptive branch name from the current changes (e.g. `feat/add-login`, `docs/update-readme`)
-- Create the branch: `git switch -c <branch-name>`
-- Announce the chosen name and reasoning
-- NEVER switch to an existing branch. If the chosen name conflicts with an existing branch, append a short disambiguator or choose an alternative name.
+Never commit to the default branch.
 
-**If on a feature branch whose existing commits relate to the current changes:**
-- Display the current branch name and existing commits relative to the default branch
-- Proceed to create the commit on this branch
+- **On the default branch:** derive a descriptive branch name from the changes (e.g. `feat/add-login`), create it with `git switch -c`, and announce the choice. Never switch to an existing branch; on a name conflict, pick an alternative.
+- **On a feature branch with unrelated existing commits** (leftover from a different task): announce the mismatch, then branch off the latest remote default (`git switch -c <name> <default>`) so the work does not pass through the local default branch. Ask the user if relatedness is unclear.
 
-**If on a feature branch whose existing commits are unrelated to the current changes** (e.g. left over from a different task after switching focus):
-- Announce the mismatch between the branch's history and the current changes so the user can intervene if needed
-- Derive a new branch name from the current changes and create it off the latest remote default so uncommitted work does not pass through the local default branch: `git switch -c <branch-name> <default>`
-- Announce the chosen name and reasoning (as in the default-branch case)
-- If uncertain whether the existing commits are related, ask the user before branching rather than guessing
+## 3. Commit
 
-## 3. Diff Analysis
-
-Understand the changes before staging:
-
-- Review staged changes: `git diff --staged`
-- Review unstaged changes: `git diff`
-- Group changes by semantic intent (one logical change per commit)
-
-## 4. Commit Creation
-
-- Never stage files that contain secrets (.env, credentials, private keys)
-- **Verify the drafted commit message against all rules in `~/.claude/rules/commit-message.md` before running `git commit`.** Check at minimum:
-  - Subject line is ≤ 50 characters (run `echo -n "<subject>" | wc -m` to confirm)
-  - Subject and body are written in English
-  - Format follows Conventional Commits
-  - Body explains the rationale, not the mechanics
-  If any check fails, fix the message and re-verify. Do not proceed with `git commit` until all checks pass.
-- When writing the message body, explain WHY the change is needed. Do not list every file or sub-change — the diff shows that. Focus on the core motivation; omit supporting changes unless they have independent rationale a reviewer needs to understand.
-- If changes fall into multiple distinct groups, create one commit per group
-- For each group: `git add <files>`, craft a commit message, then `git commit`
-
-## Key Constraints
-
-- NEVER commit directly to the default branch (master/main)
-- NEVER use `git commit --fixup` or `git commit --amend` (use `/fixup` command instead)
-- NEVER reference `git log` messages as a style guide for commit messages, as past messages may not follow the correct format.
-- This command creates a NEW, INDEPENDENT commit only
+- Group changes by semantic intent — one logical change per commit; create one commit per group.
+- Never stage files containing secrets (.env, credentials, private keys).
+- Verify the drafted message against `commit-message.md` (subject ≤ 50 characters, English, Conventional Commits, body explains why) before running `git commit`.
+- Do not use past `git log` messages as a style guide, and never use `--fixup` or `--amend` here — `/fixup` owns those.

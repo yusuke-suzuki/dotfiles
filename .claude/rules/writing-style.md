@@ -1,51 +1,16 @@
 # Writing Style
 
-Apply to all text output (documents, PR descriptions, commit messages, comments).
+Apply to all text output: documents, PR descriptions, commit messages, comments.
 
-## Tone
+- Write plainly. Avoid exaggeration, meta-phrasings, metaphors, and abstract jargon. In Japanese, prefer plain Japanese over katakana loanwords when a natural equivalent exists (established proper nouns like `JSON`, `API`, `Pull Request` are fine).
+- Do not invent background, motivation, or intent the user has not stated. Ask when needed project-specific context is missing.
+- Replace relative references (「以前」「今後」, old/new contrasts) with concrete ones (class name, method name, PR number, commit id).
+- In Japanese prose, put half-width spaces around alphanumerics, code spans, and links, and use half-width parentheses `()`.
+- Match the established tone and formality of text being edited (です/ます vs である/だ — never mix within one context). Do not restyle database values or API responses.
+- Do not hard-wrap Markdown paragraphs. Hard wrapping applies only to fixed-width destinations: commit messages (72 columns) and code comments.
+- Documents are self-contained deliverables: no relative links to local files, no progress-tracking sections or meta-commentary, and first-use terms defined in the document rather than in chat history. Preserve the structure of provided templates.
+- End generated documents and PR descriptions with this signature (after any template's closing line):
 
-Write naturally. Avoid exaggerated expressions, meta-phrasings, and vague enumeration markers.
-
-## Accuracy
-
-Do not speculate about context specific to the user's project or situation:
-
-- Do not invent background, motivation, or history the user has not stated
-- Do not guess intent with hedged language
-- When project-specific context is missing and needed, always ask the user before writing
-
-General knowledge and publicly verifiable facts may be stated without qualification.
-
-## Vocabulary
-
-Prefer plain words over jargon, metaphors, and abstract nouns.
-
-## Style Consistency
-
-When editing existing text, match the established tone and voice (formal, casual, technical). For language-specific axes (e.g., Japanese formality), see the language-specific style files.
-
-## Redundancy
-
-Do not explain what is self-evident from context:
-
-- Project conventions obvious from the codebase (e.g., deploy mechanisms, framework behavior)
-- Information the reader already stated or demonstrated knowledge of
-- Implementation details that the code itself makes clear
-
-## Line wrapping
-
-Hard line wrapping in source applies only where the destination reads as fixed-width plain text:
-
-- **Commit messages** wrap at 72 characters per `commit-message.md`.
-- **Code comments and docstrings** follow the language's conventional width.
-- **Markdown files** (rule files, skill files, design docs, READMEs, PR descriptions, issue bodies, review comments) do not hard-wrap. Markdown joins consecutive non-blank lines into one paragraph, so a hard wrap produces no visible break — only an awkward source.
-
-## Signature
-
-When generating documents, PR descriptions, or other published content, always end with:
-
-```text
-🤖 Generated with [Claude Code](https://claude.ai/code)
-```
-
-PR descriptions always require the signature at the very end, including when a project PR template is used. Append the signature after the template's existing closing line.
+  ```text
+  🤖 Generated with [Claude Code](https://claude.ai/code)
+  ```
