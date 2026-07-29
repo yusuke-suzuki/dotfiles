@@ -1,8 +1,10 @@
 {
-  "name": "copyedit-skill",
+  "name": "textlint-skill",
   "private": true,
   "devDependencies": {
+    "@textlint-ja/textlint-rule-preset-ai-writing": "^1.5.0",
     "textlint": "^15.7.1",
+    "textlint-rule-no-mixed-zenkaku-and-hankaku-alphabet": "^1.0.1",
     "textlint-rule-preset-ja-spacing": "^3.0.2",
     "textlint-rule-preset-ja-technical-writing": "^12.0.2",
     "textlint-rule-prh": "^6.1.0"

@@ -14,6 +14,6 @@ Write the draft to a file, then run:
 
 The first run installs npm dependencies into the skill directory.
 
-Rules live in `.textlintrc.json` (preset-ja-technical-writing, preset-ja-spacing) and `prh.yml` (katakana loanwords with established plain-Japanese equivalents, full-width parentheses). Context-dependent loanwords (ロジック, マッピング, クランプ, ラッパー) are intentionally absent from the dictionary — replace them yourself when no established technical term is intended.
+Rules live in `.textlintrc.json` (preset-ja-technical-writing, preset-ai-writing, preset-ja-spacing, no-mixed-zenkaku-and-hankaku-alphabet) and `prh.yml` (katakana loanwords with established plain-Japanese equivalents, full-width parentheses). Context-dependent loanwords (ロジック, マッピング, クランプ, ラッパー) are intentionally absent from the dictionary — replace them yourself when no established technical term is intended.
 
 After `--fix`, review the remaining report: some rules (particle errors, sentence style) are detect-only and need manual edits.
