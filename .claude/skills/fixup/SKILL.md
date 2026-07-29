@@ -5,91 +5,23 @@ description: Create a fixup commit and autosquash rebase
 
 # Fixup
 
-You are assisting with fixing up an existing commit using interactive rebase. Follow these steps:
+## 1. Assess state
 
-## 1. Initial Assessment
+Run `git status` and `git fetch origin`, detect the default branch (`git symbolic-ref refs/remotes/origin/HEAD --short`), and list commits (`git log <default>..HEAD --oneline`). On the default branch, stop and inform the user — never rewrite history there.
 
-- Run `git status` to see if there are uncommitted changes
-- Run `git fetch origin` to get latest remote updates
-- Detect the default branch:
-  ```bash
-  git symbolic-ref refs/remotes/origin/HEAD --short
-  ```
-- Display existing commits with `git log <default>..HEAD --oneline`
+## 2. Identify target
 
-## 2. Identify Target Commit
+- One commit on the branch → the target is HEAD.
+- Multiple commits → match the current changes against each commit's diff. If no target is identifiable: for a new independent change, invoke `/commit`; for history needing consolidation, invoke `/squash`, then re-run `/fixup`.
 
-Determine the fixup target automatically based on the branch state:
+## 3. Fixup and rebase
 
-**If the branch has 1 commit:**
-- The target is HEAD. Proceed directly to Step 3.
+`git add <files>`, then `git commit --fixup=<target-hash>`, then `git rebase --autosquash <default>`.
 
-**If the branch has multiple commits:**
-- Compare the changed files and diff content against each commit in the branch to identify the target.
-- **Target identified:** Proceed to Step 3 with that commit.
-- **Target not identifiable:** Analyze the changes and commit history, then invoke the appropriate skill automatically:
-  - If the changes are a new independent feature or fix: invoke `/commit` via the Skill tool.
-  - If the commit history needs consolidation: invoke `/squash` via the Skill tool, then re-invoke `/fixup` after squash completes.
+## 4. Message review
 
-## 3. Create Fixup Commit
+Run `git show HEAD` and read `~/.claude/skills/commit/commit-message.md`, especially "After /fixup". Evaluate whether the existing message still describes the final diff as a single coherent unit — it often does. Amend (`git commit --amend`) only if it doesn't, drafting against the final diff, not the iteration history.
 
-1. Stage changes with `git add <files>`
-2. Create a fixup commit:
+## 5. Wrap up
 
-   ```bash
-   git commit --fixup=<target-hash>
-   ```
-
-## 4. Autosquash Rebase
-
-Run non-interactive rebase with autosquash:
-
-```bash
-git rebase --autosquash <default>
-```
-
-## 5. Commit Message Review
-
-After rebase completes, verify the commit message in two phases.
-
-### Phase 1: Evaluate
-
-1. Display the rebased commit:
-
-   ```bash
-   git show HEAD
-   ```
-
-2. Read `.claude/rules/commit-message.md` — especially the "After /fixup or --autosquash rebase" section.
-
-3. Evaluate whether the existing message accurately describes the purpose of the final diff as a single coherent unit.
-
-4. If the message is accurate, skip amending and proceed to Step 6.
-
-### Phase 2: Amend (only if needed)
-
-If the message does not accurately describe the commit's purpose:
-
-1. Draft a corrected message based on the final diff — not on what changed between iterations
-2. Explain what is inaccurate and why
-3. Update with `git commit --amend`
-
-## 6. Post-Rebase Actions
-
-After message review:
-
-1. Display the final commit history:
-
-   ```bash
-   git log <default>..HEAD --oneline
-   ```
-
-2. Inform the user to run `/publish` to push changes and update the PR
-
-## Key Principles
-
-- Use `--fixup=<hash>` to create fixup commits targeting specific commits
-- `--autosquash` automatically merges fixup commits during rebase
-- After rebase, evaluate the existing message before amending — it is often already accurate and needs no change
-- Read `commit-message.md` before drafting any corrected message
-- Commit messages follow the `commit-message` rule
+Show `git log <default>..HEAD --oneline` and suggest `/publish`.

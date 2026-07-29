@@ -1,0 +1,29 @@
+# Katakana loanwords with established plain-Japanese equivalents.
+# Context-dependent loanwords (ロジック, マッピング, クランプ, ラッパー, クリア
+# in verb usage) are intentionally absent — they need human/LLM judgment.
+version: 1
+rules:
+  - expected: 単純
+    pattern: シンプル
+  - expected: 明確な
+    pattern: クリアな
+  - expected: 方針
+    pattern: アプローチ
+  - expected: 意味合い
+    pattern: ニュアンス
+  - expected: 層
+    pattern: /レイヤー?/
+  - expected: 利点
+    pattern: メリット
+  - expected: 欠点
+    pattern: デメリット
+  - expected: 分類
+    pattern: /カテゴリー?/
+  - expected: 文脈
+    pattern: /コンテキスト(?!ウィンドウ|メニュー|スイッチ)/
+  - expected: 単純な
+    pattern: トリビアルな
+  - expected: (
+    pattern: （
+  - expected: )
+    pattern: ）

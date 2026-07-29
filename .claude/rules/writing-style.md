@@ -1,51 +1,11 @@
 # Writing Style
 
-Apply to all text output (documents, PR descriptions, commit messages, comments).
+- In Japanese prose, prefer plain Japanese over katakana loanwords when a natural equivalent exists, put half-width spaces around alphanumerics/code spans/links, and use half-width parentheses `()`.
+- Before publishing Japanese prose (PR description, issue body, review comment, document), run the `textlint` skill's auto-fix on the draft and review what it cannot fix.
+- Replace relative references (「以前」「今後」, old/new contrasts) with concrete ones (class name, method name, PR number, commit id). Do not invent background or motivation the user has not stated.
+- Hard-wrap only fixed-width destinations (commit messages at 72 columns, code comments) — never Markdown paragraphs.
+- End generated documents and PR descriptions with this signature (after any template's closing line):
 
-## Tone
-
-Write naturally. Avoid exaggerated expressions, meta-phrasings, and vague enumeration markers.
-
-## Accuracy
-
-Do not speculate about context specific to the user's project or situation:
-
-- Do not invent background, motivation, or history the user has not stated
-- Do not guess intent with hedged language
-- When project-specific context is missing and needed, always ask the user before writing
-
-General knowledge and publicly verifiable facts may be stated without qualification.
-
-## Vocabulary
-
-Prefer plain words over jargon, metaphors, and abstract nouns.
-
-## Style Consistency
-
-When editing existing text, match the established tone and voice (formal, casual, technical). For language-specific axes (e.g., Japanese formality), see the language-specific style files.
-
-## Redundancy
-
-Do not explain what is self-evident from context:
-
-- Project conventions obvious from the codebase (e.g., deploy mechanisms, framework behavior)
-- Information the reader already stated or demonstrated knowledge of
-- Implementation details that the code itself makes clear
-
-## Line wrapping
-
-Hard line wrapping in source applies only where the destination reads as fixed-width plain text:
-
-- **Commit messages** wrap at 72 characters per `commit-message.md`.
-- **Code comments and docstrings** follow the language's conventional width.
-- **Markdown files** (rule files, skill files, design docs, READMEs, PR descriptions, issue bodies, review comments) do not hard-wrap. Markdown joins consecutive non-blank lines into one paragraph, so a hard wrap produces no visible break — only an awkward source.
-
-## Signature
-
-When generating documents, PR descriptions, or other published content, always end with:
-
-```text
-🤖 Generated with [Claude Code](https://claude.ai/code)
-```
-
-PR descriptions always require the signature at the very end, including when a project PR template is used. Append the signature after the template's existing closing line.
+  ```text
+  🤖 Generated with [Claude Code](https://claude.ai/code)
+  ```

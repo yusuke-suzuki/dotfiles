@@ -39,6 +39,7 @@ cd ~/dotfiles
 - Git
 - GitHub CLI (`gh`)
 - mise
+- Node.js / npm (the `textlint` skill runs textlint via `npx`)
 
 ### Updating
 
