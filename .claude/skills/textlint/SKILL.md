@@ -12,7 +12,7 @@ Write the draft to a file, then run:
 {SKILL_BASE_DIR}/scripts/lint.sh --fix <file>    # auto-fix in place
 ```
 
-The first run installs npm dependencies into the skill directory.
+Dependencies run via `npx` (pinned in `lint.sh`); the first run downloads them into the npx cache.
 
 Rules live in `.textlintrc.json` (preset-ja-technical-writing, preset-ai-writing, preset-ja-spacing, no-mixed-zenkaku-and-hankaku-alphabet) and `prh.yml` (katakana loanwords with established plain-Japanese equivalents, full-width parentheses). Context-dependent loanwords (ロジック, マッピング, クランプ, ラッパー) are intentionally absent from the dictionary — replace them yourself when no established technical term is intended.
 

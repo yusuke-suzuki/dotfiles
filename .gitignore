@@ -1,6 +1,2 @@
 # Claude Code local settings
 .claude/settings.local.json
-
-# textlint skill dependencies
-.claude/skills/textlint/node_modules/
-.claude/skills/textlint/package-lock.json
