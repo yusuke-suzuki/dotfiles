@@ -12,6 +12,8 @@ Identify the PR for the current branch (`gh pr view --json number,headRepository
 - **`gh`** (GraphQL — REST does not expose thread ids): query `repository → pullRequest → reviewThreads(first: 50) { nodes { id isResolved comments(first: 50) { nodes { databaseId author { login } body path line diffHunk } } } }`
 - **MCP**: `pull_request_read` with `method: "get_review_comments"`
 
+Both return paginated results — follow the `pageInfo` cursors while `hasNextPage` so no thread or comment is missed.
+
 Display unresolved threads: author, path, line, diff hunk, body.
 
 ## 2. Analyze
@@ -24,11 +26,11 @@ For each unresolved comment:
 
 ## 3. Plan approval
 
-Enter plan mode (EnterPlanMode) and write the per-comment plan — quoted comment, path/line, analysis, recommended action — in the user's response language (`language` in `~/.claude/settings.json`). Present via ExitPlanMode and do not proceed until approved.
+Enter plan mode (EnterPlanMode) and write the per-comment plan — quoted comment, path/line, analysis, recommended action — in the user's response language. Present via ExitPlanMode and do not proceed until approved.
 
 ## 4. Execute
 
-Reply to every comment to keep an audit trail, regardless of author (human or bot), matching the original comment's language. For fixes, make the change and reply briefly ("Done").
+Reply on every unresolved thread (one reply, posted on the thread's last comment) to keep an audit trail, regardless of author (human or bot), matching the original comment's language. For fixes, make the change and reply briefly ("Done").
 
 Per thread, reply first, then resolve — never in parallel, and never resolve if the reply failed:
 

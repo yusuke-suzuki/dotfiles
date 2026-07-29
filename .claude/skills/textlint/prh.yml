@@ -20,7 +20,7 @@ rules:
   - expected: 分類
     pattern: /カテゴリー?/
   - expected: 文脈
-    pattern: /コンテキスト(?!ウィンドウ)/
+    pattern: /コンテキスト(?!ウィンドウ|メニュー|スイッチ)/
   - expected: 単純な
     pattern: トリビアルな
   - expected: (

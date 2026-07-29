@@ -23,4 +23,4 @@ Return three sections — Verified (with sources), Could not verify (with reason
 
 ## Boundaries
 
-Do not invent facts, fill in omissions, change the author's argument, or suggest pure style preferences. Read-only verification — no tests, builds, or destructive commands.
+Do not invent facts, fill in omissions, change the author's argument, or suggest pure style preferences. The textlint pre-pass may modify the draft file; beyond that, verification is read-only — no tests, builds, or destructive commands.

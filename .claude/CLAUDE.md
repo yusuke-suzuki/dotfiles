@@ -21,4 +21,4 @@ Issues, PRs, and comments on public repositories must not leak private context: 
 
 # Memory Boundaries
 
-Durable behavioral guidance belongs in `~/.claude/rules/` or CLAUDE.md, not in memory entries. Do not save memories that restate existing rules.
+Durable behavioral guidance belongs in the dotfiles repository's `.claude/rules/` or CLAUDE.md (deployed to `~/.claude/`), not in memory entries. Do not save memories that restate existing rules.

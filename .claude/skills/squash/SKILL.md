@@ -7,7 +7,7 @@ description: Squash all branch commits into a single commit
 
 ## 1. Assess state
 
-Run `git status` and `git fetch origin`, detect the default branch (`git symbolic-ref refs/remotes/origin/HEAD --short`), and list commits (`git log <default>..HEAD --oneline`). With only one commit, inform the user that squash is not needed and exit.
+Run `git status` and `git fetch origin`, detect the default branch (`git symbolic-ref refs/remotes/origin/HEAD --short`), and list commits (`git log <default>..HEAD --oneline`). On the default branch, stop and inform the user — never rewrite history there. The working tree and index must be clean; ask the user to commit or stash first otherwise. With only one commit, inform the user that squash is not needed and exit.
 
 ## 2. Consistency check
 

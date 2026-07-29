@@ -34,11 +34,11 @@ Each countermeasure names the file, the change, and why it prevents recurrence. 
 
 ## 4. User review
 
-Enter plan mode (EnterPlanMode) and write the full analysis in the user's response language (`language` in `~/.claude/settings.json`). Present via ExitPlanMode; do not proceed until approved. The user may correct the analysis, revise countermeasures, and strip sensitive information.
+Enter plan mode (EnterPlanMode) and write the full analysis in the user's response language. Present via ExitPlanMode; do not proceed until approved. The user may correct the analysis, revise countermeasures, and strip sensitive information.
 
 ## 5. Create issue
 
-Create the issue on `yusuke-suzuki/dotfiles`, in English, titled `retro: <concise summary>`, with sections `## Violations` (table), `## Root Causes`, and `## Proposed Countermeasures` (task checkboxes). With `gh`, pass the body inline via heredoc; with MCP, use `issue_write` (if it rejects cross-repository targeting, inform the user and stop).
+Create the issue on `yusuke-suzuki/dotfiles`, in English, titled `retro: <concise summary>`, with sections `## Violations` (table), `## Root Causes`, and `## Proposed Countermeasures` (task checkboxes). With `gh`, pass the body inline via quoted heredoc (`<<'EOF'`, so the body is not shell-expanded); with MCP, use `issue_write` (if it rejects cross-repository targeting, inform the user and stop).
 
 Since the repository is public, describe violations in terms of the rules themselves, not the private task being performed.
 

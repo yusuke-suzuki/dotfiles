@@ -7,7 +7,7 @@ description: Create a fixup commit and autosquash rebase
 
 ## 1. Assess state
 
-Run `git status` and `git fetch origin`, detect the default branch (`git symbolic-ref refs/remotes/origin/HEAD --short`), and list commits (`git log <default>..HEAD --oneline`).
+Run `git status` and `git fetch origin`, detect the default branch (`git symbolic-ref refs/remotes/origin/HEAD --short`), and list commits (`git log <default>..HEAD --oneline`). On the default branch, stop and inform the user — never rewrite history there.
 
 ## 2. Identify target
 
