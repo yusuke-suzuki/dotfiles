@@ -26,7 +26,7 @@ For each unresolved comment:
 
 ## 3. Plan approval
 
-Enter plan mode (EnterPlanMode) and write the per-comment plan — quoted comment, path/line, analysis, recommended action — in the user's response language. Present via ExitPlanMode and do not proceed until approved.
+Enter plan mode (EnterPlanMode) and write the per-comment plan — quoted comment, path/line, analysis, recommended action — in the user's response language. Present via ExitPlanMode and do not proceed until approved. Once approved, execute steps 4-6 in a single pass — do not re-enter plan mode or revise the approved actions.
 
 ## 4. Fix and push
 
@@ -34,15 +34,12 @@ Apply the approved fixes, then commit and push before posting any reply — invo
 
 Skip this step when every action is "No change".
 
-## 5. Reply and resolve
+## 5. Reply
 
-Reply on every unresolved thread (one reply, posted on the thread's last comment) to keep an audit trail, regardless of author (human or bot), matching the original comment's language. For fixes, reference the pushed commit id.
+Reply on every thread selected in step 1 (one reply, posted on the thread's last comment) to keep an audit trail, regardless of author (human or bot), matching the original comment's language. For fixes, reference the pushed commit id. Post the reply to the last comment's `databaseId`: `gh api -X POST /repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies -f body="..."`, or MCP `add_reply_to_pull_request_comment`.
 
-1. **Reply** to the last comment's `databaseId`: `gh api -X POST /repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies -f body="..."`, or MCP `add_reply_to_pull_request_comment`.
-2. **Resolve**: GraphQL mutation `resolveReviewThread(input: {threadId: ...})`, or MCP `pull_request_review_write` with `method: "resolve_thread"`. Reply first, then resolve — never in parallel, and never resolve if the reply failed.
-
-Exception — do not resolve a thread where a fix was pushed and the author of the thread's root (first) comment is a review bot that verifies fixes and resolves its own threads (e.g. coderabbitai) — later replies by other authors do not change this classification. The bot's resolution is its confirmation that the pushed commit addresses the comment, and resolving manually pre-empts that verification. "No change" threads have nothing for the bot to verify, so resolve them manually as usual.
+Do not resolve threads: review bots that verify fixes (e.g. coderabbitai) resolve their own threads once the pushed fix is verified, and all other threads are resolved manually outside this skill.
 
 ## 6. Summary
 
-List what was fixed and what was resolved without changes. Note threads left unresolved pending a review bot's verification; if the bot later replies that the issue persists, treat that as a new unresolved comment.
+List what was fixed and what was replied without changes. Threads stay unresolved until a review bot verifies the fix or someone resolves them manually; if a bot replies that the issue persists, treat that as a new unresolved comment.
