@@ -1,9 +1,9 @@
 ---
-name: resolve-comments
-description: Resolve PR review comments
+name: address-comments
+description: Address PR review comments — analyze, fix, push, and reply
 ---
 
-# Resolve Comments
+# Address Comments
 
 ## 1. Fetch threads
 
