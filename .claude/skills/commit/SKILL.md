@@ -21,6 +21,7 @@ Never commit to the default branch.
 ## 3. Commit
 
 - Group changes by semantic intent — one logical change per commit; create one commit per group.
+- If the diff adds or edits Japanese text (code comments, docstrings, test case titles, documents), run the `textlint` skill on it before committing.
 - Never stage files containing secrets (.env, credentials, private keys).
 - Verify the drafted message against `commit-message.md` (subject ≤ 50 characters, English, Conventional Commits, body explains why) before running `git commit`.
 - Do not use past `git log` messages as a style guide, and never use `--fixup` or `--amend` here — `/fixup` owns those.
