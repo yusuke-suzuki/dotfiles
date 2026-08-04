@@ -24,4 +24,4 @@ Run `git show HEAD` and read `~/.claude/skills/commit/commit-message.md`, especi
 
 ## 5. Wrap up
 
-Show `git log <default>..HEAD --oneline` and suggest `/publish`.
+Show `git log <default>..HEAD --oneline` and suggest pushing (`git push --force-with-lease` if the target commit was already on the remote).
