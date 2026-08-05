@@ -30,7 +30,7 @@ Enter plan mode (EnterPlanMode) and write the per-comment plan — quoted commen
 
 ## 4. Fix and push
 
-Apply the approved fixes, then commit and push before posting any reply — invoke `/fixup` (or `/commit` for an independent change), then `/publish`. A reply posted while the fix exists only locally cannot be verified: review bots such as coderabbitai respond that they cannot confirm the fix.
+Apply the approved fixes, then commit and push before posting any reply — invoke `/fixup` (or `/commit` for an independent change), then push (`--force-with-lease` after a fixup rebase). A reply posted while the fix exists only locally cannot be verified: review bots such as coderabbitai respond that they cannot confirm the fix.
 
 Skip this step when every action is "No change".
 

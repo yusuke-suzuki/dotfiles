@@ -17,4 +17,4 @@ Run `git rebase <default>`. On conflicts: show the conflicting files (`git statu
 
 ## 3. Wrap up
 
-Show the rebased history and suggest `/publish` to push (`--force-with-lease`).
+Show the rebased history and suggest pushing with `git push --force-with-lease`.

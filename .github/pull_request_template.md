@@ -10,4 +10,4 @@ Why are these changes needed?
 
 - Key changes (what, not how)
 
-<!-- Add additional sections below as needed (e.g., Testing, Checklist) -->
+<!-- Add additional sections below as needed (e.g., Testing) -->

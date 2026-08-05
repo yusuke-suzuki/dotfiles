@@ -26,4 +26,4 @@ Write against the full diff, following `~/.claude/skills/commit/commit-message.m
 
 ## 5. Wrap up
 
-Show `git show HEAD --stat` and suggest `/publish`.
+Show `git show HEAD --stat` and suggest pushing with `git push --force-with-lease`.
