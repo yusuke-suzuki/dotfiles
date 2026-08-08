@@ -16,6 +16,8 @@ Both connections paginate independently: pass each `endCursor` back as `after` a
 
 Exclude unresolved threads whose last comment is the current user's own reply (`gh api /user` or MCP `get_me` for the login) — they are awaiting the reviewer's response and re-enter scope only when a newer comment arrives. Display the remaining unresolved threads: author, path, line, diff hunk, body.
 
+Review bots wrap their own verification transcripts, bundled linter output, and tracking metadata in `<details>` blocks and HTML comments, which routinely outweigh the finding itself. Before reading the bodies, drop `(?s)<!--.*?-->` and every `<details>` block that carries no fenced `suggestion` or `diff` — those hold the reviewer's proposed change and are the one part worth keeping.
+
 ## 2. Analyze
 
 For each unresolved comment:
