@@ -9,10 +9,10 @@ description: Address PR review comments — analyze, fix, push, and reply
 
 Identify the PR for the current branch (`gh pr view --json number,headRepositoryOwner`, or MCP `list_pull_requests`). Fetch review threads with thread ids, resolution state, and embedded comments:
 
-- **`gh`** (GraphQL — REST does not expose thread ids): query `repository → pullRequest → reviewThreads(first: 50) { nodes { id isResolved comments(first: 50) { nodes { databaseId author { login } body path line diffHunk } } } }`
-- **MCP**: `pull_request_read` with `method: "get_review_comments"`
+- **`gh`** (GraphQL — neither REST nor `gh pr view --json` exposes thread ids or `isResolved`): query `repository → pullRequest → reviewThreads(first: 5, after: $endCursor) { pageInfo { hasNextPage endCursor } nodes { id isResolved comments(first: 5, after: $commentCursor) { pageInfo { hasNextPage endCursor } nodes { databaseId author { login } body path line diffHunk } } } }`
+- **MCP**: `pull_request_read` with `method: "get_review_comments"`, paging with `perPage` and `after`
 
-Both return paginated results — follow the `pageInfo` cursors while `hasNextPage` so no thread or comment is missed.
+Both connections paginate independently: pass each `endCursor` back as `after` and keep going while its `hasNextPage` is true, so no thread or comment is missed. Keep pages to 5-10 — bot comments are long, and one oversized page can exceed the tool's token limit and spill to a file that then has to be read back.
 
 Exclude unresolved threads whose last comment is the current user's own reply (`gh api /user` or MCP `get_me` for the login) — they are awaiting the reviewer's response and re-enter scope only when a newer comment arrives. Display the remaining unresolved threads: author, path, line, diff hunk, body.
 
@@ -26,7 +26,7 @@ For each unresolved comment:
 
 ## 3. Plan approval
 
-Enter plan mode (EnterPlanMode) and write the per-comment plan — quoted comment, path/line, analysis, recommended action — in the user's response language. Present via ExitPlanMode and do not proceed until approved. Once approved, execute steps 4-6 in a single pass — do not re-enter plan mode or revise the approved actions.
+Enter plan mode (EnterPlanMode) and write the per-comment plan in the user's response language: path/line, the verdict with its reasoning, and the action. Do not quote the comment back — step 1 already displayed it — and keep each entry to a few lines. Present via ExitPlanMode and do not proceed until approved. Once approved, execute steps 4-6 in a single pass — do not re-enter plan mode or revise the approved actions.
 
 ## 4. Fix and push
 
@@ -36,7 +36,9 @@ Skip this step when every action is "No change".
 
 ## 5. Reply
 
-Reply on every thread selected in step 1 (one reply, posted on the thread's last comment) to keep an audit trail, regardless of author (human or bot), matching the original comment's language. For fixes, reference the pushed commit id. Post the reply to the last comment's `databaseId`: `gh api -X POST /repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies -f body="..."`, or MCP `add_reply_to_pull_request_comment`.
+Reply on every thread selected in step 1 (one reply per thread) to keep an audit trail, regardless of author (human or bot), matching the original comment's language. For fixes, reference the pushed commit id.
+
+Post to the `databaseId` of the thread's **first** comment — the reply endpoint takes a top-level comment id, not that of a reply: `gh api -X POST /repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies -f body="..."`, or MCP `add_reply_to_pull_request_comment`.
 
 Do not resolve threads: review bots that verify fixes (e.g. coderabbitai) resolve their own threads once the pushed fix is verified, and all other threads are resolved manually outside this skill.
 

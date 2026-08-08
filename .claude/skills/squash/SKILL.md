@@ -13,16 +13,18 @@ Run `git status` and `git fetch origin`, detect the default branch (`git symboli
 
 If semantically distinct commits are mixed (e.g. an unrelated feature and a bug fix), warn via AskUserQuestion and suggest splitting into separate branches; proceed only on confirmation.
 
-## 3. Squash
+## 3. Message
+
+Review the full diff (`git diff <default>..HEAD`) and draft the message against it, following `~/.claude/skills/commit/commit-message.md`. Do not reference the pre-squash history (avoid "combine feature X and fix Y") — describe the final state as a single coherent intent.
+
+Write it to a file and run `~/.claude/skills/commit/scripts/validate-message.sh <file>` until it passes.
+
+## 4. Squash
 
 ```bash
 git reset --soft <default>
-git commit
+git commit -F <file>
 ```
-
-## 4. Message
-
-Write against the full diff, following `~/.claude/skills/commit/commit-message.md`. Do not reference the pre-squash history (avoid "combine feature X and fix Y") — describe the final state as a single coherent intent.
 
 ## 5. Wrap up
 

@@ -3,7 +3,8 @@
 ## Format
 
 - Conventional Commits, English, imperative mood, present tense (`feat: add user authentication`, not `added`)
-- Subject ≤ 50 characters including prefix and scope (verify: `echo -n "subject" | wc -m`)
+- Subject ≤ 50 characters including prefix and scope
+- Format rules are enforced by `~/.claude/skills/commit/scripts/validate-message.sh <message-file>` — run it on every draft
 
 ## Types
 
