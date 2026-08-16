@@ -5,7 +5,7 @@ description: Review the session for rule violations, analyze root causes, and cr
 
 # Retrospective
 
-Identify violations of `~/.claude/CLAUDE.md`, `~/.claude/rules/`, and skill workflows in this session, analyze root causes, and record countermeasures as a GitHub issue.
+Identify violations of `~/.claude/CLAUDE.md` and skill workflows in this session, analyze root causes, and record countermeasures as a GitHub issue.
 
 ## 1. Violations
 
@@ -21,12 +21,12 @@ Group related violations and classify each cause:
 
 ## 3. Countermeasures
 
-Always-on prompt text is a budget: every added rule loads into every future session, and this workflow is historically the main source of rule growth. Prefer countermeasures in this order:
+CLAUDE.md is a budget: every line added there loads into every future session, and this workflow is historically the main source of its growth. Prefer countermeasures in this order:
 
 1. **Mechanical enforcement** — settings.json permissions or hooks, a textlint/prh dictionary entry, or a script inside a skill. A deterministic check beats prose asking the model to be careful.
-2. **Skill fix** — correct the on-demand workflow that produced the violation; it loads only when invoked.
-3. **Rule deletion or simplification** — when the violation stems from conflicting or over-constraining rules.
-4. **Always-on rule addition (last resort)** — only when the mistake is expensive (data loss, leaking private context, destructive operations) and the model would not get it right from context alone; a line or two, never a new section.
+2. **Skill fix** — correct the on-demand workflow that produced the violation; it loads only when invoked. Guidance that applies to one kind of task belongs here even when no skill covers it yet — a new skill costs nothing until it is relevant.
+3. **Deletion or simplification** — when the violation stems from conflicting or over-constraining instructions.
+4. **CLAUDE.md addition (last resort)** — only when the mistake is expensive (data loss, leaking private context, destructive operations), spans every kind of task, and the model would not get it right from context alone; a line or two, never a new section.
 
 "No countermeasure" is a valid conclusion for a one-off failure unlikely to recur — record the violation and move on.
 

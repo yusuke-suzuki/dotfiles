@@ -3,7 +3,8 @@ set -e
 
 # Dotfiles Installer
 # This script installs:
-#   - Claude Code CLAUDE.md, settings.json, rules, and skills
+#   - Claude Code CLAUDE.md, settings.json, and skills
+#   - Cursor user rules, ready to paste into Customize → Rules
 #   - mise configuration
 # Run this script from the cloned repository directory
 
@@ -13,6 +14,8 @@ CLAUDE_DIR="$HOME/.claude"
 RULES_DIR="$CLAUDE_DIR/rules"
 SKILLS_DIR="$CLAUDE_DIR/skills"
 AGENTS_DIR="$CLAUDE_DIR/agents"
+CURSOR_DIR="$HOME/.cursor"
+CURSOR_USER_RULES="$CURSOR_DIR/user-rules.md"
 MISE_CONFIG_DIR="$HOME/.config/mise"
 
 echo "Installing dotfiles..."
@@ -25,10 +28,16 @@ if [ ! -d "$SOURCE_DIR" ]; then
     exit 1
 fi
 
-# Clean and recreate rules directory
-echo "🧹 Cleaning existing rules..."
-rm -rf "$RULES_DIR"
-mkdir -p "$RULES_DIR"
+mkdir -p "$CLAUDE_DIR"
+
+# Rules now live in CLAUDE.md and skills. Earlier runs left files behind that
+# would otherwise keep loading into every session — remove those by name so
+# rules added by hand stay, and drop the directory only once it is empty
+echo "🧹 Removing rules installed by earlier versions..."
+for legacy_rule in communication feedback-handling git tool-usage writing-style; do
+    rm -f "$RULES_DIR/$legacy_rule.md"
+done
+rmdir "$RULES_DIR" 2>/dev/null || true
 
 # Install CLAUDE.md
 echo "📝 Installing CLAUDE.md..."
@@ -37,15 +46,6 @@ cp "$SOURCE_DIR/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
 # Install settings.json
 echo "⚙️  Installing settings.json..."
 cp "$SOURCE_DIR/settings.json" "$CLAUDE_DIR/settings.json"
-
-# Install rules
-echo "📏 Installing rules..."
-for rule_file in "$SOURCE_DIR"/rules/*.md; do
-    if [ -f "$rule_file" ]; then
-        echo "   Installing rule: $(basename "$rule_file")"
-        cp "$rule_file" "$RULES_DIR"
-    fi
-done
 
 # Install skills
 echo ""
@@ -73,6 +73,26 @@ if [ -d "$SOURCE_DIR/agents" ]; then
         fi
     done
 fi
+
+echo ""
+
+# ============================================
+# Cursor configuration
+# ============================================
+echo "Installing Cursor configuration..."
+
+# Cursor loads skills from ~/.claude/skills/ for compatibility with Claude Code,
+# so the install above already covers them. Its always-on equivalent, User Rules,
+# is held in Cursor's settings rather than on disk, so the best that can be
+# installed is the text to paste in.
+# Priority Rules is dropped along the way: Cursor resolves the conflict the
+# other way round, giving project rules precedence over user rules
+mkdir -p "$CURSOR_DIR"
+awk '/^# /{ skip = ($0 == "# Priority Rules") } !skip' \
+    "$SOURCE_DIR/CLAUDE.md" > "$CURSOR_USER_RULES"
+echo "📋 Installed user rules: $CURSOR_USER_RULES"
+echo "   Paste its contents into Customize → Rules → User Rules — and again"
+echo "   after any install that changes them, since Cursor keeps its own copy."
 
 echo ""
 
@@ -105,11 +125,7 @@ echo ""
 echo "Installed files:"
 echo "  - $CLAUDE_DIR/CLAUDE.md"
 echo "  - $CLAUDE_DIR/settings.json"
-for rule_file in "$RULES_DIR"/*.md; do
-    if [ -f "$rule_file" ]; then
-        echo "  - $rule_file"
-    fi
-done
+echo "  - $CURSOR_USER_RULES"
 for skill_dir in "$SKILLS_DIR"/*/; do
     if [ -d "$skill_dir" ]; then
         echo "  - $skill_dir"

@@ -14,8 +14,9 @@ For Japanese drafts, run the `textlint` skill first — it auto-fixes the mechan
 - **Facts** — check every concrete reference against its source: PR/issue numbers (`gh pr view`), commit ids (`git show`), file paths (Read/Glob), identifiers (Grep), numeric claims, and quotes (byte-for-byte). Names introduced by a proposed design must not be described as currently existing. Report anything uncheckable as "could not verify" — never pass it silently.
 - **Consistency** — one term per concept; no internal contradictions; terminology matches referenced specs; heading/list shapes consistent.
 - **Argument quality** — problem statements name the consequence, not just the fact ("X is duplicated, so a change needs two edits"); categorized lists partition cleanly.
-- **Reader perspective** — the reader has no chat history: no conversational references (「先ほど」「ご指摘の通り」); first-use terms defined in the document.
+- **Reader perspective** — the reader has no chat history: no conversational references (「先ほど」「ご指摘の通り」); first-use terms defined in the document. Relative references (「以前」「今後」, old/new contrasts) must name what they point at — a class, a method, a PR number, a commit id.
 - **Quantitative claims** — percentages cite the denominator N; numbers state their scope (time range, segment, version); causal language only with a named mechanism.
+- **Formatting** — hard-wrap only fixed-width destinations such as commit messages and code comments; never hard-wrap Markdown paragraphs.
 
 ## Report
 
