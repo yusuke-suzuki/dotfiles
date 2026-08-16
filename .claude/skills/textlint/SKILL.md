@@ -14,7 +14,7 @@ Write the draft to a file, then run:
 
 Dependencies run via `npx` (pinned in `lint.sh`); the first run downloads them into the npx cache.
 
-Rules live in `.textlintrc.json` (preset-ja-technical-writing, preset-ai-writing, preset-ja-spacing, no-mixed-zenkaku-and-hankaku-alphabet) and `prh.yml` (katakana loanwords with established plain-Japanese equivalents, full-width parentheses). Context-dependent loanwords (ロジック, マッピング, クランプ, ラッパー) are intentionally absent from the dictionary — replace them yourself when no established technical term is intended.
+The target style is plain Japanese over katakana loanwords wherever a natural equivalent exists, half-width spaces around alphanumerics, code spans, and links, and half-width parentheses. Rules live in `.textlintrc.json` (preset-ja-technical-writing, preset-ai-writing, preset-ja-spacing, no-mixed-zenkaku-and-hankaku-alphabet) and `prh.yml` (katakana loanwords with established plain-Japanese equivalents, full-width parentheses). Context-dependent loanwords (ロジック, マッピング, クランプ, ラッパー) are intentionally absent from the dictionary — replace them yourself when no established technical term is intended.
 
 After `--fix`, review the remaining report: some rules (particle errors, sentence style) are detect-only and need manual edits.
 

@@ -40,6 +40,8 @@ Skip this step when every action is "No change".
 
 Reply on every thread selected in step 1 (one reply per thread) to keep an audit trail, regardless of author (human or bot), matching the original comment's language. For fixes, reference the pushed commit id.
 
+Default to a conclusion plus a one-line rationale; do not restate what the diff or the resolved state already shows.
+
 Post to the `databaseId` of the thread's **first** comment — the reply endpoint takes a top-level comment id, not that of a reply: `gh api -X POST /repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies -f body="..."`, or MCP `add_reply_to_pull_request_comment`.
 
 Do not resolve threads: review bots that verify fixes (e.g. coderabbitai) resolve their own threads once the pushed fix is verified, and all other threads are resolved manually outside this skill.
