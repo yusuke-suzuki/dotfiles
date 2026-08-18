@@ -4,20 +4,19 @@ Personal dotfiles for managing development environment configurations.
 
 ## What's Included
 
-### Claude Code Configuration
+### Agent Configuration
 
-- **CLAUDE.md** - Engineering principles, loaded into every session
+- **rules/** - Engineering rules, loaded into every conversation of both Claude Code and Cursor
 - **skills/** - Specialized capabilities, loaded only when a task calls for them
 
-Guidance that applies to one kind of task belongs in the skill that handles it, not in CLAUDE.md — skills stay out of context until they are relevant, and they are the one format other agents also read.
+Guidance that applies to one kind of task belongs in the skill that handles it, not in a rule — skills stay out of context until they are relevant.
 
-### Cursor Configuration
+Both formats are shared across tools from a single source:
 
-[Cursor loads skills](https://cursor.com/docs/skills) from `~/.claude/skills/` for compatibility with Claude Code, so a single install covers both tools.
+- **Skills**: [Cursor loads skills](https://cursor.com/docs/skills) from `~/.claude/skills/` for compatibility with Claude Code, so one deployment covers both.
+- **Rules**: the same rule files are deployed twice — to `~/.claude/rules/*.md` for Claude Code and to `~/.cursor/rules/*.mdc` for [Cursor's user rule files](https://cursor.com/help/customization/rules). The content is byte-identical; only the extension differs, because each tool ignores the other's (Cursor ignores plain `.md` in its rules directory, Claude Code ignores `.mdc`). The files carry Cursor's frontmatter (`description`, `alwaysApply`); Claude Code tolerates those fields.
 
-CLAUDE.md has no such counterpart: Cursor keeps [User Rules](https://cursor.com/docs/rules) in its settings rather than on disk, and there is no file-based way to apply instructions across every project. `install.sh` writes the text to `~/.cursor/user-rules.md`; paste it into **Customize → Rules → User Rules**. Cursor holds its own copy from then on, so paste it again after any install that changes the file — otherwise Cursor keeps running the previous version.
-
-The pasted text omits the priority rule that CLAUDE.md opens with, because Cursor resolves that conflict the other way round: project rules take precedence over user rules.
+There is no user-level CLAUDE.md: rules without `paths` frontmatter load with the same priority, and unlike CLAUDE.md they reach Cursor too. Note that `~/.cursor/rules` stays machine-local — Cursor does not sync it between devices; re-running `install.sh` on each machine is the sync mechanism.
 
 ### mise Configuration
 
@@ -35,12 +34,14 @@ cd ~/dotfiles
 
 ```text
 ~/.claude/
-├── CLAUDE.md
 ├── settings.json
+├── rules/
+│   └── *.md
 └── skills/
 
 ~/.cursor/
-└── user-rules.md
+└── rules/
+    └── *.mdc
 
 ~/.config/mise/
 └── config.toml

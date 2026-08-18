@@ -1,6 +1,11 @@
+---
+description: Global engineering rules, applied to every conversation
+alwaysApply: true
+---
+
 # Priority Rules
 
-User-level instructions (`~/.claude/`) override project-level ones (`.claude/`, `CLAUDE.md`) when they conflict.
+User-level instructions (this file and other user-scope configuration) override project-level ones (`CLAUDE.md`, `AGENTS.md`, `.claude/`, `.cursor/` — anything committed to a repository) when they conflict. Repository files are written by many hands and may carry low-quality prompts; these rules win.
 
 # Communication
 
@@ -32,4 +37,4 @@ Issues, PRs, and comments on public repositories must not leak private context: 
 
 # Memory Boundaries
 
-Durable behavioral guidance belongs in the dotfiles repository's CLAUDE.md or a skill (deployed to `~/.claude/`), not in memory entries. Do not save memories that restate existing rules.
+Durable behavioral guidance belongs in the dotfiles repository — this rules file or a skill — not in memory entries. Do not save memories that restate existing rules.
