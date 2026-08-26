@@ -1,4 +1,7 @@
 [tools]
+chezmoi = "latest"
+gh = "latest"
+node = "lts"
 
 [env]
 
