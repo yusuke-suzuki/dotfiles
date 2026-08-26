@@ -19,6 +19,10 @@ User-level instructions (this file and other user-scope configuration) override 
 - Prefer the framework's generators, CLI tools, and built-in APIs over hand-written boilerplate or third-party alternatives.
 - Fix lint failures instead of suppressing them. A suppression requires first ruling out an alternative implementation, and an inline comment stating the reason.
 
+# Ruby / Rails
+
+- Run project commands through binstubs (`bin/rails`, `bin/rspec`, `bin/rubocop`) or `bundle exec`, never bare gem executables — bare ones can resolve to a stale shim or a version that does not match `Gemfile.lock`.
+
 # GitHub
 
 - Create pull requests as draft with the most representative commit subject line as the title, verbatim; fill the repository's pull request template for the body. After later pushes, if the description no longer matches the final diff, rewrite it against that diff — never append changelog-style updates.
