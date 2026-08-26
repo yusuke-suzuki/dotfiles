@@ -7,7 +7,7 @@ description: Sync feature branch with main via rebase
 
 ## 1. Assess state
 
-Run `git status` and `git fetch origin`, detect the default branch (`git symbolic-ref refs/remotes/origin/HEAD --short`), and show unpushed commits (`git log <default>..HEAD --oneline`).
+Run `git status` and `git fetch origin`, detect the default branch (`git symbolic-ref refs/remotes/origin/HEAD --short`), and show unpushed commits (`git log <default>..HEAD --oneline`). Stop and inform the user on the default branch or a detached HEAD — never rewrite history with nowhere to land it.
 
 The working directory must be clean — if not, ask the user to commit or stash first; do not rebase over uncommitted changes.
 

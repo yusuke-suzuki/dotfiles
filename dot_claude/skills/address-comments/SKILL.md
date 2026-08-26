@@ -9,10 +9,10 @@ description: Address PR review comments — analyze, fix, push, and reply
 
 Identify the PR for the current branch (`gh pr view --json number,headRepositoryOwner`, or MCP `list_pull_requests`). Fetch review threads with thread ids, resolution state, and embedded comments:
 
-- **`gh`** (GraphQL — neither REST nor `gh pr view --json` exposes thread ids or `isResolved`): query `repository → pullRequest → reviewThreads(first: 5, after: $endCursor) { pageInfo { hasNextPage endCursor } nodes { id isResolved comments(first: 5, after: $commentCursor) { pageInfo { hasNextPage endCursor } nodes { databaseId author { login } body path line diffHunk } } } }`
+- **`gh`** (GraphQL — neither REST nor `gh pr view --json` exposes thread ids or `isResolved`): query `repository → pullRequest → reviewThreads(first: 5, after: $endCursor) { pageInfo { hasNextPage endCursor } nodes { id isResolved comments(first: 20) { pageInfo { hasNextPage endCursor } nodes { databaseId author { login } body path line diffHunk } } } }`
 - **MCP**: `pull_request_read` with `method: "get_review_comments"`, paging with `perPage` and `after`
 
-Both connections paginate independently: pass each `endCursor` back as `after` and keep going while its `hasNextPage` is true, so no thread or comment is missed. Keep pages to 5-10 — bot comments are long, and one oversized page can exceed the tool's token limit and spill to a file that then has to be read back.
+Page the thread list by passing its `endCursor` back as `after` while `hasNextPage` is true. A thread whose `comments` report `hasNextPage` needs a follow-up query on that thread's `id` with its own comment cursor — one shared cursor cannot page several threads. Keep pages to 5-10 — bot comments are long, and one oversized page can exceed the tool's token limit and spill to a file that then has to be read back.
 
 Exclude unresolved threads whose last comment is the current user's own reply (`gh api /user` or MCP `get_me` for the login) — they are awaiting the reviewer's response and re-enter scope only when a newer comment arrives. Display the remaining unresolved threads: author, path, line, diff hunk, body.
 

@@ -8,8 +8,8 @@ description: Auto-format Japanese prose with textlint — katakana loanword repl
 Write the draft to a file, then run:
 
 ```bash
-{SKILL_BASE_DIR}/scripts/lint.sh <file>          # report violations
-{SKILL_BASE_DIR}/scripts/lint.sh --fix <file>    # auto-fix in place
+~/.claude/skills/textlint/scripts/lint.sh <file>          # report violations
+~/.claude/skills/textlint/scripts/lint.sh --fix <file>    # auto-fix in place
 ```
 
 Dependencies run via `npx` (pinned in `lint.sh`); the first run downloads them into the npx cache.
