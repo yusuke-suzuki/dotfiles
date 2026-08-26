@@ -158,6 +158,9 @@ fi
 if [ "$MISE_INSTALLED" = true ]; then
     echo ""
     echo "mise setup:"
-    echo "  Add the following to your shell config (e.g., ~/.bashrc, ~/.zshrc):"
+    echo "  Interactive shells — add to ~/.zshrc or ~/.bashrc:"
     echo '    eval "$(mise activate)"'
+    echo "  Non-interactive shells (Claude Code / Cursor agent commands) — add to"
+    echo "  ~/.zshenv or ~/.bash_profile:"
+    echo '    export PATH="$HOME/.local/share/mise/shims:$PATH"'
 fi
