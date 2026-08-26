@@ -1,0 +1,7 @@
+# Shims put mise-managed tools on PATH for non-interactive shells, e.g.
+# agent-driven commands (https://mise.jdx.dev/dev-tools/shims.html)
+if command -v mise > /dev/null; then
+    eval "$(mise activate zsh --shims)"
+fi
+
+[ -f "$HOME/.zprofile.local" ] && source "$HOME/.zprofile.local"

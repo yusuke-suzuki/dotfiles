@@ -6,7 +6,7 @@ inheritance: true
 reviews:
   tools:
     # Scans AI agent skills for malicious patterns. Everything under
-    # .claude/skills/ here is a workflow document rather than executable
+    # dot_claude/skills/ here is a workflow document rather than executable
     # agent logic, and it reports the prose as session persistence and
     # unsafe tool parameters.
     skillspector:

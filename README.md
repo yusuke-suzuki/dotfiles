@@ -1,26 +1,23 @@
 # dotfiles
 
-Personal dotfiles for managing development environment configurations.
+Personal dotfiles, managed with [chezmoi](https://www.chezmoi.io/).
 
 ## What's Included
 
+| Source | Deploys to | Purpose |
+| --- | --- | --- |
+| `dot_zshrc`, `dot_zprofile` | `~/.zshrc`, `~/.zprofile` | Shell config with mise activation: `mise activate` for interactive shells, `--shims` for login shells so agent-driven commands (Claude Code, Cursor) resolve mise-managed tools without a `mise exec` prefix |
+| `dot_config/mise/` | `~/.config/mise/` | Global mise configuration |
+| `dot_claude/` | `~/.claude/` | Claude Code settings, rules, and skills |
+| `dot_cursor/rules/` | `~/.cursor/rules/` | Cursor user rules (`.mdc`) |
+| `.chezmoitemplates/rules/` | — | Single source for rule content, included by both `dot_claude/rules/*.md.tmpl` and `dot_cursor/rules/*.mdc.tmpl` |
+
 ### Agent Configuration
 
-- **rules/** - Engineering rules, loaded into every conversation of both Claude Code and Cursor
-- **skills/** - Specialized capabilities, loaded only when a task calls for them
+- **Rules** are engineering rules loaded into every conversation of both Claude Code and Cursor. The content lives once under `.chezmoitemplates/rules/` and is deployed with the extension each tool requires (Claude Code reads `~/.claude/rules/*.md`, [Cursor](https://cursor.com/help/customization/rules) reads `~/.cursor/rules/*.mdc`); the files carry Cursor's frontmatter (`description`, `alwaysApply`), which Claude Code tolerates.
+- **Skills** are specialized capabilities, loaded only when a task calls for them. [Cursor loads skills](https://cursor.com/docs/skills) from `~/.claude/skills/`, so one deployment covers both tools.
 
-Guidance that applies to one kind of task belongs in the skill that handles it, not in a rule — skills stay out of context until they are relevant.
-
-Both formats are shared across tools from a single source:
-
-- **Skills**: [Cursor loads skills](https://cursor.com/docs/skills) from `~/.claude/skills/` for compatibility with Claude Code, so one deployment covers both.
-- **Rules**: the same rule files are deployed twice — to `~/.claude/rules/*.md` for Claude Code and to `~/.cursor/rules/*.mdc` for [Cursor's user rule files](https://cursor.com/help/customization/rules). The content is byte-identical; only the extension differs, because each tool ignores the other's (Cursor ignores plain `.md` in its rules directory, Claude Code ignores `.mdc`). The files carry Cursor's frontmatter (`description`, `alwaysApply`); Claude Code tolerates those fields.
-
-There is no user-level CLAUDE.md: rules without `paths` frontmatter load with the same priority, and unlike CLAUDE.md they reach Cursor too. Note that `~/.cursor/rules` stays machine-local — Cursor does not sync it between devices; re-running `install.sh` on each machine is the sync mechanism.
-
-### mise Configuration
-
-Global mise configuration template.
+Guidance that applies to one kind of task belongs in the skill that handles it, not in a rule — skills stay out of context until they are relevant. There is no user-level CLAUDE.md: rules load with the same priority and, unlike CLAUDE.md, reach Cursor too.
 
 ## Installation
 
@@ -30,34 +27,20 @@ cd ~/dotfiles
 ./install.sh
 ```
 
-### What Gets Installed
+`install.sh` installs chezmoi via mise if missing, points it at this clone (`sourceDir` in `~/.config/chezmoi/chezmoi.toml`), and runs `chezmoi apply`.
 
-```text
-~/.claude/
-├── settings.json
-├── rules/
-│   └── *.md
-└── skills/
-
-~/.cursor/
-└── rules/
-    └── *.mdc
-
-~/.config/mise/
-└── config.toml
-```
-
-### Requirements
-
-- Git
-- GitHub CLI (`gh`)
-- mise
-- Node.js / npm (the `textlint` skill runs textlint via `npx`)
+> [!WARNING]
+> `chezmoi apply` overwrites `~/.zshrc` and `~/.zprofile` with the managed versions. On a machine with existing shell config, first move machine-specific content to `~/.zshrc.local` / `~/.zprofile.local` (sourced by the managed files), or reconcile with `chezmoi diff` and `chezmoi merge ~/.zshrc` after the bootstrap.
 
 ### Updating
 
 ```bash
-cd ~/dotfiles
-git pull
-./install.sh
+chezmoi update   # git pull the source directory, then apply
 ```
+
+After editing sources locally, run `chezmoi apply` to deploy.
+
+### Requirements
+
+- Git (the system one is fine)
+- mise — the one manually installed tool; everything else (chezmoi, gh, node) is declared in its global config and installed by `install.sh`
