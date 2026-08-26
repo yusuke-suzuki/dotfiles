@@ -5,7 +5,7 @@ set -e
 # This script installs:
 #   - Claude Code settings.json, rules, and skills
 #   - The same rules for Cursor (as .mdc under ~/.cursor/rules)
-#   - mise configuration
+#   - mise configuration and shell activation
 # Run this script from the cloned repository directory
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -17,6 +17,21 @@ AGENTS_DIR="$CLAUDE_DIR/agents"
 CURSOR_DIR="$HOME/.cursor"
 CURSOR_RULES_DIR="$CURSOR_DIR/rules"
 MISE_CONFIG_DIR="$HOME/.config/mise"
+
+# Append a mise activation line unless the file already references mise
+# activate, so hand-written setups are left untouched
+ensure_mise_line() {
+    local file="$1" line="$2"
+    if [ -f "$file" ] && grep -q "mise activate" "$file"; then
+        echo "  Already configured: $file"
+        return
+    fi
+    if [ -s "$file" ] && [ -n "$(tail -c1 "$file")" ]; then
+        echo >> "$file"
+    fi
+    printf '%s\n' "$line" >> "$file"
+    echo "  Configured: $file"
+}
 
 echo "Installing dotfiles..."
 echo ""
@@ -126,6 +141,33 @@ else
     # Install mise config
     cp "$SCRIPT_DIR/mise/config.toml.template" "$MISE_CONFIG_DIR/config.toml"
     echo "  Installed: $MISE_CONFIG_DIR/config.toml"
+
+    # Official two-file setup (https://mise.jdx.dev/dev-tools/shims.html):
+    # activate for interactive shells, shims for non-interactive ones so
+    # agent-driven commands (Claude Code, Cursor) resolve mise-managed tools
+    # without a `mise exec` prefix
+    echo "  Configuring shell activation..."
+    case "$(basename "${SHELL:-}")" in
+        zsh)
+            ensure_mise_line "${ZDOTDIR:-$HOME}/.zshrc" 'eval "$(mise activate zsh)"'
+            ensure_mise_line "${ZDOTDIR:-$HOME}/.zprofile" 'eval "$(mise activate zsh --shims)"'
+            ;;
+        bash)
+            # Creating ~/.bash_profile would shadow an existing ~/.profile
+            # for login shells, so prefer ~/.profile in that case
+            BASH_LOGIN_FILE="$HOME/.bash_profile"
+            if [ ! -f "$BASH_LOGIN_FILE" ] && [ -f "$HOME/.profile" ]; then
+                BASH_LOGIN_FILE="$HOME/.profile"
+            fi
+            ensure_mise_line "$HOME/.bashrc" 'eval "$(mise activate bash)"'
+            ensure_mise_line "$BASH_LOGIN_FILE" 'eval "$(mise activate bash --shims)"'
+            ;;
+        *)
+            echo "  ⚠️  Unsupported shell: ${SHELL:-unknown}. Configure manually:"
+            echo '     interactive shells:     eval "$(mise activate)"'
+            echo '     non-interactive shells: eval "$(mise activate --shims)"'
+            ;;
+    esac
 fi
 
 echo ""
@@ -157,10 +199,5 @@ if [ "$MISE_INSTALLED" = true ]; then
 fi
 if [ "$MISE_INSTALLED" = true ]; then
     echo ""
-    echo "mise setup:"
-    echo "  Interactive shells — add to ~/.zshrc or ~/.bashrc:"
-    echo '    eval "$(mise activate)"'
-    echo "  Non-interactive shells (Claude Code / Cursor agent commands) — add to"
-    echo "  ~/.zshenv or ~/.bash_profile:"
-    echo '    export PATH="$HOME/.local/share/mise/shims:$PATH"'
+    echo "Restart your shell to apply mise activation."
 fi

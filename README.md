@@ -20,7 +20,7 @@ There is no user-level CLAUDE.md: rules without `paths` frontmatter load with th
 
 ### mise Configuration
 
-Global mise configuration template.
+Global mise configuration template. `install.sh` also sets up shell activation following the [official two-file setup](https://mise.jdx.dev/dev-tools/shims.html): `mise activate` in the interactive shell config (`~/.zshrc` / `~/.bashrc`) and `mise activate --shims` in the login shell config (`~/.zprofile` / `~/.bash_profile`), so non-interactive shells — such as the ones Claude Code and Cursor run commands in — resolve mise-managed tools without a `mise exec` prefix. Lines are appended only when the file does not already reference `mise activate`, so hand-written setups are preserved.
 
 ## Installation
 
