@@ -24,11 +24,11 @@ For each unresolved comment:
 
 1. Verify the flagged scenario can actually occur (spec, naming constraints, type system, invariants). If it cannot, draft a "No change" reply citing the constraint and skip the rest.
 2. Read the relevant code, assess the feedback's validity and trade-offs, and weigh it against the design intent — do not accept suggestions uncritically.
-3. Draft the action: **Fix** (specific changes) or **No change** (rationale).
+3. Draft the action: **Fix** (specific changes) or **No change** (rationale). The rationale here is the seed for the review reply — keep the design reason, not only the code change.
 
 ## 3. Plan approval
 
-Enter plan mode (EnterPlanMode) and write the per-comment plan in the user's response language: path/line, the verdict with its reasoning, and the action. Do not quote the comment back — step 1 already displayed it — and keep each entry to a few lines. Present via ExitPlanMode and do not proceed until approved. Once approved, execute steps 4-6 in a single pass — do not re-enter plan mode or revise the approved actions.
+Enter plan mode (EnterPlanMode) and write the per-comment plan in the user's response language. For each unresolved thread, include path/line, the stripped comment body from step 1, the verdict with its reasoning, the action, and the full reply text that will be posted. The plan's own prose is in the user's response language; the embedded reply text is in the language it will be posted in (step 5). The plan must be enough to approve without opening GitHub. The reply body in the plan is itself a reviewable artifact; do not summarize it. For a Fix, use a placeholder for the commit id and substitute only that after push. Present via ExitPlanMode and do not proceed until approved. Once approved, execute steps 4-6 in a single pass — do not re-enter plan mode or revise the approved actions.
 
 ## 4. Fix and push
 
@@ -40,7 +40,7 @@ Skip this step when every action is "No change".
 
 Reply on every thread selected in step 1 (one reply per thread) to keep an audit trail, regardless of author (human or bot), matching the original comment's language. For fixes, reference the pushed commit id.
 
-Default to a conclusion plus a one-line rationale; do not restate what the diff or the resolved state already shows.
+A review reply is itself the stated response to the finding; reviewers will judge it as they would a design decision. Write it to stand alone. Write for a reviewer who has not seen the plan and cannot infer intent from the diff. Lead with a one-sentence verdict, then 1–2 short paragraphs that (a) name the concern being answered and (b) give the design reason this response is right — including why a suggested alternative was rejected, when one was. Reuse the approved plan's rationale; do not compress it to one line. Post the approved reply text; do not rewrite it after approval except to substitute the commit id. Do not narrate the code change, quote the review back, recap what the diff already shows, or add examples in this skill.
 
 Post to the `databaseId` of the thread's **first** comment — the reply endpoint takes a top-level comment id, not that of a reply: `gh api -X POST /repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies -f body="..."`, or MCP `add_reply_to_pull_request_comment`.
 
