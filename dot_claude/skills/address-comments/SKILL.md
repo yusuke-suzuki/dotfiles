@@ -16,7 +16,7 @@ Page the thread list by passing its `endCursor` back as `after` while `hasNextPa
 
 Fetch the current user's login (`gh api /user` or MCP `get_me`) to identify the user's own comments — threads where the user commented last stay in scope, and step 2 decides their disposition. Display all unresolved threads: author, path, line, diff hunk, body.
 
-Review bots wrap their own verification transcripts, bundled linter output, and tracking metadata in `<details>` blocks and HTML comments, which routinely outweigh the finding itself. Before reading the bodies, drop `(?s)<!--.*?-->` and every `<details>` block that carries no fenced `suggestion` or `diff` — those hold the reviewer's proposed change and are the one part worth keeping.
+Review bots wrap their own verification transcripts, bundled linter output, and tracking metadata in `<details>` blocks and HTML comments, which routinely outweigh the finding itself. Before reading a bot-authored body, drop `(?s)<!--.*?-->` and every `<details>` block that carries no fenced `suggestion` or `diff` — those hold the bot's proposed change and are the one part worth keeping. Leave human-authored comments intact: a human's `<details>` block can hold the finding itself.
 
 ## 2. Analyze
 
@@ -44,13 +44,13 @@ Every draft then passes the lint gate before it enters the plan:
 
 ## 4. Plan approval
 
-Enter plan mode (EnterPlanMode) and write the per-comment plan in the user's response language. For each unresolved thread, include its thread id and first-comment `databaseId` (the posting target in step 6 — two threads can share path, line, and body, so the plan must carry the immutable key), path/line, the stripped comment body from step 1, the verdict with its reasoning, the action, and the reply text drafted and linted in step 3 — verbatim and in full, in its posting language; a Waiting thread carries its Waiting reasoning instead of a reply, so the judgment can be overridden at approval. The reply body in the plan is itself a reviewable artifact; do not summarize it. The plan must be enough to approve without opening GitHub. Present via ExitPlanMode and do not proceed until approved. Once approved, execute steps 5-7 in a single pass — do not re-enter plan mode or revise the approved actions.
+Enter plan mode (EnterPlanMode) and write the per-comment plan in the user's response language. For each unresolved thread, include its thread id and first-comment `databaseId` (the posting target in step 6 — two threads can share path, line, and body, so the plan must carry the immutable key), path/line, the stripped bodies of all its comments from step 1 in posted order, the verdict with its reasoning, the action, and the reply text drafted and linted in step 3 — verbatim and in full, in its posting language; a Waiting thread carries its Waiting reasoning instead of a reply, so the judgment can be overridden at approval. The reply body in the plan is itself a reviewable artifact; do not summarize it. The plan must be enough to approve without opening GitHub. Present via ExitPlanMode and do not proceed until approved. Once approved, execute steps 5-7 in a single pass — do not re-enter plan mode or revise the approved actions.
 
 ## 5. Fix and push
 
 Apply the approved fixes, then commit and push before posting any reply — invoke `/fixup` (or `/commit` for an independent change), then push (`--force-with-lease` after a fixup rebase). A reply posted while the fix exists only locally cannot be verified: review bots such as coderabbitai respond that they cannot confirm the fix.
 
-Skip this step when every action is "No change".
+Skip this step unless at least one action is a Fix.
 
 ## 6. Reply
 
