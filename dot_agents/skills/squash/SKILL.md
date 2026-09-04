@@ -15,9 +15,9 @@ If semantically distinct commits are mixed (e.g. an unrelated feature and a bug 
 
 ## 3. Message
 
-Review the full diff (`git diff <default>..HEAD`) and draft the message against it, following `~/.claude/skills/commit/commit-message.md`. Do not reference the pre-squash history (avoid "combine feature X and fix Y") — describe the final state as a single coherent intent.
+Review the full diff (`git diff <default>..HEAD`) and draft the message against it, following `~/.agents/skills/commit/commit-message.md`. Do not reference the pre-squash history (avoid "combine feature X and fix Y") — describe the final state as a single coherent intent.
 
-Write it to a file and run `~/.claude/skills/commit/scripts/validate-message.sh <file>` until it passes.
+Write it to a file and run `~/.agents/skills/commit/scripts/validate-message.sh <file>` until it passes.
 
 ## 4. Squash
 
