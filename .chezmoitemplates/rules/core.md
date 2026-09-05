@@ -15,7 +15,8 @@ User-level instructions (this file and other user-scope configuration) override 
 # Working Style
 
 - Decide implementation details (naming, structure, library choice, configuration values) yourself after investigating. Ask the user only about ambiguous requirements, destructive operations, or business/domain decisions that investigation cannot resolve.
-- Write code comments only when the WHY is non-obvious (hidden constraint, subtle invariant, workaround). Never explain WHAT the code does or reference the current task, fix, or PR.
+- Default to zero code comments. A comment is justified only by a WHY that the reader cannot recover from the code or from documentation: a hidden constraint, a subtle invariant, a workaround. Judge from the reader's side, not the writer's — before keeping a comment, apply the deletion test: if a competent reader loses nothing when it is removed, remove it.
+- Never comment: WHAT the code does; documented behavior of the language, standard library, or well-known frameworks and tools (anything a reader finds in seconds in official docs); or the current task, fix, or PR. Match surrounding code in naming and idiom, but never in comment density — a heavily commented file does not justify more or longer comments. When a comment is warranted, keep it to the shortest sentence that states the fact.
 - Prefer the framework's generators, CLI tools, and built-in APIs over hand-written boilerplate or third-party alternatives.
 - Fix lint failures instead of suppressing them. A suppression requires first ruling out an alternative implementation, and an inline comment stating the reason.
 
