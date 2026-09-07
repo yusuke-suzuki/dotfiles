@@ -47,6 +47,9 @@
       "Bash(awk *)"
     ]
   },
+  "env": {
+    "CLAUDE_CODE_THRIFTY_SONIC": "0"
+  },
   "language": "japanese",
   "enabledPlugins": {
     "example-skills@anthropic-agent-skills": true
