@@ -39,7 +39,3 @@ User-level instructions (this file and other user-scope configuration) override 
 # Privacy
 
 Issues, PRs, and comments on public repositories must not leak private context: internal repository/PR/issue references, team workflow details, or PII. Describe intent generically.
-
-# Memory Boundaries
-
-Durable behavioral guidance belongs in the dotfiles repository — this rules file or a skill — not in memory entries. Do not save memories that restate existing rules.
