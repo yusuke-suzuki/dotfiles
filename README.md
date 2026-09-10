@@ -8,6 +8,7 @@ Personal dotfiles, managed with [chezmoi](https://www.chezmoi.io/).
 | --- | --- | --- |
 | `dot_zshrc`, `dot_zprofile` | `~/.zshrc`, `~/.zprofile` | Shell config with mise activation: `mise activate` for interactive shells, `--shims` for login shells so agent-driven commands (Claude Code, Cursor) resolve mise-managed tools without a `mise exec` prefix |
 | `dot_config/mise/` | `~/.config/mise/` | Global mise configuration |
+| `dot_bundle/config` | `~/.bundle/config` | Global Bundler config: `auto_install` so a missing gem triggers `bundle install` instead of failing the command |
 | `dot_agents/skills/` | `~/.agents/skills/` | Agent skills, shared by Claude Code and Cursor |
 | `dot_claude/` | `~/.claude/` | Claude Code settings and rules, plus per-skill symlinks into `~/.agents/skills/` |
 | `dot_cursor/rules/` | `~/.cursor/rules/` | Cursor user rules (`.mdc`) |
