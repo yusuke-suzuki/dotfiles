@@ -4,6 +4,9 @@ gh = "latest"
 node = "lts"
 
 [env]
+# Install missing gems instead of failing the command, so a Gemfile change
+# does not make rspec, rubocop and friends look unrunnable
+BUNDLE_AUTO_INSTALL = "true"
 
 [settings]
 # Recognize idiomatic version files like .ruby-version
