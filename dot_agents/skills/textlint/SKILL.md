@@ -14,7 +14,7 @@ Write the draft to a file, then run:
 
 Dependencies run via `npx` (pinned in `lint.sh`); the first run downloads them into the npx cache.
 
-The style is whatever `.textlintrc.json` and `prh.yml` enforce — Google's Japanese style guide as far as the rules reach. They are the source of truth; read them rather than a copy kept here.
+The style is whatever `.textlintrc.json` and `prh.yml` enforce. They are the source of truth; read them rather than a copy kept here.
 
 What they cannot decide is yours: katakana loanwords whose replacement depends on the sentence (ロジック, マッピング, クランプ, ラッパー) are deliberately absent from the dictionary, so replace them yourself when no established technical term is intended.
 
