@@ -25,6 +25,9 @@ run_textlint() {
 # applies only one of two fixes that overlap, so one pass leaves those behind.
 if [ -n "$FIX" ]; then
     run_textlint --fix "$@" > /dev/null || true
+    run_textlint --fix "$@" > /dev/null || true
 fi
 
-run_textlint ${FIX:+"$FIX"} "$@"
+# Always report rather than reuse the --fix output, which lists what it fixed
+# and stays silent about the detect-only rules that need a manual edit.
+run_textlint "$@"
