@@ -27,3 +27,14 @@ rules:
     pattern: （
   - expected: )
     pattern: ）
+  # Half-width space between Japanese text and the outside of half-width
+  # brackets. The inside is left alone, as is a bracket that sits between
+  # half-width characters, e.g. Foo(bar).
+  - expected: $1 (
+    pattern: /([ぁ-んァ-ヶー一-龯々〇])\(/
+  - expected: ) $1
+    pattern: /\)([ぁ-んァ-ヶー一-龯々〇])/
+  - expected: $1 [
+    pattern: /([ぁ-んァ-ヶー一-龯々〇])\[/
+  - expected: "] $1"
+    pattern: /\]([ぁ-んァ-ヶー一-龯々〇])/
