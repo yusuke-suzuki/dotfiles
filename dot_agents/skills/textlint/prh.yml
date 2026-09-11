@@ -38,27 +38,6 @@ rules:
     pattern: /([ぁ-んァ-ヶー一-龯々〇])\[/
   - expected: "] $1"
     pattern: /\]([ぁ-んァ-ヶー一-龯々〇])/
-  # Digits are half-width.
-  - expected: "0"
-    pattern: ０
-  - expected: "1"
-    pattern: １
-  - expected: "2"
-    pattern: ２
-  - expected: "3"
-    pattern: ３
-  - expected: "4"
-    pattern: ４
-  - expected: "5"
-    pattern: ５
-  - expected: "6"
-    pattern: ６
-  - expected: "7"
-    pattern: ７
-  - expected: "8"
-    pattern: ８
-  - expected: "9"
-    pattern: ９
   # 、。 rather than ，．, except between two digits, where the two are a decimal
   # point and a thousands separator and become half-width instead.
   - expected: "、"
