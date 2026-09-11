@@ -59,42 +59,56 @@ rules:
     pattern: ８
   - expected: "9"
     pattern: ９
-  # 、。 rather than ，．, except inside a number, where the two are a decimal
+  # 、。 rather than ，．, except between two digits, where the two are a decimal
   # point and a thousands separator and become half-width instead.
   - expected: "、"
-    pattern: /(?<![0-9０-９])，(?![0-9０-９])/
+    pattern: /(?:(?<![0-9０-９])，|，(?![0-9０-９]))/
+    specs:
+      - from: 値は 3 つあります，つまり十分です
+        to: 値は 3 つあります、つまり十分です
+      - from: v1，最新版
+        to: v1、最新版
   - expected: "。"
-    pattern: /(?<![0-9０-９])．(?![0-9０-９])/
+    pattern: /(?:(?<![0-9０-９])．|．(?![0-9０-９]))/
   - expected: ","
     pattern: /(?<=[0-9０-９])，(?=[0-9０-９])/
+    specs:
+      - from: １，０００
+        to: １,０００
   - expected: "."
     pattern: /(?<=[0-9０-９])．(?=[0-9０-９])/
-  # Katakana loanwords keep the long vowel mark. Words whose short form is the
-  # established one in Japanese technical writing (ブラウザ, コンテナ, メモリ)
-  # are left out.
+  # Katakana loanwords keep the long vowel mark, unless more katakana follows:
+  # the match would then be the head of a longer word that has its own spelling
+  # (ユーザビリティ, モニタリング). Words whose short form is the established one
+  # in Japanese technical writing (ブラウザ, コンテナ, メモリ) are left out.
   - expected: サーバー
-    pattern: /サーバ(?!ー)/
+    pattern: /サーバ(?![ァ-ヶー])/
   - expected: ユーザー
-    pattern: /ユーザ(?!ー)/
+    pattern: /ユーザ(?![ァ-ヶー])/
+    specs:
+      - from: ユーザの設定
+        to: ユーザーの設定
+      - from: ユーザビリティ
+        to: ユーザビリティ
   - expected: コンピューター
-    pattern: /コンピュータ(?!ー)/
+    pattern: /コンピュータ(?![ァ-ヶー])/
   - expected: パラメーター
-    pattern: /パラメータ(?!ー)/
+    pattern: /パラメータ(?![ァ-ヶー])/
   - expected: フォルダー
-    pattern: /フォルダ(?!ー)/
+    pattern: /フォルダ(?![ァ-ヶー])/
   - expected: ドライバー
-    pattern: /ドライバ(?!ー)/
+    pattern: /ドライバ(?![ァ-ヶー])/
   - expected: コントローラー
-    pattern: /コントローラ(?!ー)/
+    pattern: /コントローラ(?![ァ-ヶー])/
   - expected: エディター
-    pattern: /エディタ(?!ー)/
+    pattern: /エディタ(?![ァ-ヶー])/
   - expected: アダプター
-    pattern: /アダプタ(?!ー)/
+    pattern: /アダプタ(?![ァ-ヶー])/
   - expected: モニター
-    pattern: /モニタ(?!ー)/
+    pattern: /モニタ(?![ァ-ヶー])/
   - expected: プリンター
-    pattern: /プリンタ(?!ー)/
+    pattern: /プリンタ(?![ァ-ヶー])/
   - expected: センサー
-    pattern: /センサ(?!ー)/
+    pattern: /センサ(?![ァ-ヶー])/
   - expected: マネージャー
-    pattern: /マネージャ(?!ー)/
+    pattern: /マネージャ(?![ァ-ヶー])/
