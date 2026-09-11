@@ -27,3 +27,88 @@ rules:
     pattern: （
   - expected: )
     pattern: ）
+  # Half-width space between Japanese text and the outside of half-width
+  # brackets. The inside is left alone, as is a bracket that sits between
+  # half-width characters, e.g. Foo(bar).
+  - expected: $1 (
+    pattern: /([ぁ-んァ-ヶー一-龯々〇])\(/
+  - expected: ) $1
+    pattern: /\)([ぁ-んァ-ヶー一-龯々〇])/
+  - expected: $1 [
+    pattern: /([ぁ-んァ-ヶー一-龯々〇])\[/
+  - expected: "] $1"
+    pattern: /\]([ぁ-んァ-ヶー一-龯々〇])/
+  # Digits are half-width.
+  - expected: "0"
+    pattern: ０
+  - expected: "1"
+    pattern: １
+  - expected: "2"
+    pattern: ２
+  - expected: "3"
+    pattern: ３
+  - expected: "4"
+    pattern: ４
+  - expected: "5"
+    pattern: ５
+  - expected: "6"
+    pattern: ６
+  - expected: "7"
+    pattern: ７
+  - expected: "8"
+    pattern: ８
+  - expected: "9"
+    pattern: ９
+  # 、。 rather than ，．, except between two digits, where the two are a decimal
+  # point and a thousands separator and become half-width instead.
+  - expected: "、"
+    pattern: /(?:(?<![0-9０-９])，|，(?![0-9０-９]))/
+    specs:
+      - from: 値は 3 つあります，つまり十分です
+        to: 値は 3 つあります、つまり十分です
+      - from: v1，最新版
+        to: v1、最新版
+  - expected: "。"
+    pattern: /(?:(?<![0-9０-９])．|．(?![0-9０-９]))/
+  - expected: ","
+    pattern: /(?<=[0-9０-９])，(?=[0-9０-９])/
+    specs:
+      - from: １，０００
+        to: １,０００
+  - expected: "."
+    pattern: /(?<=[0-9０-９])．(?=[0-9０-９])/
+  # Katakana loanwords keep the long vowel mark, unless more katakana follows:
+  # the match would then be the head of a longer word that has its own spelling
+  # (ユーザビリティ, モニタリング). Words whose short form is the established one
+  # in Japanese technical writing (ブラウザ, コンテナ, メモリ) are left out.
+  - expected: サーバー
+    pattern: /サーバ(?![ァ-ヶー])/
+  - expected: ユーザー
+    pattern: /ユーザ(?![ァ-ヶー])/
+    specs:
+      - from: ユーザの設定
+        to: ユーザーの設定
+      - from: ユーザビリティ
+        to: ユーザビリティ
+  - expected: コンピューター
+    pattern: /コンピュータ(?![ァ-ヶー])/
+  - expected: パラメーター
+    pattern: /パラメータ(?![ァ-ヶー])/
+  - expected: フォルダー
+    pattern: /フォルダ(?![ァ-ヶー])/
+  - expected: ドライバー
+    pattern: /ドライバ(?![ァ-ヶー])/
+  - expected: コントローラー
+    pattern: /コントローラ(?![ァ-ヶー])/
+  - expected: エディター
+    pattern: /エディタ(?![ァ-ヶー])/
+  - expected: アダプター
+    pattern: /アダプタ(?![ァ-ヶー])/
+  - expected: モニター
+    pattern: /モニタ(?![ァ-ヶー])/
+  - expected: プリンター
+    pattern: /プリンタ(?![ァ-ヶー])/
+  - expected: センサー
+    pattern: /センサ(?![ァ-ヶー])/
+  - expected: マネージャー
+    pattern: /マネージャ(?![ァ-ヶー])/
