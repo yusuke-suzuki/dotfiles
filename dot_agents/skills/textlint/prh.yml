@@ -38,3 +38,63 @@ rules:
     pattern: /([ぁ-んァ-ヶー一-龯々〇])\[/
   - expected: "] $1"
     pattern: /\]([ぁ-んァ-ヶー一-龯々〇])/
+  # Digits are half-width.
+  - expected: "0"
+    pattern: ０
+  - expected: "1"
+    pattern: １
+  - expected: "2"
+    pattern: ２
+  - expected: "3"
+    pattern: ３
+  - expected: "4"
+    pattern: ４
+  - expected: "5"
+    pattern: ５
+  - expected: "6"
+    pattern: ６
+  - expected: "7"
+    pattern: ７
+  - expected: "8"
+    pattern: ８
+  - expected: "9"
+    pattern: ９
+  # 、。 rather than ，．, except inside a number, where the two are a decimal
+  # point and a thousands separator and become half-width instead.
+  - expected: "、"
+    pattern: /(?<![0-9０-９])，(?![0-9０-９])/
+  - expected: "。"
+    pattern: /(?<![0-9０-９])．(?![0-9０-９])/
+  - expected: ","
+    pattern: /(?<=[0-9０-９])，(?=[0-9０-９])/
+  - expected: "."
+    pattern: /(?<=[0-9０-９])．(?=[0-9０-９])/
+  # Katakana loanwords keep the long vowel mark. Words whose short form is the
+  # established one in Japanese technical writing (ブラウザ, コンテナ, メモリ)
+  # are left out.
+  - expected: サーバー
+    pattern: /サーバ(?!ー)/
+  - expected: ユーザー
+    pattern: /ユーザ(?!ー)/
+  - expected: コンピューター
+    pattern: /コンピュータ(?!ー)/
+  - expected: パラメーター
+    pattern: /パラメータ(?!ー)/
+  - expected: フォルダー
+    pattern: /フォルダ(?!ー)/
+  - expected: ドライバー
+    pattern: /ドライバ(?!ー)/
+  - expected: コントローラー
+    pattern: /コントローラ(?!ー)/
+  - expected: エディター
+    pattern: /エディタ(?!ー)/
+  - expected: アダプター
+    pattern: /アダプタ(?!ー)/
+  - expected: モニター
+    pattern: /モニタ(?!ー)/
+  - expected: プリンター
+    pattern: /プリンタ(?!ー)/
+  - expected: センサー
+    pattern: /センサ(?!ー)/
+  - expected: マネージャー
+    pattern: /マネージャ(?!ー)/

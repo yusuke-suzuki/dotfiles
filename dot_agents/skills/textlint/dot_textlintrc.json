@@ -5,6 +5,9 @@
         "max": 150
       },
       "no-exclamation-question-mark": false,
+      "no-mix-dearu-desumasu": {
+        "preferInBody": "ですます"
+      },
       "max-kanji-continuous-len": {
         "max": 8
       }
