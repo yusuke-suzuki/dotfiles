@@ -2,7 +2,7 @@
   "rules": {
     "preset-ja-technical-writing": {
       "sentence-length": {
-        "max": 150
+        "max": 100
       },
       "no-exclamation-question-mark": false,
       "no-mix-dearu-desumasu": {
