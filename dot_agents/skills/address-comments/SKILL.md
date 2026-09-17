@@ -41,7 +41,7 @@ A reply is a turn in a conversation with the reviewer, and reviewers judge it as
 Every draft then passes the lint gate before it enters the plan:
 
 1. For Japanese drafts, run the `textlint` skill and fix every reported violation, including the detect-only rules that need manual edits (particle errors, sentence style). Reports are blockers, not advisories: a draft with an unaddressed violation neither enters the plan nor gets posted.
-2. Run the `copyedit` skill's checks over the drafts (facts, consistency, reader perspective) and fix every finding, re-running until clean — copyedit findings block the plan and the posting exactly as textlint reports do.
+2. Verify every factual reference the draft makes — PR and issue numbers, commit ids, quoted text — against its source, and correct every mismatch. An unverified reference blocks the plan and the posting exactly as a textlint report does.
 
 ## 4. Plan approval
 
