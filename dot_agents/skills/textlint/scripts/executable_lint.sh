@@ -18,7 +18,8 @@ run_textlint() {
         --package @textlint-ja/textlint-rule-preset-ai-writing@1.7.0 \
         --package textlint-rule-no-mixed-zenkaku-and-hankaku-alphabet@1.0.1 \
         --package textlint-rule-no-mixed-zenkaku-and-hankaku-number@1.0.0 \
-        textlint --config "$SKILL_DIR/.textlintrc.json" --rulesdir "$SKILL_DIR/rules" "$@"
+        --package @textlint-rule/textlint-rule-pattern@2.0.2 \
+        textlint --config "$SKILL_DIR/.textlintrc.json" "$@"
 }
 
 # A fix can produce text that another rule then fixes — a full-width paren
