@@ -18,6 +18,7 @@ run_textlint() {
         --package @textlint-ja/textlint-rule-preset-ai-writing@1.7.0 \
         --package textlint-rule-no-mixed-zenkaku-and-hankaku-alphabet@1.0.1 \
         --package textlint-rule-no-mixed-zenkaku-and-hankaku-number@1.0.0 \
+        --package @textlint-rule/textlint-rule-pattern@2.0.2 \
         textlint --config "$SKILL_DIR/.textlintrc.json" "$@"
 }
 

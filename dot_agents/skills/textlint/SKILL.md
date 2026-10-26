@@ -16,7 +16,7 @@ Dependencies run via `npx` (pinned in `lint.sh`); the first run downloads them i
 
 The style is whatever `.textlintrc.json` and `prh.yml` enforce. They are the source of truth; read them rather than a copy kept here.
 
-What they cannot decide is yours: katakana loanwords whose replacement depends on the sentence (ロジック, マッピング, クランプ, ラッパー) are deliberately absent from the dictionary, so replace them yourself when no established technical term is intended.
+What they cannot decide is yours: katakana loanwords whose replacement depends on the sentence (ロジック, マッピング, クランプ, ラッパー) are deliberately absent from the dictionary, so replace them yourself when no established technical term is intended. Likewise, `@textlint-rule/pattern` flags every 側 without a fix; rewrite the sentence to name the actor or the place instead.
 
 `--fix` applies the fixes, then reports what is left: some rules are detect-only and need manual edits.
 

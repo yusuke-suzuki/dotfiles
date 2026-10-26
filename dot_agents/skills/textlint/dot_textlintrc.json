@@ -33,6 +33,14 @@
       "rulePaths": [
         "./prh.yml"
       ]
+    },
+    "@textlint-rule/pattern": {
+      "patterns": [
+        {
+          "message": "「側」を使わず、主体や位置を具体的に書いてください。",
+          "pattern": "側"
+        }
+      ]
     }
   }
 }
