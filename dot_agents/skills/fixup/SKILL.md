@@ -7,7 +7,7 @@ description: Create a fixup commit and autosquash rebase
 
 ## 1. Assess state
 
-Run `git status` and `git fetch origin`, detect the default branch (`git symbolic-ref refs/remotes/origin/HEAD --short`), and list commits (`git log <default>..HEAD --oneline`). Stop and inform the user on the default branch or a detached HEAD — never rewrite history with nowhere to land it.
+Run `git status` and `git fetch origin`, detect the default branch (`git symbolic-ref refs/remotes/origin/HEAD --short`; if unset, run `git remote set-head origin --auto` first), and list commits (`git log <default>..HEAD --oneline`). Stop and inform the user on the default branch or a detached HEAD — never rewrite history with nowhere to land it. If the branch has an upstream and `git log HEAD..@{u}` is non-empty, stop and run `/sync` first.
 
 ## 2. Identify target
 
