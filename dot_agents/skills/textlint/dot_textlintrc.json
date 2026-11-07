@@ -45,7 +45,8 @@
       "patterns": [
         {
           "message": "「側」を使わず、主体や位置を具体的に書いてください。",
-          "pattern": "側"
+          "pattern": "側",
+          "allowNodeTypes": ["BlockQuote"]
         },
         {
           "message": "話し言葉です。「ため」「そのため」など書き言葉で書いてください。",
