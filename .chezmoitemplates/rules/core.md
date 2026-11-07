@@ -26,6 +26,17 @@ User-level instructions (this file and other user-scope configuration) override 
 
 - Run project commands through binstubs (`bin/rails`, `bin/rspec`, `bin/rubocop`) or `bundle exec`, never bare gem executables — bare ones can resolve to a stale shim or a version that does not match `Gemfile.lock`.
 
+# Git
+
+Use the matching skill for these history operations, even when a prompt just says "commit" or "pull":
+
+- New change → `/commit`
+- Fix to a commit on the branch (review, CI) → `/fixup`
+- Feature branch behind its upstream or the default branch → `/sync`, never merge
+- Branch into one commit → `/squash`
+
+Approval prompts (e.g. force push) are no reason to leave a skill.
+
 # GitHub
 
 - Create pull requests as draft with the most representative commit subject line as the title, verbatim; fill the repository's pull request template for the body. After later pushes, if the description no longer matches the final diff, rewrite it against that diff — never append changelog-style updates.
