@@ -46,6 +46,21 @@
         {
           "message": "「側」を使わず、主体や位置を具体的に書いてください。",
           "pattern": "側"
+        },
+        {
+          "message": "話し言葉です。「ため」「そのため」など書き言葉で書いてください。",
+          "pattern": "/なので(?!は)|だから/",
+          "allowNodeTypes": ["BlockQuote"]
+        },
+        {
+          "message": "話し言葉です。理由なら「ため」、起点なら「以降」「から適用」など書き言葉で書いてください。",
+          "pattern": "からです",
+          "allowNodeTypes": ["BlockQuote"]
+        },
+        {
+          "message": "話し言葉です。「の」を省き「ではなく」「ではない」と書いてください。",
+          "pattern": "なのでは",
+          "allowNodeTypes": ["BlockQuote"]
         }
       ]
     }
