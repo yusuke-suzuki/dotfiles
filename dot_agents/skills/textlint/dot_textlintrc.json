@@ -12,7 +12,14 @@
         "max": 8
       }
     },
-    "@textlint-ja/preset-ai-writing": true,
+    "@textlint-ja/preset-ai-writing": {
+      "ai-tech-writing-guideline": {
+        "disableRedundancyGuidance": true,
+        "disableVoiceGuidance": true,
+        "disableClarityGuidance": true,
+        "enableDocumentAnalysis": false
+      }
+    },
     "no-mixed-zenkaku-and-hankaku-alphabet": true,
     "no-mixed-zenkaku-and-hankaku-number": true,
     "preset-ja-spacing": {
@@ -38,7 +45,23 @@
       "patterns": [
         {
           "message": "「側」を使わず、主体や位置を具体的に書いてください。",
-          "pattern": "側"
+          "pattern": "側",
+          "allowNodeTypes": ["BlockQuote"]
+        },
+        {
+          "message": "話し言葉です。「ため」「そのため」など書き言葉で書いてください。",
+          "pattern": "/なので(?!は)|だから/",
+          "allowNodeTypes": ["BlockQuote"]
+        },
+        {
+          "message": "話し言葉です。理由なら「ため」、起点なら「以降」「から適用」など書き言葉で書いてください。",
+          "pattern": "からです",
+          "allowNodeTypes": ["BlockQuote"]
+        },
+        {
+          "message": "話し言葉です。「の」を省き「ではなく」「ではない」と書いてください。",
+          "pattern": "なのでは",
+          "allowNodeTypes": ["BlockQuote"]
         }
       ]
     }

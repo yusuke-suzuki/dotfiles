@@ -20,6 +20,10 @@ What they cannot decide is yours: katakana loanwords whose replacement depends o
 
 `--fix` applies the fixes, then reports what is left: some rules are detect-only and need manual edits.
 
+## Prose
+
+Write in 書き言葉; never use 話し言葉. `no-doubled-joshi` treats a 読点 as distance between particles, so resolve its reports by reordering or rewording, never by inserting a 読点.
+
 ## Japanese text embedded in source files
 
 textlint parses only `.md` and `.txt`; running `lint.sh` on a source file (`.ts`, `.rb`, …) is a silent no-op. Extract the Japanese fragments (code comments, docstrings, test case titles) into a scratch `.txt` file — one fragment per block, blocks separated by blank lines, keeping the original line breaks of multiline comments — run `lint.sh --fix` on it, then edit each fixed fragment back into its place in the source.
