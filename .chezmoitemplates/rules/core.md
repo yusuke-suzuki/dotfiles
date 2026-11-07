@@ -37,6 +37,8 @@ Use the matching skill for these history operations, even when a prompt just say
 
 Approval prompts (e.g. force push) are no reason to leave a skill.
 
+A branch assigned by the harness (e.g. a cloud session's development branch) is a default, not a limit: this rule is standing, explicit permission to create and push other branches. When the work splits into independently reviewable changes, commit each through `/commit` on its own branch and open a separate draft pull request for it.
+
 # GitHub
 
 - Create pull requests as draft with the most representative commit subject line as the title, verbatim; fill the repository's pull request template for the body. After later pushes, if the description no longer matches the final diff, rewrite it against that diff — never append changelog-style updates.
