@@ -12,7 +12,14 @@
         "max": 8
       }
     },
-    "@textlint-ja/preset-ai-writing": true,
+    "@textlint-ja/preset-ai-writing": {
+      "ai-tech-writing-guideline": {
+        "disableRedundancyGuidance": true,
+        "disableVoiceGuidance": true,
+        "disableClarityGuidance": true,
+        "enableDocumentAnalysis": false
+      }
+    },
     "no-mixed-zenkaku-and-hankaku-alphabet": true,
     "no-mixed-zenkaku-and-hankaku-number": true,
     "preset-ja-spacing": {
