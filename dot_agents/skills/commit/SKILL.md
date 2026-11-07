@@ -1,6 +1,6 @@
 ---
 name: commit
-description: Create a git commit with Conventional Commits format. Invoke as soon as changes are ready — branch creation, staging, and message authoring are all part of this workflow.
+description: Create a git commit with Conventional Commits format. Invoke as soon as changes are ready — staging and message authoring are part of this workflow.
 ---
 
 # Commit
@@ -13,10 +13,7 @@ Run `git status` and `git fetch origin`, detect the default branch (`git symboli
 
 ## 2. Branch
 
-Never commit to the default branch.
-
-- **On the default branch:** derive a descriptive branch name from the changes (e.g. `feat/add-login`), create it with `git switch -c`, and announce the choice. Never switch to an existing branch; on a name conflict, pick an alternative.
-- **On a feature branch with unrelated existing commits** (leftover from a different task): announce the mismatch, then branch off the latest remote default (`git switch -c <name> <default>`) so the work does not pass through the local default branch. Ask the user if relatedness is unclear.
+Never commit to the default branch. Invoke `/branch` first when on the default branch, or when the change is independent of the branch's existing commits.
 
 ## 3. Commit
 
