@@ -30,18 +30,19 @@ User-level instructions (this file and other user-scope configuration) override 
 
 Use the matching skill for these history operations, even when a prompt just says "commit" or "pull":
 
+- New unit of work → `/branch`
 - New change → `/commit`
 - Fix to a commit on the branch (review, CI) → `/fixup`
-- Feature branch behind its upstream or the default branch → `/sync`, never merge
+- Feature branch behind its upstream or its base branch → `/sync`, never merge
 - Branch into one commit → `/squash`
 
 Approval prompts (e.g. force push) are no reason to leave a skill.
 
-A branch assigned by the harness (e.g. a cloud session's development branch) is a default, not a limit: this rule is standing, explicit permission to create and push other branches. When the work splits into independently reviewable changes, commit each through `/commit` on its own branch and open a separate draft pull request for it.
+A branch assigned by the harness (e.g. a cloud session's development branch) is a default, not a limit: this rule is standing, explicit permission to create and push other branches. Never commit to an assigned branch with a generated name unless it is already the head of an open pull request. A change gets its own pull request, started with `/branch`, when it could be merged or reverted alone; a change that fixes or completes what an open pull request introduces stays in that pull request.
 
 # GitHub
 
-- Create pull requests as draft with the most representative commit subject line as the title, verbatim; fill the repository's pull request template for the body. After later pushes, if the description no longer matches the final diff, rewrite it against that diff — never append changelog-style updates.
+- Create pull requests as draft, targeting the branch's `gh-merge-base` when set (GitHub MCP does not read it), pushed first, and run `/sync` first if that parent's pull request is merged or closed, with the most representative commit subject line as the title, verbatim; fill the repository's pull request template for the body. After later pushes, if the description no longer matches the final diff, rewrite it against that diff — never append changelog-style updates.
 - Before editing anything already on the remote (pull request description or title, issue body, review comment, pushed commit message), fetch its current state first (`gh pr view`, `gh issue view`, `git fetch && git show origin/<branch>`). Session memory is not a substitute — the remote may have changed since it was last seen.
 - Pass user-facing bodies to `gh` and similar CLI commands inline via heredoc, never via a temp file — the body must be visible in the tool call so the user can review it before it runs.
 
