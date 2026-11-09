@@ -15,3 +15,5 @@ idiomatic_version_file_enable_tools = ["ruby", "node"]
 
 # Automatically load .env files in project root
 env_file = ".env"
+
+ruby.compile = true
