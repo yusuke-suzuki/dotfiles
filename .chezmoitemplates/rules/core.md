@@ -30,7 +30,7 @@ User-level instructions (this file and other user-scope configuration) override 
 
 Use the matching skill for these history operations, even when a prompt just says "commit" or "pull":
 
-- New unit of work → `/branch`
+- New branch → `/branch`
 - New change → `/commit`
 - Fix to a commit on the branch (review, CI) → `/fixup`
 - Feature branch behind its upstream or its base branch → `/sync`, never merge
@@ -38,7 +38,7 @@ Use the matching skill for these history operations, even when a prompt just say
 
 Approval prompts (e.g. force push) are no reason to leave a skill.
 
-A branch assigned by the harness (e.g. a cloud session's development branch) is a default, not a limit: this rule is standing, explicit permission to create and push other branches. Never commit to an assigned branch with a generated name unless it is already the head of an open pull request. A change gets its own pull request, started with `/branch`, when it could be merged or reverted alone; a change that fixes or completes what an open pull request introduces stays in that pull request.
+A branch assigned by the harness (e.g. a cloud session's development branch) is a default, not a limit: this rule is standing, explicit permission to create and push other branches. Never commit to an assigned branch with a generated name unless it is already the head of an open pull request. A session works on one branch and one pull request: follow-up requests in the same session continue on the current branch, even when they could be merged or reverted alone. Start another branch with `/branch` only when the user asks to split the work, when a change must be merged or released separately from the rest (e.g. an API that ships before its client, a migration deployed before the code that relies on it), or when the current branch's pull request is merged or closed. When splitting for a release constraint, name the constraint to the user.
 
 # GitHub
 
