@@ -1,6 +1,6 @@
 ---
 name: branch
-description: Start a branch for a new unit of work, either from the default branch or stacked on the current branch. Invoke before the first edit of each change that deserves its own pull request.
+description: Start a branch, either from the default branch or stacked on the current branch. Invoke before the first commit when no usable branch exists yet, when the user asks to split work into a separate pull request, or when a change must be merged or released separately (e.g. an API that ships before its client) — never just because a follow-up request could stand alone.
 ---
 
 # Branch
