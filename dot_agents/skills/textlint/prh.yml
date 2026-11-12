@@ -23,6 +23,15 @@ rules:
     pattern: /コンテキスト(?!ウィンドウ|メニュー|スイッチ)/
   - expected: 単純な
     pattern: トリビアルな
+  - expected: 全て
+    pattern: すべて
+  - expected: 既に
+    pattern: すでに
+  - expected: 当た$1
+    pattern: /あた(る|って|った|れ|らな)/
+    specs:
+      - from: 実行にあたって確認します
+        to: 実行に当たって確認します
   - expected: (
     pattern: （
   - expected: )
@@ -43,10 +52,10 @@ rules:
   - expected: "、"
     pattern: /(?:(?<![0-9０-９])，|，(?![0-9０-９]))/
     specs:
-      - from: 値は 3 つあります，つまり十分です
-        to: 値は 3 つあります、つまり十分です
-      - from: v1，最新版
-        to: v1、最新版
+      - from: 値は 3 つあり，いずれも必須です
+        to: 値は 3 つあり、いずれも必須です
+      - from: v1，v2 の両方に対応します
+        to: v1、v2 の両方に対応します
   - expected: "。"
     pattern: /(?:(?<![0-9０-９])．|．(?![0-9０-９]))/
   - expected: ","
