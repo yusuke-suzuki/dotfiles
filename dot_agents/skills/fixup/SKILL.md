@@ -27,7 +27,7 @@ Stop first if `git log --merges <target>~1..HEAD` is non-empty: autosquash rebas
 
 Find the target's post-rebase hash in `git log <default>..HEAD`, run `git show <target>`, and read `~/.agents/skills/commit/commit-message.md`, especially "After /fixup". Evaluate whether the existing message still describes the final diff as a single coherent unit — it often does; leave it alone if so.
 
-Only if it doesn't: draft against the final diff, not the iteration history, write it to a file, and run `~/.agents/skills/commit/scripts/validate-message.sh <file>` until it passes. If the target is HEAD, `git commit --amend -F <file>`. Otherwise `git commit --allow-empty --fixup=reword:<target>` — keep the prepared `amend!` first line and put the new message below it — then rerun `GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash <target>~1` and confirm no `amend!` commit remains.
+Only if it doesn't: redraft the whole message from the final diff, never by appending to the old one, no longer than a fresh commit of that diff would need. Write it to a file, and run `~/.agents/skills/commit/scripts/validate-message.sh <file>` until it passes. If the target is HEAD, `git commit --amend -F <file>`. Otherwise `git commit --allow-empty --fixup=reword:<target>` — keep the prepared `amend!` first line and put the new message below it — then rerun `GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash <target>~1` and confirm no `amend!` commit remains.
 
 ## 5. Wrap up
 
