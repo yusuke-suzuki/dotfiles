@@ -5,7 +5,7 @@ description: Sync feature branch with its base via rebase
 
 # Sync
 
-Read `~/.agents/skills/git-workflow/SKILL.md` first if it is not loaded.
+Read `../git-workflow/SKILL.md` (relative to this skill's base directory) first if it is not loaded.
 
 ## 1. Assess state
 

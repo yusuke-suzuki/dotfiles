@@ -5,7 +5,7 @@ description: Squash all branch commits into a single commit
 
 # Squash
 
-Read `~/.agents/skills/git-workflow/SKILL.md` first if it is not loaded.
+Read `../git-workflow/SKILL.md` (relative to this skill's base directory) first if it is not loaded.
 
 ## 1. Assess state
 
@@ -17,9 +17,9 @@ If semantically distinct commits are mixed (e.g. an unrelated feature and a bug 
 
 ## 3. Message
 
-Review the full diff (`git diff <base-ref>...HEAD`) and draft the message against it, following `~/.agents/skills/commit/commit-message.md`. Do not reference the pre-squash history (avoid "combine feature X and fix Y") — describe the final state as a single coherent intent.
+Review the full diff (`git diff <base-ref>...HEAD`) and draft the message against it, following `../commit/commit-message.md` (relative to this skill's base directory). Do not reference the pre-squash history (avoid "combine feature X and fix Y") — describe the final state as a single coherent intent.
 
-Write it to a file and run `~/.agents/skills/commit/scripts/validate-message.sh <file>` until it passes.
+Write it to a file and run `<skill-dir>/../commit/scripts/validate-message.sh <file>` from your working directory, with `<skill-dir>` replaced by this skill's base directory, until it passes.
 
 ## 4. Squash
 

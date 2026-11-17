@@ -5,11 +5,11 @@ description: Auto-format Japanese prose with textlint — katakana loanword repl
 
 # Textlint
 
-Write the draft to a file, then run:
+Write the draft to a file, then run, from your working directory, with `<skill-dir>` replaced by this skill's base directory:
 
 ```bash
-~/.agents/skills/textlint/scripts/lint.sh <file>          # report violations
-~/.agents/skills/textlint/scripts/lint.sh --fix <file>    # auto-fix in place
+<skill-dir>/scripts/lint.sh <file>          # report violations
+<skill-dir>/scripts/lint.sh --fix <file>    # auto-fix in place
 ```
 
 Dependencies run via `npx` (pinned in `lint.sh`); the first run downloads them into the npx cache.

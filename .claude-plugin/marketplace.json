@@ -1,0 +1,14 @@
+{
+  "name": "dotfiles",
+  "description": "Agent skills from yusuke-suzuki/dotfiles",
+  "owner": {
+    "name": "yusuke-suzuki"
+  },
+  "plugins": [
+    {
+      "name": "dev",
+      "source": "./plugins/dev",
+      "description": "Development workflow and coding standards skills"
+    }
+  ]
+}
