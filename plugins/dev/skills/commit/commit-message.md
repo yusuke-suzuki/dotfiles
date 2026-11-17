@@ -4,7 +4,7 @@
 
 - Conventional Commits, English, imperative mood, present tense (`feat: add user authentication`, not `added`)
 - Subject ≤ 50 characters including prefix and scope
-- Format rules are enforced by `~/.agents/skills/commit/scripts/validate-message.sh <message-file>` — run it on every draft
+- Format rules are enforced by `<skill-dir>/scripts/validate-message.sh <message-file>`, where `<skill-dir>` is the commit skill's base directory — run it on every draft from your working directory
 
 ## Types
 

@@ -2,7 +2,7 @@
 
 This repository is the source of truth for shell, mise, Claude Code, and Cursor configuration, managed with chezmoi. `install.sh` bootstraps chezmoi; `chezmoi apply` deploys the `dot_`-prefixed sources to `$HOME` (`dot_claude/` → `~/.claude/`, `dot_zshrc` → `~/.zshrc`, and so on).
 
-Agent guidance lives only in skills under `dot_agents/skills/` (deployed to the tool-neutral `~/.agents/skills/`, which Cursor reads natively; Claude Code reads each skill through a per-skill symlink deployed from `dot_claude/skills/symlink_<skill-name>`); there are no always-on rules. When adding a skill, create the skill directory under `dot_agents/skills/` and the matching symlink stub. Descriptions load into every session and bodies only on demand, so keep both minimal. Tool-specific configuration goes under `dot_claude/` for Claude Code and `dot_cursor/` for Cursor (currently none).
+Agent guidance lives only in skills, packaged as the `dev` plugin under `plugins/dev/`; there are no always-on rules. Claude Code and Codex install it through the marketplaces in `.claude-plugin/` and `.agents/plugins/`, Devin from `plugins/dev`, and Cursor from `~/.cursor/plugins/local/dev`, which `.chezmoiexternal.toml` extracts from the `main` tarball. When adding a skill, create `plugins/dev/skills/<name>/SKILL.md`, mark its scripts executable in git, and reference bundled files relative to the skill's base directory. Descriptions load into every session and bodies only on demand, so keep both minimal. Tool-specific configuration goes under `dot_claude/` for Claude Code and `dot_cursor/` for Cursor (currently none).
 
 To correct agent behavior, prefer countermeasures in this order:
 
@@ -12,8 +12,8 @@ To correct agent behavior, prefer countermeasures in this order:
 
 Never propose "be more careful".
 
-Deleting a source does not delete what an earlier `chezmoi apply` deployed: when removing a deployed file or skill, list its target in `.chezmoiremove`.
+Deleting a source does not delete what an earlier `chezmoi apply` deployed: when removing a deployed file or skill, remove its target in a new `run_once_after_` script, not `.chezmoiremove`, which applies on every run and would also delete whatever is later installed at the same path. Never edit an existing `run_once_` script: chezmoi reruns one whose content changes, which would repeat its earlier removals.
 
-chezmoi source naming applies: executable scripts need the `executable_` prefix, and files deployed with a leading dot need the `dot_` prefix (plain dot-prefixed names are ignored by chezmoi).
+chezmoi source naming applies outside `plugins/`, which chezmoi ignores: executable scripts need the `executable_` prefix, and files deployed with a leading dot need the `dot_` prefix (plain dot-prefixed names are ignored by chezmoi).
 
 When modifying configuration, always edit the source files in this repository — never the deployed copies under `$HOME`. Commit the change, then run `chezmoi apply` to deploy.

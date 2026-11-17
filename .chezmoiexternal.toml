@@ -1,0 +1,7 @@
+[".cursor/plugins/local/dev"]
+    type = "archive"
+    exact = true
+    url = "https://github.com/yusuke-suzuki/dotfiles/archive/refs/heads/main.tar.gz"
+    stripComponents = 3
+    include = ["*/plugins/dev/**"]
+    refreshPeriod = "24h"
