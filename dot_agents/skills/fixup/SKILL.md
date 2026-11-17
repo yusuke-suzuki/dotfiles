@@ -5,6 +5,8 @@ description: Create a fixup commit and autosquash rebase
 
 # Fixup
 
+Read `~/.agents/skills/git-workflow/SKILL.md` first if it is not loaded.
+
 ## 1. Assess state
 
 Run `git status` and `git fetch origin`, detect the default branch (`git symbolic-ref refs/remotes/origin/HEAD --short`; if unset, run `git remote set-head origin --auto` first), and list commits (`git log <default>..HEAD --oneline`). Stop and inform the user on the default branch or a detached HEAD — never rewrite history with nowhere to land it. If the branch has an upstream and `git log HEAD..@{u}` is non-empty, stop and run `/sync` first.
@@ -21,7 +23,7 @@ Stop first if `git log --merges <target>~1..HEAD` is non-empty: autosquash rebas
 
 `git add <files>`, then `git commit --fixup=<target-hash>`, then `GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash <target>~1` — before git 2.44, `--autosquash` without `-i` is silently ignored. Confirm no `fixup!` or `amend!` commit remains in `git log <default>..HEAD`.
 
-`git add` does not clear paths already staged, and `--fixup` commits everything in the index. Between the two, confirm with `git diff --cached --name-only` that the index holds only the files that constitute the fix; if anything else is there, stop and ask the user to commit or unstage it.
+`git add` does not clear paths already staged, and `--fixup` commits everything in the index. Between the two, confirm with `git diff --cached --name-only` that the index holds only the files that constitute the fix; if anything else is there, stop and ask the user to commit or unstage it. After verification commands, remove side-effect files (lockfiles, caches, generated outputs) and check `git status` so artifacts do not slip into PR scope.
 
 ## 4. Message review
 

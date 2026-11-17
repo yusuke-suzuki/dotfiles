@@ -5,6 +5,8 @@ description: Sync feature branch with its base via rebase
 
 # Sync
 
+Read `~/.agents/skills/git-workflow/SKILL.md` first if it is not loaded.
+
 ## 1. Assess state
 
 Run `git status` and `git fetch origin`, detect the default branch (`git symbolic-ref refs/remotes/origin/HEAD --short`; if unset, run `git remote set-head origin --auto` first), and resolve `<base>`: `git config branch.<current>.gh-merge-base`, else the pull request's `baseRefName` (`gh pr view --json baseRefName`, or GitHub MCP), else the default branch. `<base-ref>` is `<default>` for the default branch; otherwise whichever of `origin/<base>` and the local `<base>` contains the other, or the one that exists; stop and ask the user if they diverged or neither exists. A base other than the default branch is retired when its pull request is merged. Stop and ask the user when its pull request is closed unmerged, or when `origin/<base>` exists but `git ls-remote --heads origin <base>` is empty without a merged pull request. Stop and inform the user on the default branch or a detached HEAD — never rewrite history with nowhere to land it.

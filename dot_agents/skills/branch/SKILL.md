@@ -5,6 +5,8 @@ description: Start a branch, either from the default branch or stacked on the cu
 
 # Branch
 
+Read `~/.agents/skills/git-workflow/SKILL.md` first if it is not loaded.
+
 Run `git status` and `git fetch origin`, and detect the default branch (`git symbolic-ref refs/remotes/origin/HEAD --short`; if unset, run `git remote set-head origin --auto` first).
 
 Derive a descriptive name from the planned change (e.g. `feat/add-login`). Never reuse an existing branch; on a name conflict, pick another. Announce the name and the base.
