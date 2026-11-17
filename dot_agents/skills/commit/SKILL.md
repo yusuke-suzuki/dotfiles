@@ -5,6 +5,8 @@ description: Create a git commit with Conventional Commits format. Invoke as soo
 
 # Commit
 
+Read `~/.agents/skills/git-workflow/SKILL.md` first if it is not loaded.
+
 Message conventions live in `commit-message.md` in this skill's base directory — read it before drafting any message.
 
 ## 1. Assess state
@@ -18,6 +20,7 @@ Never commit to the default branch. Invoke `/branch` first when on the default b
 ## 3. Commit
 
 - Group changes by semantic intent — one logical change per commit; create one commit per group.
+- After verification commands, remove side-effect files (lockfiles, caches, generated outputs) and check `git status` so artifacts do not slip into PR scope.
 - If the diff adds or edits Japanese text (code comments, docstrings, test case titles, documents), run the `textlint` skill on it before committing.
 - Never stage files containing secrets (.env, credentials, private keys).
 - Write the drafted message to a file and run `~/.agents/skills/commit/scripts/validate-message.sh <file>` — fix every `NG`, judge each `CHECK`, re-run until it passes, then commit with `git commit -F <file>`. It checks format only; the body explaining the why (per `commit-message.md`) is on you.
