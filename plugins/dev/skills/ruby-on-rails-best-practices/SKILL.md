@@ -17,7 +17,7 @@ description: Ruby on Rails conventions. Load before writing or reviewing Rails c
 
 ### Transactions
 
-- Never open an explicit `transaction` block. Let the transaction ActiveRecord opens around `save`/`destroy` carry multi-record writes: put dependent writes in callbacks or `autosave` associations of the record being saved.
+- Never open an explicit `transaction` block. Let the transaction ActiveRecord opens around `save`/`destroy` carry multi-record writes: put dependent writes in callbacks of the record being saved.
 
 ### External calls
 
