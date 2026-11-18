@@ -24,7 +24,7 @@ description: Ruby on Rails conventions. Load before writing or reviewing Rails c
 Decide where an external call goes by which failure can be detected and corrected.
 
 - A call whose outcome the saved state asserts (deleting or creating a resource at an external service the record points to) runs inside the transaction, before the write it guards, so that its failure raises and rolls the write back instead of committing a state that is not true. Make it idempotent so that a retry corrects the opposite failure, where the call succeeded and the commit did not, and give it a short timeout, because it holds the transaction open.
-- A call that only reports a committed fact (mail, Web Push, notifications) runs in `after_commit` or a job. Sent from inside the transaction, it cannot be taken back when the transaction rolls back.
+- A call that only reports a committed fact (mail, Web Push, notifications) runs outside the transaction: in `after_commit`, which fires once the commit has succeeded, or in a job enqueued from it. Sent from inside the transaction, it cannot be taken back when the transaction rolls back.
 
 ### Validations
 
