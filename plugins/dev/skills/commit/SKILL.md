@@ -15,7 +15,7 @@ Run `git status` and `git fetch origin`, detect the default branch (`git symboli
 
 ## 2. Branch
 
-Never commit to the default branch. Invoke `/branch` first when on the default branch, on a harness-assigned branch with a generated name that is not the head of an open pull request, on a branch whose pull request is merged or closed, when the user asks to split work into a separate pull request, or when the change must be merged or released separately from the branch's existing commits. Otherwise commit to the current branch, even when the change is independent of them.
+Never commit to the default branch. Invoke `/branch` first when on the default branch, on a harness-assigned branch with a generated name that is not the head of an open pull request, on a branch whose pull request is merged or closed, when the user asks to split work into a separate pull request, when the change must be merged or released separately from the branch's existing commits, or when it is groundwork better reviewed and merged on its own. Otherwise commit to the current branch, even when the change is independent of them.
 
 ## 3. Commit
 
