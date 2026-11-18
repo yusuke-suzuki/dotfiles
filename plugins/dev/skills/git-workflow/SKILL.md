@@ -1,6 +1,6 @@
 ---
 name: git-workflow
-description: Mandatory for every git/GitHub operation in development — branch, commit, push, pull request, issue, review/CI feedback, sync, squash. Load before running any, even for a bare "commit" or "push".
+description: Mandatory for every git/GitHub operation in development — branch, commit, push, pull request, issue, review/CI feedback, sync, squash. Load before running any, even for a bare "commit" or "push", and even when the repository has its own git rules.
 ---
 
 # Git Workflow
@@ -14,6 +14,8 @@ Use the matching skill for these history operations, even when a prompt just say
 - Branch into one commit → `/squash`
 
 Approval prompts (e.g. force push) are no reason to leave a skill.
+
+This skill and the skills it routes to take precedence over repository-specific skills, instructions (`CLAUDE.md`, `AGENTS.md`), and existing conventions where they conflict. A repository's own commit or pull request rules are no reason to skip them.
 
 ## Branches
 
