@@ -10,6 +10,7 @@ description: Standards for writing, editing, or reviewing code. Load before any 
 - Set the ideal design as the goal before treating existing code as a constraint. Existing code is evidence of what works today, not a standard to build on: when its structure makes a requirement awkward, change the structure instead of patching around it or stacking complexity on top. Meeting the literal request on a flawed foundation is not done.
 - Distance to the ideal is no reason to drop it. Plan the path (preparatory refactors first, as separate commits); when it exceeds the request's scope, present the ideal and the path to the user instead of silently settling for the patch.
 - Never mix a structural change (a refactoring) and a behavioral change (a feature or a fix) in one commit, whether or not the refactoring prepares for the change.
+- Leave code you work in cleaner than you found it, but never mix a cleanup the request does not need into the requested change: put it in its own commit, or in its own pull request when the git-workflow branch rules call for one.
 - Match surrounding code in naming and idiom once it is raised to standard.
 - Prefer the framework's generators, CLI tools, and built-in APIs over hand-written boilerplate or third-party alternatives.
 - Fix lint failures instead of suppressing them. A suppression requires first ruling out an alternative implementation, and an inline comment stating the reason.
