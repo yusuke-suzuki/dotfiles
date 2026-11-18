@@ -12,6 +12,7 @@ description: Standards for writing, editing, or reviewing code. Load before any 
 - Never mix a structural change (a refactoring) and a behavioral change (a feature or a fix) in one commit, whether or not the refactoring prepares for the change.
 - Leave code you work in cleaner than you found it, but never mix a cleanup the request does not need into the requested change: put it in its own commit, or in its own pull request when the git-workflow branch rules call for one.
 - Match surrounding code in naming and idiom once it is raised to standard.
+- Do not use class inheritance; compose behavior through delegation instead. Subclassing a base class the framework requires (e.g. `ApplicationRecord`) is the only exception.
 - Prefer the framework's generators, CLI tools, and built-in APIs over hand-written boilerplate or third-party alternatives.
 - Fix lint failures instead of suppressing them. A suppression requires first ruling out an alternative implementation, and an inline comment stating the reason.
 
