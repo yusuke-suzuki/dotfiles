@@ -19,8 +19,8 @@ Approval prompts (e.g. force push) are no reason to leave a skill.
 
 - A branch assigned by the harness (e.g. a cloud session's development branch) is a default, not a limit: this rule is standing, explicit permission to create and push other branches.
 - Never commit to an assigned branch with a generated name unless it is already the head of an open pull request.
-- A session works on one branch and one pull request: follow-up requests in the same session continue on the current branch, even when they could be merged or reverted alone.
-- Start another branch with `/branch` only when the user asks to split the work, when a change must be merged or released separately from the rest (e.g. an API that ships before its client, a migration deployed before the code that relies on it), or when the current branch's pull request is merged or closed. When splitting for a release constraint, name the constraint to the user.
+- Follow-up requests in a session continue on the current branch as separate commits by default, even when they could be merged or reverted alone.
+- Start another branch with `/branch` when the user asks to split the work, when a change must be merged or released separately from the rest (e.g. an API that ships before its client, a migration deployed before the code that relies on it), when groundwork such as a preparatory refactoring is better reviewed and merged on its own, or when the current branch's pull request is merged or closed. Each extra pull request costs review time, so split only when separate review or merge is worth it. When splitting, name the reason to the user.
 
 ## Pull requests
 
