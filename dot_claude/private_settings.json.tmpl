@@ -57,5 +57,20 @@
     "CLAUDE_ENV_FILE": "{{ .chezmoi.homeDir }}/.claude/env.sh"
   },
   "autoMemoryEnabled": false,
-  "language": "japanese"
+  "language": "japanese",
+  "outputStyle": "Concise",
+  "sandbox": {
+    "enabled": true
+  },
+  "extraKnownMarketplaces": {
+    "dotfiles": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/yusuke-suzuki/dotfiles.git"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "dev@dotfiles": true
+  }
 }
