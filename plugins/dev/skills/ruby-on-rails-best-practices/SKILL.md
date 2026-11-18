@@ -54,13 +54,19 @@ Decide where an external call goes by which failure can be detected and correcte
 ## Logging
 
 - Log structured events: a message plus key-value fields, never values interpolated into a string.
+- The message is for people reading the log, not for search: put each value to filter or aggregate on in a field of its own.
 - Log an exception at error level with the fields the logging backend expects (for Datadog, `error.kind`, `error.message`, `error.stack` and a `service` attribute), so the backend's standard error tracking groups and alerts on it without custom parsing.
 
 ## Rake Tasks
 
 - Keep domain logic in models, as above; the task body itself may then be a plain procedural sequence of model calls, which keeps a one-off maintenance task easy to follow.
+- Leave declared task arguments out of `desc`: `rake -T` already lists them.
 - Log progress and failures as structured events, as above.
+- Set `runtime: task.name` as a default field of every log the task writes, through the logger's context or tags, and leave the task name out of each message.
+- Stop on an invalid argument or an unmet precondition with `abort` and a message saying what is wrong, not with `raise`: it is the operator's input to fix, not a bug, and a backtrace only buries the message.
 - Never swallow an exception: do not rescue it only to log and exit successfully. Let it propagate so the task exits non-zero.
+- Process records fail-fast: do not rescue an exception per record to carry on with the rest. One failing record usually means something is wrong, and continuing turns it into a flood of the same error.
+- Do not raise to mark a run as failed once it has finished without an exception. When it finishes but some records need attention, such as a record the code skips because its state is unexpected, log each as a structured event at error level so it is detected, and let the task exit successfully.
 - Rescue an exception to log it as a structured error event, with context such as the record being processed, since Rake reports an uncaught one only as plain text on stderr; end that rescue with a bare `raise`. A rescue that handles the error, such as `ActiveRecord::RecordNotUnique` for idempotency, is not covered.
 - Leave retries and alerting to what triggered the task (a cron job or a scheduler) and configure them there, since a trigger such as plain cron neither retries nor alerts by default; do not retry inside the task.
 - Make a task safe to rerun from the start, since a retry repeats all of it, including side effects that ran before the failure.
