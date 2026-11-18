@@ -48,3 +48,15 @@ Decide where an external call goes by which failure can be detected and correcte
 
 - Avoid N+1 queries with `preload`, not `includes` or `eager_load`. Of the three, `preload` states its intent most plainly, which is to load these associations for the records already selected, and its behavior is the easiest to predict: it always runs one separate query per association. `includes` switches to a JOIN when the relation references the association's table, so its queries depend on the rest of the chain. `eager_load` always joins, so the association's rows can change which rows the main query returns.
 - Write the `preload` inline in the controller action, on the relation whose records the action serializes. Do not wrap it in a scope, a model method, or a helper method.
+
+## Logging
+
+- Log structured events: a message plus key-value fields, never values interpolated into a string.
+- Log an exception at error level with the fields the logging backend expects (for Datadog, `error.kind`, `error.message`, `error.stack` and a `service` attribute), so the backend's standard error tracking groups and alerts on it without custom parsing.
+
+## Rake Tasks
+
+- Log progress and failures as structured events, as above.
+- Never swallow an exception: do not rescue it only to log and exit successfully. Let it propagate so the task exits non-zero.
+- Leave retries and alerting to what triggered the task (a cron job or a scheduler) and configure them there, since a trigger such as plain cron neither retries nor alerts by default; do not retry inside the task.
+- Make a task safe to rerun from the start, since a retry repeats all of it, including side effects that ran before the failure.
