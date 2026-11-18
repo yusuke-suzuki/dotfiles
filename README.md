@@ -47,7 +47,7 @@ After editing sources locally, run `chezmoi apply` to deploy.
 | Claude | In the Claude app, Plugins → Add → Add marketplace with `yusuke-suzuki/dotfiles`, then install `dev`; plugins on the account also load in cloud sessions. For Claude Code on a machine alone: `claude plugin marketplace add yusuke-suzuki/dotfiles`, then `claude plugin install dev@dotfiles` |
 | Codex | `codex plugin marketplace add yusuke-suzuki/dotfiles`, then install `dev` from `/plugins` |
 | Devin | `devin plugins install yusuke-suzuki/dotfiles#plugins/dev` |
-| Cursor | `chezmoi apply` extracts it to `~/.cursor/plugins/local/dev`; Cursor documents GitHub imports only for Teams and Enterprise marketplaces, and a local plugin cannot be a symlink to a folder outside `~/.cursor/plugins/local/`. chezmoi re-downloads it once a day, or on `chezmoi apply --refresh-externals`; reload the Cursor window afterwards |
+| Cursor | `chezmoi apply` extracts it to `~/.cursor/plugins/local/dev`; Cursor's own marketplace import from a repository can be disabled by an organization policy, and a local plugin cannot be a symlink to a folder outside `~/.cursor/plugins/local/`. chezmoi re-downloads it once a day, or on `chezmoi apply --refresh-externals`; reload the Cursor window afterwards. On an Enterprise plan, Cursor loads local plugins only after an admin enables Allow Local Plugin Imports (Dashboard → Settings → Security & Identity → Marketplace and Plugins), which is off by default |
 
 Plugins track the `main` branch, so a skill change reaches them once it is merged and each tool updates the plugin.
 
