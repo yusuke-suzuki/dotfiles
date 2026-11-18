@@ -14,6 +14,7 @@ description: Ruby on Rails conventions. Load before writing or reviewing Rails c
 
 - Do not create service classes (Service Objects). Business logic should primarily reside in models. For logic tied to a database table, use an ActiveRecord model. For logic not directly tied to a table, create a plain Ruby model (a class that does not inherit from `ApplicationRecord`).
 - Gather domain logic in models through the Active Model APIs, such as validations and callbacks, rather than in code that calls them.
+- Do not add calls to existing service classes either. When the logic you need lives only in one, move it into a model first, as a separate structural commit.
 
 ### Transactions
 
@@ -39,6 +40,7 @@ Decide where an external call goes by which failure can be detected and correcte
 ### Locking
 
 - Keep transactions short: a migration's DDL waits for the metadata lock (MDL) held by any open transaction on the table, and every later query on that table queues behind it. Do not reach for `lock!`/`with_lock` first; prefer a unique index, an insert-only design, or optimistic locking (`lock_version`), and take a row lock only when none of these can serve.
+- Like `preload`, a row lock is the caller's concern: take it with `with_lock` in the controller action, job, or task that needs it, never inside a model method. This is the one exception to opening a transaction explicitly; `lock!` outside a transaction releases the lock immediately.
 
 ### Callbacks and validations
 
@@ -56,7 +58,9 @@ Decide where an external call goes by which failure can be detected and correcte
 
 ## Rake Tasks
 
+- Keep domain logic in models, as above; the task body itself may then be a plain procedural sequence of model calls, which keeps a one-off maintenance task easy to follow.
 - Log progress and failures as structured events, as above.
 - Never swallow an exception: do not rescue it only to log and exit successfully. Let it propagate so the task exits non-zero.
+- Rescue an exception to log it as a structured error event, with context such as the record being processed, since Rake reports an uncaught one only as plain text on stderr; end that rescue with a bare `raise`. A rescue that handles the error, such as `ActiveRecord::RecordNotUnique` for idempotency, is not covered.
 - Leave retries and alerting to what triggered the task (a cron job or a scheduler) and configure them there, since a trigger such as plain cron neither retries nor alerts by default; do not retry inside the task.
 - Make a task safe to rerun from the start, since a retry repeats all of it, including side effects that ran before the failure.
