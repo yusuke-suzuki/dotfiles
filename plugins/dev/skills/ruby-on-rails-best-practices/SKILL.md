@@ -19,12 +19,16 @@ description: Ruby on Rails conventions. Load before writing or reviewing Rails c
 ### Transactions
 
 - Never open an explicit `transaction` block. Let the transaction ActiveRecord opens around `save`/`destroy` carry multi-record writes: put dependent writes in callbacks of the record being saved.
+- Keep transactions short: a migration's DDL waits for the metadata lock (MDL) held by any open transaction on the table, and every later query on that table queues behind it.
 
-### External calls
+### External resources
 
-Decide where an external call goes by which failure can be detected and corrected.
+- Create or delete a resource at an external service that a record points to inside the transaction, before the write that records it, so that a failed call raises and rolls the write back instead of committing a state that is not true.
+- Make the call idempotent: when it succeeds and the commit fails, a retry repeats it, and the repeat must succeed.
+- Give the call a short timeout, since it holds the transaction open.
 
-- A call whose outcome the saved state asserts (deleting or creating a resource at an external service the record points to) runs inside the transaction, before the write it guards, so that its failure raises and rolls the write back instead of committing a state that is not true. Make it idempotent so that a retry corrects the opposite failure, where the call succeeded and the commit did not, and give it a short timeout, because it holds the transaction open.
+### Notifications
+
 - A call that only reports a committed fact (mail, Web Push, notifications) runs outside the transaction: in `after_commit`, which fires once the commit has succeeded, or in a job enqueued from it. Sent from inside the transaction, it cannot be taken back when the transaction rolls back.
 
 ### Validations
@@ -39,7 +43,7 @@ Decide where an external call goes by which failure can be detected and correcte
 
 ### Locking
 
-- Keep transactions short: a migration's DDL waits for the metadata lock (MDL) held by any open transaction on the table, and every later query on that table queues behind it. Do not reach for `lock!`/`with_lock` first; prefer a unique index, an insert-only design, or optimistic locking (`lock_version`), and take a row lock only when none of these can serve.
+- Do not reach for `lock!`/`with_lock` first; prefer a unique index, an insert-only design, or optimistic locking (`lock_version`), and take a row lock only when none of these can serve.
 - Like `preload`, a row lock is the caller's concern: take it with `with_lock` in the controller action, job, or task that needs it, never inside a model method. This is the one exception to opening a transaction explicitly; `lock!` outside a transaction releases the lock immediately.
 
 ### Callbacks and validations
