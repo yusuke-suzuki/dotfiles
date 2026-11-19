@@ -22,7 +22,7 @@ What they cannot decide is yours: katakana loanwords whose replacement depends o
 
 ## Prose
 
-Write in 書き言葉; never use 話し言葉. `no-doubled-joshi` treats a 読点 as distance between particles, so resolve its reports by reordering or rewording, never by inserting a 読点.
+Write in 書き言葉; never use 話し言葉. `no-doubled-joshi` treats a 読点 as distance between particles, so resolve its reports by reordering or rewording, never by inserting a 読点. Likewise, resolve a `sentence-length` report by cutting redundant words or turning parallel items into a list, not by chopping the sentence into short ones: a run of short sentences that all end the same way (〜です。〜です。) reads as childish.
 
 ## Japanese text embedded in source files
 

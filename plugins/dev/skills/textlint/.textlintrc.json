@@ -2,7 +2,7 @@
   "rules": {
     "preset-ja-technical-writing": {
       "sentence-length": {
-        "max": 100
+        "max": 160
       },
       "no-exclamation-question-mark": false,
       "no-mix-dearu-desumasu": {
@@ -56,6 +56,11 @@
         {
           "message": "話し言葉です。理由なら「ため」、起点なら「以降」「から適用」など書き言葉で書いてください。",
           "pattern": "からです",
+          "allowNodeTypes": ["BlockQuote"]
+        },
+        {
+          "message": "幼稚な表現です。「〜します」「〜したいと考えています」など、意図をそのまま書いてください。",
+          "pattern": "たいです",
           "allowNodeTypes": ["BlockQuote"]
         },
         {

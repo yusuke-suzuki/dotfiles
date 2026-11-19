@@ -6,7 +6,6 @@ description: Ruby on Rails conventions. Load before writing or reviewing Rails c
 # Ruby on Rails Best Practices
 
 - Run project commands through binstubs (`bin/rails`, `bin/rspec`, `bin/rubocop`) or `bundle exec`, never bare gem executables — bare ones can resolve to a stale shim or a version that does not match `Gemfile.lock`.
-- When adding new features, adhere to the Rails "Convention over Configuration" philosophy.
 
 ## Models
 
@@ -14,32 +13,33 @@ description: Ruby on Rails conventions. Load before writing or reviewing Rails c
 
 - Do not create service classes (Service Objects). Business logic should primarily reside in models. For logic tied to a database table, use an ActiveRecord model. For logic not directly tied to a table, create a plain Ruby model (a class that does not inherit from `ApplicationRecord`).
 - Gather domain logic in models through the Active Model APIs, such as validations and callbacks, rather than in code that calls them.
-- Do not add calls to existing service classes either. When the logic you need lives only in one, move it into a model first, as a separate structural commit.
+- Do not add calls to existing service classes either. When the logic you need lives only in one, move it into a model first.
 
 ### Transactions
 
 - Never open an explicit `transaction` block. Let the transaction ActiveRecord opens around `save`/`destroy` carry multi-record writes: put dependent writes in callbacks of the record being saved.
+- Keep transactions short: a migration's DDL waits for the metadata lock (MDL) held by any open transaction on the table, and every later query on that table queues behind it.
 
-### External calls
+### External resources
 
-Decide where an external call goes by which failure can be detected and corrected.
+- Create or delete a resource at an external service that a record points to inside the transaction, before the write that records it, so that a failed call raises and rolls the write back instead of committing a state that is not true.
+- Make the call idempotent: when it succeeds and the commit fails, a retry repeats it, and the repeat must succeed.
+- Give the call a short timeout, since it holds the transaction open.
 
-- A call whose outcome the saved state asserts (deleting or creating a resource at an external service the record points to) runs inside the transaction, before the write it guards, so that its failure raises and rolls the write back instead of committing a state that is not true. Make it idempotent so that a retry corrects the opposite failure, where the call succeeded and the commit did not, and give it a short timeout, because it holds the transaction open.
-- A call that only reports a committed fact (mail, Web Push, notifications) runs outside the transaction: in `after_commit`, which fires once the commit has succeeded, or in a job enqueued from it. Sent from inside the transaction, it cannot be taken back when the transaction rolls back.
+### Notifications
+
+- A call that only reports a committed fact (mail, Web Push, notifications) runs outside the transaction. Sent from inside the transaction, it cannot be taken back when the transaction rolls back.
+- A job enqueued with `deliver_later` or `perform_later` from a callback inside the transaction already runs outside it: Active Job holds the enqueue until the transaction commits, so a rolled-back transaction enqueues nothing. This needs `enqueue_after_transaction_commit` enabled on `ActiveJob::Base`, so that it also covers mail delivery jobs, which do not inherit from `ApplicationJob`.
+- Jobs pushed through Sidekiq's own API (`Sidekiq::Job.perform_async`) bypass Active Job and are enqueued at once, even inside a transaction: push them from `after_commit`, or enable `Sidekiq.transactional_push!`.
 
 ### Validations
 
 - Use Rails' built-in validators (`presence`, `inclusion`, `comparison`, `format`, `length`, `numericality`, ...) whenever they can express the rule, and write a custom `validate` method only when they cannot. Back every integrity rule with a database constraint (NOT NULL, unique index, foreign key), because validations alone race.
 - Enforce uniqueness with a unique index alone, never a `uniqueness` validation: a repeated write is made idempotent by rescuing `ActiveRecord::RecordNotUnique`, which the validation preempts with a validation error.
 
-### Immutable data model
-
-- Design tables as immutable by default, following https://scrapbox.io/kawasima/イミュータブルデータモデル. Record what happened as insert-only rows and derive current state from them instead of updating status or flag columns in place. Physical deletion required to remove personal data takes precedence.
-- It is a principle, not a goal: do not let it produce a design or operation more complex than the problem needs.
-
 ### Locking
 
-- Keep transactions short: a migration's DDL waits for the metadata lock (MDL) held by any open transaction on the table, and every later query on that table queues behind it. Do not reach for `lock!`/`with_lock` first; prefer a unique index, an insert-only design, or optimistic locking (`lock_version`), and take a row lock only when none of these can serve.
+- Do not reach for `lock!`/`with_lock` first; prefer a unique index, an insert-only design, or optimistic locking (`lock_version`), and take a row lock only when none of these can serve.
 - Like `preload`, a row lock is the caller's concern: take it with `with_lock` in the controller action, job, or task that needs it, never inside a model method. This is the one exception to opening a transaction explicitly; `lock!` outside a transaction releases the lock immediately.
 
 ### Callbacks and validations
