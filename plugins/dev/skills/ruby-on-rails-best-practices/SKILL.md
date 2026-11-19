@@ -29,7 +29,9 @@ description: Ruby on Rails conventions. Load before writing or reviewing Rails c
 
 ### Notifications
 
-- A call that only reports a committed fact (mail, Web Push, notifications) runs outside the transaction: in `after_commit`, which fires once the commit has succeeded, or in a job enqueued from it. Sent from inside the transaction, it cannot be taken back when the transaction rolls back.
+- A call that only reports a committed fact (mail, Web Push, notifications) runs outside the transaction. Sent from inside the transaction, it cannot be taken back when the transaction rolls back.
+- A job enqueued with `deliver_later` or `perform_later` from a callback inside the transaction already runs outside it: Active Job holds the enqueue until the transaction commits, so a rolled-back transaction enqueues nothing. This needs `enqueue_after_transaction_commit` enabled on `ActiveJob::Base`, so that it also covers mail delivery jobs, which do not inherit from `ApplicationJob`.
+- Jobs pushed through Sidekiq's own API (`Sidekiq::Job.perform_async`) bypass Active Job and are enqueued at once, even inside a transaction: push them from `after_commit`, or enable `Sidekiq.transactional_push!`.
 
 ### Validations
 
