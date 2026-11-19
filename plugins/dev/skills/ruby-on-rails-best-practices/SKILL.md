@@ -5,6 +5,8 @@ description: Ruby on Rails conventions. Load before writing or reviewing Rails c
 
 # Ruby on Rails Best Practices
 
+## Commands
+
 - Run project commands through binstubs (`bin/rails`, `bin/rspec`, `bin/rubocop`) or `bundle exec`, never bare gem executables — bare ones can resolve to a stale shim or a version that does not match `Gemfile.lock`.
 
 ## Models
