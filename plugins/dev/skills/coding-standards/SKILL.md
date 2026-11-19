@@ -17,6 +17,10 @@ description: Standards for writing, editing, or reviewing code. Load before any 
 - Prefer the framework's generators, CLI tools, and built-in APIs over hand-written boilerplate or third-party alternatives.
 - Fix lint failures instead of suppressing them. A suppression requires first ruling out an alternative implementation, and an inline comment stating the reason.
 
+## Data model
+
+- Design tables as immutable by default, following https://scrapbox.io/kawasima/イミュータブルデータモデル. Record what happened as insert-only rows and derive current state from them instead of updating status or flag columns in place. Physical deletion required to remove personal data takes precedence.
+- It is a principle, not a goal: do not let it produce a design or operation more complex than the problem needs.
 ## Comments
 
 - Write zero code comments. A comment is a last resort, reached only after every alternative has failed to carry the information: a more precise name, an extracted function or named constant, restructured control flow, a type or signature, a test that states the expectation, a commit message, a pull request description, or documentation. Before writing one, name which of those you tried and why each cannot hold the fact; if you cannot name it, there is no comment to write.

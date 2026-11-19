@@ -37,11 +37,6 @@ description: Ruby on Rails conventions. Load before writing or reviewing Rails c
 - Use Rails' built-in validators (`presence`, `inclusion`, `comparison`, `format`, `length`, `numericality`, ...) whenever they can express the rule, and write a custom `validate` method only when they cannot. Back every integrity rule with a database constraint (NOT NULL, unique index, foreign key), because validations alone race.
 - Enforce uniqueness with a unique index alone, never a `uniqueness` validation: a repeated write is made idempotent by rescuing `ActiveRecord::RecordNotUnique`, which the validation preempts with a validation error.
 
-### Immutable data model
-
-- Design tables as immutable by default, following https://scrapbox.io/kawasima/イミュータブルデータモデル. Record what happened as insert-only rows and derive current state from them instead of updating status or flag columns in place. Physical deletion required to remove personal data takes precedence.
-- It is a principle, not a goal: do not let it produce a design or operation more complex than the problem needs.
-
 ### Locking
 
 - Do not reach for `lock!`/`with_lock` first; prefer a unique index, an insert-only design, or optimistic locking (`lock_version`), and take a row lock only when none of these can serve.
