@@ -24,6 +24,8 @@ What they cannot decide is yours: katakana loanwords whose replacement depends o
 
 Write in 書き言葉; never use 話し言葉. `no-doubled-joshi` treats a 読点 as distance between particles, so resolve its reports by reordering or rewording, never by inserting a 読点. Likewise, resolve a `sentence-length` report by cutting redundant words or turning parallel items into a list, not by chopping the sentence into short ones: a run of short sentences that all end the same way (〜です。〜です。) reads as childish.
 
+When explaining why a change is made, state the need first, then what stands in the way, then the means; a reader who meets the means first cannot tell what it is for. No rule detects this order, so check it yourself.
+
 ## Japanese text embedded in source files
 
 textlint parses only `.md` and `.txt`; running `lint.sh` on a source file (`.ts`, `.rb`, …) is a silent no-op. Extract the Japanese fragments (code comments, docstrings, test case titles) into a scratch `.txt` file — one fragment per block, blocks separated by blank lines, keeping the original line breaks of multiline comments — run `lint.sh --fix` on it, then edit each fixed fragment back into its place in the source.
