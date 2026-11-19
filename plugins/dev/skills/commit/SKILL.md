@@ -5,7 +5,7 @@ description: Create a git commit with Conventional Commits format. Invoke as soo
 
 # Commit
 
-Read `../git-workflow/SKILL.md` (relative to this skill's base directory) first if it is not loaded.
+Read `../coding-standards/SKILL.md` (relative to this skill's base directory) first if it is not loaded.
 
 Message conventions live in `commit-message.md` in this skill's base directory — read it before drafting any message.
 
