@@ -14,7 +14,7 @@ description: Ruby on Rails conventions. Load before writing or reviewing Rails c
 
 - Do not create service classes (Service Objects). Business logic should primarily reside in models. For logic tied to a database table, use an ActiveRecord model. For logic not directly tied to a table, create a plain Ruby model (a class that does not inherit from `ApplicationRecord`).
 - Gather domain logic in models through the Active Model APIs, such as validations and callbacks, rather than in code that calls them.
-- Do not add calls to existing service classes either. When the logic you need lives only in one, move it into a model first, as a separate structural commit.
+- Do not add calls to existing service classes either. When the logic you need lives only in one, move it into a model first.
 
 ### Transactions
 
