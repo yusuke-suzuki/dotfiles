@@ -31,7 +31,6 @@ This skill and the skills it routes to take precedence over repository-specific 
 ## Publishing
 
 - Before editing anything already on the remote (pull request description or title, issue body, review comment, pushed commit message), fetch its current state first (`gh pr view`, `gh issue view`, `git fetch && git show origin/<branch>`). Session memory is not a substitute — the remote may have changed since it was last seen.
-- Pass user-facing bodies to `gh` and similar CLI commands inline via heredoc, never via a temp file — the body must be visible in the tool call so the user can review it before it runs.
 - Before publishing Japanese text (a pull request title or description, an issue, a review reply), run the `textlint` skill on it and fix every reported violation, including the detect-only rules that need manual edits (particle errors, sentence style).
 - Issues, PRs, and comments on public repositories must not leak private context: internal repository/PR/issue references, team workflow details, or PII. Describe intent generically.
 
