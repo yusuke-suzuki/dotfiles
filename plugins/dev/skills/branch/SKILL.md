@@ -5,7 +5,7 @@ description: Start a branch, either from the default branch or stacked on the cu
 
 # Branch
 
-Read `../git-workflow/SKILL.md` (relative to this skill's base directory) first if it is not loaded.
+Read `../coding-standards/SKILL.md` (relative to this skill's base directory) first if it is not loaded.
 
 Run `git status` and `git fetch origin`, and detect the default branch (`git symbolic-ref refs/remotes/origin/HEAD --short`; if unset, run `git remote set-head origin --auto` first).
 
