@@ -48,6 +48,13 @@ description: Ruby on Rails conventions. Load before writing or reviewing Rails c
 
 - Do not write through methods that skip them, such as `update_column`, `update_columns`, `update_all`, `delete`, `delete_all`, `insert_all`, `upsert_all`, `touch_all`, `update_counters` and `increment_counter`. Write through `create!`, `update!`, `save!` and `destroy!`, so that every write runs the validations and callbacks the model keeps its invariants with, and a callback added later reaches every existing write path. If a skipping method seems unavoidable, state why in the PR description. Tests are exempt when they use one to set up a state the application cannot reach, such as a backdated `created_at` or a reference to a record that no longer exists.
 
+## Controllers
+
+### Strong Parameters
+
+- Read request parameters only through a private `<resource>_params` method that calls `params.expect` (e.g. `params.expect(post: [:title, :body])`), never `require`/`permit` or `params[...]` in the action: `expect` answers a missing or mistyped top-level key with 400 Bad Request instead of raising a 500.
+- Use a boolean parameter of a JSON request body as received, without `ActiveModel::Type::Boolean.new.cast`: `params.expect` keeps JSON types, so it arrives as `true` or `false`, and handling a value outside the API contract, such as the string `"false"`, is not the API's responsibility.
+
 ## N+1 Queries
 
 - Avoid N+1 queries with `preload`, not `includes` or `eager_load`. Of the three, `preload` states its intent most plainly, which is to load these associations for the records already selected, and its behavior is the easiest to predict: it always runs one separate query per association. `includes` switches to a JOIN when the relation references the association's table, so its queries depend on the rest of the chain. `eager_load` always joins, so the association's rows can change which rows the main query returns.
